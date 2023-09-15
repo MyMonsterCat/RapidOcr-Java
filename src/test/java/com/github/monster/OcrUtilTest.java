@@ -16,9 +16,9 @@ public class OcrUtilTest {
         String dirPath = System.getProperty("user.dir") +  "/ncnn";
         // 调用
         // Mac调用示例
-        // OcrResult ocrResult = OcrUtil.NcnnOcr(dirPath + "/RapidOcrNcnn.dylib", dirPath + "/models", "images/1.jpg");
+         OcrResult ocrResult = OcrUtil.NcnnOcr(dirPath + "/libRapidOcrNcnn.dylib", dirPath + "/models", "images/1.jpg");
         // windows调用
-        OcrResult ocrResult = OcrUtil.NcnnOcr(dirPath + "/RapidOcrNcnn.dll", "ncnn/models", "images/1.jpg");
+        // OcrResult ocrResult = OcrUtil.NcnnOcr(dirPath + "/RapidOcrNcnn.dll", "ncnn/models", "images/1.jpg");
         System.out.println(ocrResult);
     }
 

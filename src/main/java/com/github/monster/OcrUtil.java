@@ -17,8 +17,8 @@ public class OcrUtil {
 
 
     /**
-     * @param library        动态链接库路径，例如绝对路径/User/Monster/projectName/a/b/xx.dll，只需要传a/b/xx
-     * @param modelsDir      例如绝对路径/User/Monster/projectName/a/b/models，只需要传a/b/models
+     * @param library        动态链接库绝对路径
+     * @param modelsDir      模型路径
      * @param detName        ncnn传ch_PP-OCRv3_det_infer
      * @param clsName        ncnn传ch_ppocr_mobile_v2.0_cls_infer
      * @param recName        ncnn传ch_PP-OCRv3_rec_infer
