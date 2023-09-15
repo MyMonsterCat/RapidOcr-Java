@@ -2,9 +2,6 @@ package com.benjaminwan.ocrlibrary;
 
 import com.github.monster.OcrUtil;
 
-import java.io.File;
-import java.util.Objects;
-
 /**
  * OCR引擎对象，负责接收参数并执行OCR
  * 请确保包位置无误，必须在com.benjaminwan.ocrlibrary下
