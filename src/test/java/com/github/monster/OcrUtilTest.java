@@ -13,25 +13,23 @@ public class OcrUtilTest {
     public void ncnnOcr() {
 
         // 获取jni的绝对路径
-        String dirPath = Objects.requireNonNull(OcrUtil.class.getResource("")).getPath().split("RapidOcr-Java")[0] + "RapidOcr-Java/ncnn/";
-        String absoluteLibraryPath = dirPath + "libRapidOcrNcnn.dylib";
+        String dirPath = System.getProperty("user.dir") +  "/ncnn";
         // 调用
         // Mac调用示例
-        // OcrResult ocrResult = OcrUtil.NcnnOcr(absoluteLibraryPath, dirPath + "/models", "images/1.jpg");
+        // OcrResult ocrResult = OcrUtil.NcnnOcr(dirPath + "/RapidOcrNcnn.dylib", dirPath + "/models", "images/1.jpg");
         // windows调用
-        OcrResult ocrResult = OcrUtil.NcnnOcr(absoluteLibraryPath, "ncnn/models", "images/1.jpg");
+        OcrResult ocrResult = OcrUtil.NcnnOcr(dirPath + "/RapidOcrNcnn.dll", "ncnn/models", "images/1.jpg");
         System.out.println(ocrResult);
     }
 
     @Test
     public void onnxOcr() {
         // 获取jni的绝对路径
-        String dirPath = Objects.requireNonNull(OcrUtil.class.getResource("")).getPath().split("RapidOcr-Java")[0] + "RapidOcr-Java/onnx/";
-        String absoluteLibraryPath = dirPath + "libRapidOcrOnnx.dylib";
+        String dirPath = System.getProperty("user.dir") +  "/ncnn";
         // Mac调用示例
-        // OcrResult ocrResult = OcrUtil.OnnxOcr(absoluteLibraryPath, dirPath + "/models", "images/1.jpg");
+        // OcrResult ocrResult = OcrUtil.OnnxOcr(dirPath + "/libRapidOcrOnnx.dylib", dirPath + "/models", "images/1.jpg");
         // windows调用
-        OcrResult ocrResult = OcrUtil.OnnxOcr(absoluteLibraryPath, dirPath + "onnx/models", "images/1.jpg");
+        OcrResult ocrResult = OcrUtil.OnnxOcr(dirPath + "/RapidOcrOnnx.dll", "onnx/models", "images/1.jpg");
         System.out.println(ocrResult);
     }
 }
