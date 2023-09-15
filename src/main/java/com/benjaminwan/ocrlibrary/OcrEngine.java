@@ -13,15 +13,14 @@ import java.util.Objects;
 public class OcrEngine {
 
     public OcrEngine(String libraryPath) {
-        String dirPath = Objects.requireNonNull(OcrUtil.class.getResource("")).getPath().split("RapidOcr-Java")[0] + "RapidOcr-Java" + File.separator + libraryPath;
         String library;
         String property = System.getProperty("os.name");
         if (property.contains("Win")) {
-            library = dirPath + ".dll";
+            library = libraryPath + ".dll";
         } else if (property.contains("Mac")) {
-            library = dirPath + ".dylib";
+            library = libraryPath + ".dylib";
         } else if (property.contains("Linux")) {
-            library = dirPath + ".so";
+            library = libraryPath + ".so";
         } else {
             throw new UnsupportedOperationException("不支持的系统: " + property);
         }
