@@ -13,18 +13,7 @@ import java.util.Objects;
 public class OcrEngine {
 
     public OcrEngine(String libraryPath) {
-        String library;
-        String property = System.getProperty("os.name");
-        if (property.contains("Win")) {
-            library = libraryPath + ".dll";
-        } else if (property.contains("Mac")) {
-            library = libraryPath + ".dylib";
-        } else if (property.contains("Linux")) {
-            library = libraryPath + ".so";
-        } else {
-            throw new UnsupportedOperationException("不支持的系统: " + property);
-        }
-        System.load(library);
+        System.load(libraryPath);
     }
 
     private int padding = 50;

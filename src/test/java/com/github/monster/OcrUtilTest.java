@@ -11,15 +11,21 @@ public class OcrUtilTest {
 
     @Test
     public void ncnnOcr() {
-        String dirPath = Objects.requireNonNull(OcrUtil.class.getResource("")).getPath().split("RapidOcr-Java")[0] + "RapidOcr-Java/ncnn";
-        OcrResult ocrResult = OcrUtil.NcnnOcr(dirPath, "images/1.jpg");
+        // 获取jni的绝对路径
+        String dirPath = Objects.requireNonNull(OcrUtil.class.getResource("")).getPath().split("RapidOcr-Java")[0] + "RapidOcr-Java/ncnn/";
+        String absoluteLibraryPath = dirPath + "libRapidOcrNcnn.dylib";
+        // 调用
+        OcrResult ocrResult = OcrUtil.NcnnOcr(absoluteLibraryPath, dirPath + "/models", "images/1.jpg");
         System.out.println(ocrResult);
     }
 
     @Test
     public void onnxOcr() {
-        String dirPath = Objects.requireNonNull(OcrUtil.class.getResource("")).getPath().split("RapidOcr-Java")[0] + "RapidOcr-Java/onnx";
-        OcrResult ocrResult = OcrUtil.OnnxOcr(dirPath, "images/1.jpg");
+        // 获取jni的绝对路径
+        String dirPath = Objects.requireNonNull(OcrUtil.class.getResource("")).getPath().split("RapidOcr-Java")[0] + "RapidOcr-Java/onnx/";
+        String absoluteLibraryPath = dirPath + "libRapidOcrOnnx.dylib";
+        // 调用
+        OcrResult ocrResult = OcrUtil.OnnxOcr(absoluteLibraryPath, dirPath + "/models", "images/1.jpg");
         System.out.println(ocrResult);
     }
 }
