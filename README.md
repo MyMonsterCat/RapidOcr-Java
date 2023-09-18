@@ -2,12 +2,31 @@
 
 ## 项目起源
 
-RapidOcr提供了Kotlin和Java混合版本的[Demo-onnx](https://github.com/RapidAI/RapidOcrOnnxJvm)和[Demo-ncnn](https://github.com/RapidAI/RapidOcrNcnnJvm)，而实际使用过程中，项目中并不想再引入Kotlin。
+[RapidOcr](https://github.com/RapidAI/RapidOCR)提供了Kotlin和Java混合版本的[Demo-onnx](https://github.com/RapidAI/RapidOcrOnnxJvm)和[Demo-ncnn](https://github.com/RapidAI/RapidOcrNcnnJvm)，而实际使用过程中，项目中并不想再引入Kotlin。
+
+> RapidOcr是完全开源、免费并支持多平台、多语言OCR离线部署
 
 ## 项目特点
 
 - 纯Java代码调用RapidOcr
 - 集成ncnn和onnx，并编写了简单工具类
+
+## 版本说明
+
+当前使用版本如下
+
+### ncnn
+
+- libRapidOcrNcnn.dylib: v1.2.0
+- libRapidOcrNcnn-intel.dylib: 1.1.2
+- libRapidOcrNcnn.so: 1.1.2
+- RapidOcrNcnn.dll: 1.1.2
+
+### onnx
+
+- libRapidOcrOnnx-intel.dylib: 1.2.2
+- libRapidOcrOnnx.so: 1.2.2
+- RapidOcrOnnx.dll: 1.2.2
 
 ## 快速测试
 
@@ -44,7 +63,7 @@ git clone https://github.com/RapidAI/RapidOcrOnnxJvm.git
 
 - models: 模型文件，想要更新请[前往下载相应版本的文件](https://github.com/RapidAI/RapidOcrOnnx/releases)
 
-- libRapidOcrOnnx.dylib: 使用Mac系统 **M1架构**编译
+- libRapidOcrOnnx.dylib: 暂无Mac系统 **M1架构**编译
 - libRapidOcrOnnx-intel.dylib: 使用Mac系统 **Intel架构**编译，‼️ 如果使用其进行测试，请将其重命名为`libRapidOcrOnnx`
 - libRapidOcrOnnx.so: 使用Linux系统编译
 - RapidOcrOnnx.dll: 使用Windows系统编译
@@ -56,9 +75,9 @@ git clone https://github.com/RapidAI/RapidOcrOnnxJvm.git
 
 ## RapidOcr升级
 
-方式一：按照目录说明中，自行下载相应版本jni
+- 按照目录说明中，自行下载相应版本jni
 
-方式二：前往[整合后的jni库](https://github.com/MyMonsterCat/Model-DLL)，找到相应版本下载
+- mac-arm64版本[可前往下载](https://github.com/MyMonsterCat/Model-DLL)
 
 ## OcrUtil使用说明
 
