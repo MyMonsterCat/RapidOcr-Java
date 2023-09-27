@@ -84,7 +84,7 @@ public static OcrResult Ocr(String library, String modelsDir, String detName, St
 
 ### ncnn
 
-- libRapidOcrNcnn.dylib: v1.2.0
+- libRapidOcrNcnn-silicon.dylib: v1.2.0
 - libRapidOcrNcnn-intel.dylib: 1.1.2
 - libRapidOcrNcnn.so: 1.1.2
 - RapidOcrNcnn.dll: 1.1.2
@@ -100,6 +100,8 @@ public static OcrResult Ocr(String library, String modelsDir, String detName, St
 - [x] 根据系统版本自适应加载动态库
 - [ ] 根据系统版本自适应使用配置文件
 - [x] 动态库集成到jar中，并能方便使用
+- [ ] 集成onnx
+- [ ] 将每次都copy到临时文件夹改为只copy一次
 - [ ] ...
 
 ## 鸣谢
