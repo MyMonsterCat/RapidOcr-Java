@@ -1,17 +1,17 @@
 # RapidOcr-Java
 
-## 项目起源
+## 🪧 项目起源
 
 [RapidOcr](https://github.com/RapidAI/RapidOCR)提供了Kotlin和Java混合版本的[Demo-onnx](https://github.com/RapidAI/RapidOcrOnnxJvm)和[Demo-ncnn](https://github.com/RapidAI/RapidOcrNcnnJvm)，而实际使用过程中，项目中并不想再引入Kotlin。
 
 > RapidOcr是完全开源、免费并支持多平台、多语言OCR离线部署
 
-## 项目特点
+## 👏 项目特点
 
 - 纯Java代码调用RapidOcr
 - 集成ncnn和onnx，并编写了简单工具类
 
-## 快速开始
+## 🎉 快速开始
 
 1⃣️ 引入jar包(需要自己下载项目打包，过程略)
 
@@ -32,7 +32,7 @@
   }
 ```
 
-## 目录说明
+## 🗣️ 目录说明
 
 ### Resources目录
 
@@ -52,7 +52,7 @@
 - com.benjaminwan.ocrlibrary: 核心代码，用来与dll、so、dylib进行交互。‼️ 千万不要改包名！！！
 - com.github.monster.OcrUtil: 调用核心代码工具类
 
-## Ocr参数调优
+## 🔝 Ocr参数调优
 
 详细参数说明如下：
 
@@ -78,7 +78,7 @@
 public static OcrResult Ocr(String library, String modelsDir, String detName, String clsName, String recName, String keysName, String imagePath,Integer numThread, Integer padding, Integer maxSideLen, Float boxScoreThresh, Float boxThresh,Float unClipRatio, Integer doAngleFlag, Integer mostAngleFlag, Integer gpuIndex) 
 ```
 
-## 版本说明
+## ⚠️ 版本说明
 
 当前使用版本如下
 
@@ -95,7 +95,12 @@ public static OcrResult Ocr(String library, String modelsDir, String detName, St
 - libRapidOcrOnnx.so: 1.2.2
 - RapidOcrOnnx.dll: 1.2.2
 
+## 📌 TODO
 
+- [x] 根据系统版本自适应加载动态库
+- [ ] 根据系统版本自适应使用配置文件
+- [x] 动态库集成到jar中，并能方便使用
+- [ ] ...
 
 ## 鸣谢
 
