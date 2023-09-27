@@ -11,87 +11,48 @@
 - 纯Java代码调用RapidOcr
 - 集成ncnn和onnx，并编写了简单工具类
 
-## 版本说明
+## 快速开始
 
-当前使用版本如下
+1⃣️ 引入jar包(需要自己下载项目打包，过程略)
 
-### ncnn
-
-- libRapidOcrNcnn.dylib: v1.2.0
-- libRapidOcrNcnn-intel.dylib: 1.1.2
-- libRapidOcrNcnn.so: 1.1.2
-- RapidOcrNcnn.dll: 1.1.2
-
-### onnx
-
-- libRapidOcrOnnx-intel.dylib: 1.2.2
-- libRapidOcrOnnx.so: 1.2.2
-- RapidOcrOnnx.dll: 1.2.2
-
-## 快速测试
-
-1⃣️ 下载源代码
-
-```shell
-git clone https://github.com/RapidAI/RapidOcrOnnxJvm.git
+```xml
+<dependency>
+    <groupId>com.github.monster</groupId>
+    <artifactId>RapidOcr-Java</artifactId>
+    <version>0.0.1</version>
+</dependency>
 ```
 
-2⃣️ 运行测试类
+2⃣️ 调用
 
-![](https://monster-note.oss-cn-hangzhou.aliyuncs.com/img/sql/mysql/202309151824613.png)
-
-运行成功如下
-
-![](https://monster-note.oss-cn-hangzhou.aliyuncs.com/img/sql/mysql/202309151615945.png)
+```java
+  public static void main(String[] args) {
+      OcrResult ocrResult = OcrUtil.NcnnOcr("images/40.png");
+      System.out.println(ocrResult);
+  }
+```
 
 ## 目录说明
 
-### ncnn目录
+### Resources目录
 
-这里面存放RapidOcr使用[ncnn](https://github.com/Tencent/ncnn)编译后的结果，
+分别存放RapidOcr使用[ncnn](https://github.com/Tencent/ncnn)和onnx编译后的结果
 
-- models: 模型文件，想要更新请[前往下载相应版本的文件](https://github.com/RapidAI/RapidOcrNcnn/releases)
+> 想要更新ncnn请[前往](https://github.com/RapidAI/RapidOcrNcnn/releases)，想要更新onnx请[前往](https://github.com/RapidAI/RapidOcrOnnx/releases)
 
-- libRapidOcrNcnn.dylib: 使用Mac系统 **M1架构**编译
-- libRapidOcrNcnn-intel.dylib: 使用Mac系统 **Intel架构**编译，‼️ 如果使用其进行测试，请将其重命名为`libRapidOcrNcnn.dylib`
+- models: 模型文件
+
+- libRapidOcrNcnn-silicon.dylib: 使用Mac系统 **M系列架构**编译
+- libRapidOcrNcnn-intel.dylib: 使用Mac系统 **Intel架构**编译
 - libRapidOcrNcnn.so: 使用Linux系统编译
 - RapidOcrNcnn.dll: 使用Windows系统编译
-
-### onnx目录
-
-这里面存放RapidOcr使用onnx编译后的结果，
-
-- models: 模型文件，想要更新请[前往下载相应版本的文件](https://github.com/RapidAI/RapidOcrOnnx/releases)
-
-- libRapidOcrOnnx.dylib: 暂无Mac系统 **M1架构**编译
-- libRapidOcrOnnx-intel.dylib: 使用Mac系统 **Intel架构**编译，‼️ 如果使用其进行测试，请将其重命名为`libRapidOcrOnnx`
-- libRapidOcrOnnx.so: 使用Linux系统编译
-- RapidOcrOnnx.dll: 使用Windows系统编译
 
 ### src目录
 
 - com.benjaminwan.ocrlibrary: 核心代码，用来与dll、so、dylib进行交互。‼️ 千万不要改包名！！！
 - com.github.monster.OcrUtil: 调用核心代码工具类
 
-## RapidOcr升级
-
-- 按照目录说明中，自行下载相应版本jni
-
-- mac-arm64版本[可前往下载](https://github.com/MyMonsterCat/Model-DLL)
-
-## OcrUtil使用说明
-
-> ⚠️ 如果要使用OcrUtil，请确保ncc目录和onnx目录严格按照下面格式（以ncxx目录为例）
->
-> ncnn
->
-> - models
->   - ch_PP-OCRv3_det_infer.onnx/ch_PP-OCRv3_det_infer.bin
->   - 其他文件此处省略...
->   - ...
-> - xxx.dylib
-> - xxx.so
-> - Xxx.dll
+## Ocr参数调优
 
 详细参数说明如下：
 
@@ -117,44 +78,24 @@ git clone https://github.com/RapidAI/RapidOcrOnnxJvm.git
 public static OcrResult Ocr(String library, String modelsDir, String detName, String clsName, String recName, String keysName, String imagePath,Integer numThread, Integer padding, Integer maxSideLen, Float boxScoreThresh, Float boxThresh,Float unClipRatio, Integer doAngleFlag, Integer mostAngleFlag, Integer gpuIndex) 
 ```
 
-## Maven打包引入其他项目
+## 版本说明
 
-1⃣️ Maven打包
+当前使用版本如下
 
-![](https://monster-note.oss-cn-hangzhou.aliyuncs.com/img/sql/mysql/202309151651157.png)
+### ncnn
 
-2⃣️ Maven坐标引入
+- libRapidOcrNcnn.dylib: v1.2.0
+- libRapidOcrNcnn-intel.dylib: 1.1.2
+- libRapidOcrNcnn.so: 1.1.2
+- RapidOcrNcnn.dll: 1.1.2
 
-```xml
-<dependency>
-    <groupId>com.github.monster</groupId>
-    <artifactId>RapidOcr-Java</artifactId>
-    <version>0.0.1</version>
-</dependency>
-```
+### onnx
 
-3⃣️ 引入jni文件
+- libRapidOcrOnnx-intel.dylib: 1.2.2
+- libRapidOcrOnnx.so: 1.2.2
+- RapidOcrOnnx.dll: 1.2.2
 
-按照OcrUtil使用说明中要求的格式，放入工程
 
-![](https://monster-note.oss-cn-hangzhou.aliyuncs.com/img/sql/mysql/202309151819190.png)
-
-4⃣️ 调用
-
-```java
-// 获取jni的绝对路径
-String dirPath = System.getProperty("user.dir") +  "/ncnn";
-// 调用
-// Mac调用示例
- OcrResult ocrResult = OcrUtil.NcnnOcr(dirPath + "/libRapidOcrNcnn.dylib", dirPath + "/models", "images/1.jpg");
-// windows调用
-//  OcrResult ocrResult = OcrUtil.NcnnOcr(dirPath + "/RapidOcrNcnn.dll", "ncnn/models", "images/1.jpg");
-System.out.println(ocrResult);
-```
-
-5⃣️ 识别效果与时间
-
-![](https://monster-note.oss-cn-hangzhou.aliyuncs.com/img/sql/mysql/202309151825366.png)
 
 ## 鸣谢
 
