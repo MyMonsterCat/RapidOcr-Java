@@ -46,7 +46,7 @@ public class OcrBase {
         OcrEngine ocrEngine = new OcrEngine(libraryDir, modelsDir, deleteOnExit);
         ocrEngine.setNumThread(numThread);
         ocrEngine.initLogger(
-                true,
+                false,
                 false,
                 false
         );
