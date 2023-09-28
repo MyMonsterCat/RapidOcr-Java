@@ -2,20 +2,33 @@ package com.github.monster;
 
 import com.benjaminwan.ocrlibrary.OcrResult;
 
+/**
+ * OCR工具类
+ */
 public class OcrUtil extends OcrBase {
 
-    public static OcrResult NcnnOcr(String imagePath) {
-        ConfigLoader configLoader = new ConfigLoader();
+    /**
+     * 使用Ncnn进行OCR识别
+     *
+     * @param imagePath 要识别的图片路径
+     * @return 识别结果
+     */
+    public static OcrResult runOcr(String imagePath) {
+        OcrConfigLoader ocrConfigLoader = OcrConfigLoader.getInstance();
         // 自动识别配置
-        OcrConfig config = configLoader.getConfig();
+        OcrConfig config = ocrConfigLoader.getBaseConfig();
         // 调用
-        return NcnnOcr(imagePath, config);
+        return runOcr(imagePath, config);
     }
 
-    public static OcrResult NcnnOcr(String imagePath, OcrConfig config) {
-        return Ocr(config.getLibraryDir(), config.getModelsDir(),
-                ModelConstants.MODEL_DET_NAME, ModelConstants.MODEL_CLS_NAME, ModelConstants.MODEL_REC_NAME, ModelConstants.MODEL_KEYS_NAME, imagePath,
-                config.getNumThread(), config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(),
-                config.getBoxThresh(), config.getUnClipRatio(), config.getDoAngleFlag(), config.getMostAngleFlag(), config.getGpuIndex());
+    /**
+     * 使用Ncnn进行OCR识别
+     *
+     * @param imagePath 要识别的图片路径
+     * @param config    ocr配置
+     * @return 识别结果
+     */
+    public static OcrResult runOcr(String imagePath, OcrConfig config) {
+        return ocr(imagePath, config);
     }
 }

@@ -1,6 +1,6 @@
 package com.benjaminwan.ocrlibrary;
 
-import com.github.monster.NativeUtils;
+import com.github.monster.JarFileUtils;
 import com.github.monster.OcrUtil;
 
 import java.io.IOException;
@@ -11,11 +11,10 @@ import java.io.IOException;
  */
 public class OcrEngine {
 
-    public OcrEngine(String libraryPath, String modelsDir) {
+    public OcrEngine(String libraryPath, String modelsDir, boolean deleteOnExit) {
         try {
-            NativeUtils.loadLibraryFromJar(libraryPath, null, true);
-            NativeUtils.loadModelsFromJar(modelsDir);
-
+            JarFileUtils.copyFileFromJar(libraryPath, null, true, deleteOnExit);
+            JarFileUtils.copyModelsFromJar(modelsDir, deleteOnExit);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

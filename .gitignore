@@ -2,3 +2,5 @@ target/
 .idea/
 logs/
 images/
+*.iml
+*.log
