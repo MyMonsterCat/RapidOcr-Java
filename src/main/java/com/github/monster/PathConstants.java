@@ -13,7 +13,6 @@ public class PathConstants {
     /**
      * 模型相关
      **/
-
     public static final String MODEL_PATH = NCNN + "/models";
     public static final String MODEL_BIN = ".bin";
     public static final String MODEL_PARAM = ".param";

@@ -25,7 +25,7 @@
 <dependency>
     <groupId>com.github.monster</groupId>
     <artifactId>RapidOcr-Java</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 
@@ -35,22 +35,42 @@
 public class OcrUtilTest {
 
     @Test
-    public void runOcrConfig() {
-        // 从配置加载器获取默认配置
-        OcrConfigLoader instance = OcrConfigLoader.getInstance();
-        OcrConfig ocrConfig = instance.getBaseConfig();
-        // 添加自定义配置
-        ocrConfig.setDoAngleFlag(1);
-        ocrConfig.setMostAngleFlag(1);
+    public void runParamConfig() {
+        // 配置参数
+        ParamConfig paramConfig = new ParamConfig();
+        paramConfig.setDoAngle(true);
+        paramConfig.setMostAngle(true);
         // 开始识别
-        OcrResult ocrResult = OcrUtil.runOcr("images/1.jpg", ocrConfig);
+        OcrResult ocrResult = OcrUtil.runOcr("images/1.jpg", paramConfig);
         System.out.println(ocrResult);
     }
 
     @Test
     public void runOcr() {
         // 开始识别
-        OcrResult ocrResult = OcrUtil.runOcr("images/1.jpg");
+        System.out.println("第一次OCR >>>>>>>> ");
+        OcrResult ocrResult1 = OcrUtil.runOcr("images/img.png");
+        System.out.println(ocrResult1);
+        // 开始识别
+        System.out.println("第二次OCR >>>>>>>> ");
+        OcrResult ocrResult2 = OcrUtil.runOcr("images/40.png");
+        System.out.println(ocrResult2);
+        // 开始识别
+        System.out.println("第三次OCR >>>>>>>> ");
+        OcrResult ocrResult3 = OcrUtil.runOcr("images/40.png");
+        System.out.println(ocrResult3);
+    }
+
+    @Test
+    public void runHardWareConfig() {
+        // 配置可变参数
+        ParamConfig paramConfig = new ParamConfig();
+        paramConfig.setDoAngle(true);
+        paramConfig.setMostAngle(true);
+        // 配置硬件参数：4核CPU，不使用GPU
+        HardwareConfig hardwareConfig = new HardwareConfig(4, 0);
+        // 开始识别
+        OcrResult ocrResult = OcrUtil.runOcr("images/1.jpg", paramConfig, LibConfig.getDefaultConfig(), hardwareConfig);
         System.out.println(ocrResult);
     }
 }
@@ -58,26 +78,38 @@ public class OcrUtilTest {
 
 ## 🔝 OcrConfig参数调优
 
-详细参数说明如下：
+**LibConfig**参数说明如下：
+
+|    参数名    |                  说明                   |  类型   | 权限 |
+| :----------: | :-------------------------------------: | :-----: | :--: |
+|  libraryDir  |             动态链接库路径              | String  | 读写 |
+|  modelsDir   |                模型路径                 | String  | 读写 |
+| deleteOnExit | 是否在JVM退出时删除动态链接库和模型文件 | boolean | 读写 |
+|   detName    |               Det文件名称               | String  | 只读 |
+|   clsName    |               Cls文件名称               | String  | 只读 |
+|   recName    |               Rec文件名称               | String  | 只读 |
+|   keysName   |                  词单                   | String  | 只读 |
+
+**HardWareConfig**参数说明如下：
+
+|  参数名   |                             说明                             | 类型 | 权限 |
+| :-------: | :----------------------------------------------------------: | :--: | :--: |
+| numThread |                         CPU 核心数量                         | int  | 读写 |
+| gpuIndex  | GPU0一般为默认GPU，参数选项：使用CPU(-1)/使用GPU0(0)/使用GPU1(1)/...，默认0 | int  | 读写 |
+
+> ⚠️ 本项目ncnn暂时不支持使用GPU，即使用默认值0
+
+**ParamConfig**参数说明如下：
 
 |     参数名     |                             说明                             |  类型   | 权限 |
 | :------------: | :----------------------------------------------------------: | :-----: | :--: |
-|   libraryDir   |                        动态链接库路径                        | String  | 读写 |
-|   modelsDir    |                           模型路径                           | String  | 读写 |
-|  deleteOnExit  |           是否在JVM退出时删除动态链接库和模型文件            | boolean | 读写 |
-|    detName     |                         Det文件名称                          | String  | 只读 |
-|    clsName     |                         Cls文件名称                          | String  | 只读 |
-|    recName     |                         Rec文件名称                          | String  | 只读 |
-|    keysName    |                             词单                             | String  | 只读 |
-|   numThread    |                         CPU 核心数量                         | Integer | 读写 |
-|    padding     | 图像外接白框，用于提升识别率，文字框没有正确框住所有文字时，增加此值。默认50。 | Integer | 读写 |
-|   maxSideLen   | 按图像长边进行总体缩放，放大增加识别耗时但精度更高，缩小减小耗时但精度降低，maxSideLen为0表示不缩放 | Integer | 读写 |
-| boxScoreThresh | 文字框置信度门限，文字框没有正确框住所有文字时，减小此值，默认0.5f |  Float  | 读写 |
-|   boxThresh    |               值越大，文字部分会越小，默认0.3f               |  Float  | 读写 |
-|  unClipRatio   |      单个文字框大小倍率，越大时单个文字框越大，默认1.6f      |  Float  | 读写 |
-|  doAngleFlag   | 启用(1)/禁用(0) 文字方向检测，只有图片倒置的情况下(旋转90~270度的图片)，才需要启用文字方向检测，默认关闭 | Integer | 读写 |
-| mostAngleFlag  | 启用(1)/禁用(0) 角度投票(整张图片以最大可能文字方向来识别)，当禁用文字方向检测时，此项也不起作用，默认关闭 | Integer | 读写 |
-|    gpuIndex    | GPU0一般为默认GPU，参数选项：使用CPU(-1)/使用GPU0(0)/使用GPU1(1)/...，默认0 | Integer | 读写 |
+|    padding     | 图像外接白框，用于提升识别率，文字框没有正确框住所有文字时，增加此值。默认50。 |   int   | 读写 |
+|   maxSideLen   | 按图像长边进行总体缩放，放大增加识别耗时但精度更高，缩小减小耗时但精度降低，maxSideLen为0表示不缩放 |   int   | 读写 |
+| boxScoreThresh | 文字框置信度门限，文字框没有正确框住所有文字时，减小此值，默认0.5f |  float  | 读写 |
+|   boxThresh    |               值越大，文字部分会越小，默认0.3f               |  float  | 读写 |
+|  unClipRatio   |      单个文字框大小倍率，越大时单个文字框越大，默认1.6f      |  float  | 读写 |
+|  doAngleFlag   | 启用(1)/禁用(0) 文字方向检测，只有图片倒置的情况下(旋转90~270度的图片)，才需要启用文字方向检测，默认关闭 | boolean | 读写 |
+| mostAngleFlag  | 启用(1)/禁用(0) 角度投票(整张图片以最大可能文字方向来识别)，当禁用文字方向检测时，此项也不起作用，默认关闭 | boolean | 读写 |
 
 > ✍️ 想更深入了解，请移步[config.yaml参数解释](https://rapidai.github.io/RapidOCRDocs/docs/blog/config_parameter/)
 
@@ -123,6 +155,7 @@ public class OcrUtilTest {
 - [x] 根据系统版本自适应加载动态库
 - [x] 动态库集成到jar中
 - [x] 是否删除临时文件夹配置为可选项
+- [x] jvm未退出场景连续调用识别结果集乱码[#1](https://github.com/MyMonsterCat/RapidOcr-Java/issues/1)
 
 ## 鸣谢
 
