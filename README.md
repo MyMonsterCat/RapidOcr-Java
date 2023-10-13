@@ -131,7 +131,7 @@ public class OcrUtilTest {
 ### src目录
 
 - com.benjaminwan.ocrlibrary: 核心代码，用来与dll、so、dylib进行交互。‼️ 千万不要改包名！！！
-- com.github.monster.OcrUtil: 调用核心代码工具类
+- com.github.monster.ocr.OcrUtil: 调用核心代码工具类
 
 ## ⚠️ 版本说明
 

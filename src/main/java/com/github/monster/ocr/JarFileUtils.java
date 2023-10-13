@@ -1,4 +1,4 @@
-package com.github.monster;
+package com.github.monster.ocr;
 
 import java.io.File;
 import java.io.FileNotFoundException;

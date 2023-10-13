@@ -1,6 +1,6 @@
-package com.github.monster.config;
+package com.github.monster.ocr.config;
 
-import com.github.monster.PathConstants;
+import com.github.monster.ocr.PathConstants;
 
 /**
  * 库文件配置类

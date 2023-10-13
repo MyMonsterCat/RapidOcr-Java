@@ -1,10 +1,10 @@
-package com.github.monster;
+package com.github.monster.ocr;
 
 import com.benjaminwan.ocrlibrary.OcrEngine;
 import com.benjaminwan.ocrlibrary.OcrResult;
-import com.github.monster.config.HardwareConfig;
-import com.github.monster.config.LibConfig;
-import com.github.monster.config.ParamConfig;
+import com.github.monster.ocr.config.HardwareConfig;
+import com.github.monster.ocr.config.LibConfig;
+import com.github.monster.ocr.config.ParamConfig;
 
 /**
  * OCR工具类

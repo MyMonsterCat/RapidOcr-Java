@@ -1,4 +1,4 @@
-package com.github.monster;
+package com.github.monster.ocr;
 
 /**
  * @author Monster

@@ -1,7 +1,6 @@
 package com.benjaminwan.ocrlibrary;
 
-import com.github.monster.JarFileUtils;
-import com.github.monster.OcrUtil;
+import com.github.monster.ocr.JarFileUtils;
 
 import java.io.IOException;
 

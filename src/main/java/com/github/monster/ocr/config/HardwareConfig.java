@@ -1,4 +1,4 @@
-package com.github.monster.config;
+package com.github.monster.ocr.config;
 
 /**
  * OCR引擎启动硬件配置配置

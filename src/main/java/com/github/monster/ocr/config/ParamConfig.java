@@ -1,4 +1,4 @@
-package com.github.monster.config;
+package com.github.monster.ocr.config;
 
 /**
  * 可调节参数配置
