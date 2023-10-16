@@ -4,6 +4,7 @@ import com.benjaminwan.ocrlibrary.OcrResult;
 import com.github.monster.ocr.config.HardwareConfig;
 import com.github.monster.ocr.config.LibConfig;
 import com.github.monster.ocr.config.ParamConfig;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -12,12 +13,17 @@ import org.junit.Test;
 public class OcrUtilTest {
 
     @Test
-    public void libTest() {
-        // 使用不同推理引擎进行识别
+    public void NcnnTest() {
+        // 使用NCNN引擎进行识别
         OcrResult NCNNResult = OcrUtil.runOcr("images/40.png", LibConfig.getNcnnConfig());
-//        OcrResult ONNXResult = OcrUtil.runOcr("images/40.png", LibConfig.getOnnxConfig());
-        System.out.println(NCNNResult);
-//        System.out.println(ONNXResult);
+        Assert.assertEquals("40",NCNNResult.getStrRes().trim().toString());
+    }
+
+    @Test
+    public void OnnxTest() {
+        // 使用ONNX推理引擎进行识别
+        OcrResult ONNXResult = OcrUtil.runOcr("images/40.png", LibConfig.getOnnxConfig());
+        Assert.assertEquals("40",ONNXResult.getStrRes().trim().toString());
     }
 
     @Test
@@ -46,17 +52,26 @@ public class OcrUtilTest {
 
     @Test
     public void repeatOcr() {
-        // 开始识别
-        System.out.println("第一次OCR >>>>>>>> ");
-        OcrResult ocrResult1 = OcrUtil.runOcr("images/img.png");
-        System.out.println(ocrResult1);
-        // 开始识别
-        System.out.println("第二次OCR >>>>>>>> ");
-        OcrResult ocrResult2 = OcrUtil.runOcr("images/40.png");
-        System.out.println(ocrResult2);
-        // 开始识别
-        System.out.println("第三次OCR >>>>>>>> ");
-        OcrResult ocrResult3 = OcrUtil.runOcr("images/40.png");
-        System.out.println(ocrResult3);
+        String real = "40";
+        System.out.println("NCNN 1>>>>>>>> ");
+        OcrResult NCNN_1 = OcrUtil.runOcr("images/40.png", LibConfig.getNcnnConfig());
+        Assert.assertEquals(real,NCNN_1.getStrRes().trim().toString());
+
+        System.out.println("NCNN 2>>>>>>>> ");
+        OcrResult NCNN_2 = OcrUtil.runOcr("images/40.png");
+        Assert.assertEquals(real,NCNN_2.getStrRes().trim().toString());
+
+        System.out.println("NCNN 3>>>>>>>> ");
+        OcrResult NCNN_3 = OcrUtil.runOcr("images/40.png");
+        Assert.assertEquals(real,NCNN_3.getStrRes().trim().toString());
+
+        System.out.println("NCNN 4>>>>>>>> ");
+        OcrResult NCNN_4 = OcrUtil.runOcr("images/40.png");
+        Assert.assertEquals(real,NCNN_4.getStrRes().trim().toString());
+
+        System.out.println("NCNN 5>>>>>>>> ");
+        OcrResult NCNN_5 = OcrUtil.runOcr("images/40.png");
+        Assert.assertEquals(real,NCNN_5.getStrRes().trim().toString());
     }
+
 }
