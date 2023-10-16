@@ -1,6 +1,5 @@
 package com.github.monster.ocr.config;
 
-import com.github.monster.ocr.JarFileUtils;
 import com.github.monster.ocr.PathConstants;
 import lombok.Getter;
 
@@ -66,7 +65,6 @@ public class LibConfig implements IOcrConfig {
         String cpu = System.getProperty("os.arch").toLowerCase();
         String libraryName;
         if (os.contains("win")) {
-            //TODO win7
             if (cpu.contains("amd64")) {
                 libraryName = PathConstants.OS_WINDOWS_64;
             } else {
@@ -94,9 +92,9 @@ public class LibConfig implements IOcrConfig {
      */
     public String getTempDirPath() {
         if (Objects.equals(PathConstants.ONNX, this.libraryDir)) {
-            return System.getProperty("java.io.tmpdir") + JarFileUtils.NATIVE_FOLDER_PATH_PREFIX + PathConstants.ONNX;
+            return PathConstants.TEMP_DIR + PathConstants.ONNX;
         } else {
-            return System.getProperty("java.io.tmpdir") + JarFileUtils.NATIVE_FOLDER_PATH_PREFIX + PathConstants.NCNN;
+            return PathConstants.TEMP_DIR + PathConstants.NCNN;
         }
     }
 }

@@ -14,10 +14,6 @@ public class JarFileUtils {
      * 文件前缀的最小长度
      */
     private static final int MIN_PREFIX_LENGTH = 3;
-    /**
-     * 临时文件夹前缀
-     */
-    public static final String NATIVE_FOLDER_PATH_PREFIX = "ocrJava";
 
     /**
      * 临时文件
@@ -31,9 +27,9 @@ public class JarFileUtils {
      * 从jar包中复制文件
      * 先将jar包中的动态库复制到系统临时文件夹，如果需要加载会进行加载，并且在JVM退出时自动删除。
      *
-     * @param path         要复制文件的路径，必须以'/'开始，比如 /lib/mylib.so，必须以'/'开始
+     * @param path         要复制文件的路径，必须以'/'开始，比如 /lib/monster.so，必须以'/'开始
      * @param dirName      保存的文件夹名称，必须以'/'开始，可为null
-     * @param loadClass    用于提供{@link ClassLoader}加载动态库的类，如果为null,则使用NativeUtils.class
+     * @param loadClass    用于提供{@link ClassLoader}加载动态库的类，如果为null,则使用JarFileUtils.class
      * @param load         是否加载，有些文件只需要复制到临时文件夹，不需要加载
      * @param deleteOnExit 是否在JVM退出时删除临时文件
      * @throws IOException           动态库读写错误
@@ -105,24 +101,16 @@ public class JarFileUtils {
      *
      * @param modelPath 文件夹路径
      */
-    public static void copyModelsFromJar(String modelPath, boolean deleteOnExit) throws IOException {
-        String path = modelPath.endsWith("/") ? modelPath : modelPath + "/";
+    public static void copyModelsFromJar(String modelPath, boolean isDelOnExit) throws IOException {
+        String base = modelPath.endsWith("/") ? modelPath : modelPath + "/";
         if (Objects.equals(PathConstants.ONNX, modelPath)) {
-            copyFileFromJar(path + PathConstants.MODEL_DET_NAME, PathConstants.ONNX, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_DET_NAME, PathConstants.ONNX, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_REC_NAME, PathConstants.ONNX, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_REC_NAME, PathConstants.ONNX, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME, PathConstants.ONNX, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME, PathConstants.ONNX, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_KEYS_NAME, PathConstants.ONNX, null, false, deleteOnExit);
+            for (final String path : PathConstants.MODEL_ONNX_FILE_ARRAY) {
+                copyFileFromJar(base + path, PathConstants.ONNX, null, Boolean.FALSE, isDelOnExit);
+            }
         } else {
-            copyFileFromJar(path + PathConstants.MODEL_DET_NAME + PathConstants.MODEL_SUFFIX_BIN, PathConstants.NCNN, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_DET_NAME + PathConstants.MODEL_SUFFIX_PARAM, PathConstants.NCNN, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_REC_NAME + PathConstants.MODEL_SUFFIX_BIN, PathConstants.NCNN, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_REC_NAME + PathConstants.MODEL_SUFFIX_PARAM, PathConstants.NCNN, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_SUFFIX_BIN, PathConstants.NCNN, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_SUFFIX_PARAM, PathConstants.NCNN, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_KEYS_NAME, PathConstants.NCNN, null, false, deleteOnExit);
+            for (final String path : PathConstants.MODEL_NCNN_FILE_ARRAY) {
+                copyFileFromJar(base + path, PathConstants.NCNN, null, Boolean.FALSE, isDelOnExit);
+            }
         }
 
     }
@@ -131,22 +119,12 @@ public class JarFileUtils {
      * 在系统临时文件夹下创建临时文件夹
      */
     private static File createTempDirectory(String dirName) throws IOException {
-        String tempDir = System.getProperty("java.io.tmpdir");
-        File generatedDir = new File(tempDir, JarFileUtils.NATIVE_FOLDER_PATH_PREFIX);
-        if (!generatedDir.exists()) {
-            if (!generatedDir.mkdir()) {
-                throw new IOException("无法在临时目录创建文件" + generatedDir.getName());
+        File dir = new File(PathConstants.TEMP_DIR, dirName);
+        if (!dir.exists()) {
+            if (!dir.mkdir()) {
+                throw new IOException("无法在临时目录创建文件" + dir.getName());
             }
         }
-        if (dirName != null) {
-            File dir = new File(generatedDir, dirName);
-            if (!dir.exists()) {
-                if (!dir.mkdir()) {
-                    throw new IOException("无法在临时目录创建文件" + dir.getName());
-                }
-            }
-            return dir;
-        }
-        return generatedDir;
+        return dir;
     }
 }

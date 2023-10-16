@@ -71,6 +71,7 @@ public class OcrUtil {
                 throw new IllegalArgumentException("模型初始化错误，请检查models/keys路径！");
             }
         }
+        System.out.println("当前使用的推理引擎为：" + ocrEngine.getInference().replace("/", "").toUpperCase());
     }
 
 }

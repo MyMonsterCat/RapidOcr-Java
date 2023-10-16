@@ -139,16 +139,17 @@ public class OcrUtilTest {
 
 ### ncnn
 
-- libRapidOcrNcnn-silicon.dylib: v1.2.0
-- libRapidOcrNcnn-intel.dylib: 1.1.2
-- libRapidOcrNcnn.so: 1.1.2
-- RapidOcrNcnn.dll: 1.1.2
+- Mac-Arm64: `v1.2.0`
 
-### ~~onnx~~
+- Mac-x86_64、Linux、Win：`v1.1.2`
+- win7可能存在问题，未经测试
 
-- libRapidOcrOnnx-intel.dylib: 1.2.2
-- libRapidOcrOnnx.so: 1.2.2
-- RapidOcrOnnx.dll: 1.2.2
+### onnx
+
+- Mac-Arm64: `暂不支持`
+
+- Mac-x86_64、Linux、Win：`v1.2.0`
+- win7可能存在问题，未经测试
 
 ## 📌 TODO
 
@@ -156,6 +157,10 @@ public class OcrUtilTest {
 - [x] 动态库集成到jar中
 - [x] 是否删除临时文件夹配置为可选项
 - [x] jvm未退出场景连续调用识别结果集乱码[#1](https://github.com/MyMonsterCat/RapidOcr-Java/issues/1)
+- [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)
+- [ ] 添加日志，规范日志打印
+- [ ] ONNX支持Mac-Arm64
+- [ ] 同时加载多个引擎
 
 ## 鸣谢
 

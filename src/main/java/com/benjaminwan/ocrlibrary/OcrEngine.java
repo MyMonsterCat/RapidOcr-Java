@@ -15,13 +15,21 @@ public class OcrEngine {
         try {
             if (Objects.equals(PathConstants.ONNX, libraryPath)) {
                 JarFileUtils.copyFileFromJar(libraryPath, PathConstants.ONNX, null, true, deleteOnExit);
+                inference = PathConstants.ONNX;
             } else {
                 JarFileUtils.copyFileFromJar(libraryPath, PathConstants.NCNN, null, true, deleteOnExit);
+                inference = PathConstants.NCNN;
             }
             JarFileUtils.copyModelsFromJar(modelsDir, deleteOnExit);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String inference;
+
+    public String getInference() {
+        return inference;
     }
 
     public native boolean setNumThread(int numThread);
