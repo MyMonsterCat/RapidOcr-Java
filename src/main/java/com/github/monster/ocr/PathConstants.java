@@ -13,13 +13,13 @@ public class PathConstants {
     /**
      * 推理引擎
      */
-    public static final String NCNN = File.separator + "ncnn";
-    public static final String ONNX = File.separator + "onnx";
+    public static final String NCNN = "/ncnn";
+    public static final String ONNX = "/onnx";
 
     /**
      * 模型相关
      **/
-    public static final String MODEL = File.separator + "models";
+    public static final String MODEL = "/models";
     public static final String MODEL_NCNN_PATH = NCNN + MODEL;
     public static final String MODEL_ONNX_PATH = ONNX + MODEL;
     public static final String MODEL_SUFFIX_BIN = ".bin";
@@ -32,11 +32,11 @@ public class PathConstants {
     /**
      * 动态库
      **/
-    public static final String OS_WINDOWS_32 = File.separator + "win" + File.separator + "win32" + File.separator + "RapidOcr.dll";
-    public static final String OS_WINDOWS_64 = File.separator + "win" + File.separator + "x86_64" + File.separator + "RapidOcr.dll";
-    public static final String OS_MAC_SILICON = File.separator + "mac" + File.separator + "arm64" + File.separator + "libRapidOcr.dylib";
-    public static final String OS_MAC_INTEL = File.separator + "mac" + File.separator + "x86_64" + File.separator + "libRapidOcr.dylib";
-    public static final String OS_LINUX = File.separator + "linux" + File.separator + "libRapidOcr.so";
+    public static final String OS_WINDOWS_32 = "/win/win32/RapidOcr.dll";
+    public static final String OS_WINDOWS_64 = "/win/x86_64/RapidOcr.dll";
+    public static final String OS_MAC_SILICON = "/mac/arm64/libRapidOcr.dylib";
+    public static final String OS_MAC_INTEL = "/mac/x86_64/libRapidOcr.dylib";
+    public static final String OS_LINUX = "/linux/libRapidOcr.so";
 
 
 }

@@ -84,12 +84,12 @@ public class JarFileUtils {
      * @throws IllegalArgumentException 路径必须以'/'开始、文件名必须至少有3个字符长
      */
     private static String checkFileName(String path) {
-        if (null == path || !path.startsWith(File.separator)) {
+        if (null == path || !path.startsWith("/")) {
             throw new IllegalArgumentException("路径必须以文件分隔符开始.");
         }
 
         // 从路径获取文件名
-        String[] parts = path.split(File.separator);
+        String[] parts = path.split("/");
         String filename = (parts.length > 1) ? parts[parts.length - 1] : null;
 
         // 检查文件名是否正确
@@ -105,7 +105,7 @@ public class JarFileUtils {
      * @param modelPath 文件夹路径
      */
     public static void copyModelsFromJar(String modelPath, boolean deleteOnExit) throws IOException {
-        String path = modelPath.endsWith(File.separator) ? modelPath : modelPath + File.separator;
+        String path = modelPath.endsWith("/") ? modelPath : modelPath + "/";
         if (Objects.equals(PathConstants.ONNX, modelPath)) {
             copyFileFromJar(path + PathConstants.MODEL_DET_NAME, null, false, deleteOnExit);
             copyFileFromJar(path + PathConstants.MODEL_DET_NAME, null, false, deleteOnExit);
