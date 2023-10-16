@@ -1,14 +1,17 @@
 package com.github.monster.ocr.config;
 
 import com.github.monster.ocr.PathConstants;
+import lombok.Getter;
 
 /**
  * 库文件配置类
  */
+@Getter
 public class LibConfig implements IOcrConfig {
 
+
     /**
-     * 动态链接库路径
+     * 动态链接库路径，决定了使用什么推理引擎
      */
     private String libraryDir;
     /**
@@ -37,11 +40,18 @@ public class LibConfig implements IOcrConfig {
     }
 
     /**
-     * 获取基础配置
+     * 使用NCNN推理引擎
      * 自动加载动态库、复制模型文件，以及设置CPU线程数，并且模型文件在第一次加载后会被缓存
      */
-    public static LibConfig getDefaultConfig() {
-        return new LibConfig(getLibraryName(), PathConstants.MODEL_PATH, false);
+    public static LibConfig getNcnnConfig() {
+        return new LibConfig(PathConstants.NCNN + getLibraryName(), PathConstants.MODEL_NCNN_PATH, false);
+    }
+    /**
+     * 使用ONNX推理引擎
+     * 自动加载动态库、复制模型文件，以及设置CPU线程数，并且模型文件在第一次加载后会被缓存
+     */
+    public static LibConfig getOnnxConfig() {
+        return new LibConfig(PathConstants.ONNX + getLibraryName(), PathConstants.MODEL_ONNX_PATH, false);
     }
 
     /**
@@ -51,9 +61,13 @@ public class LibConfig implements IOcrConfig {
         String os = System.getProperty("os.name").toLowerCase();
         String cpu = System.getProperty("os.arch").toLowerCase();
         String libraryName;
-
         if (os.contains("win")) {
-            libraryName = PathConstants.OS_WINDOWS;
+            //TODO win7
+            if (cpu.contains("amd64")) {
+                libraryName = PathConstants.OS_WINDOWS_64;
+            } else {
+                libraryName = PathConstants.OS_WINDOWS_32;
+            }
         } else if (os.contains("mac")) {
             if (cpu.contains("arch64")) {
                 libraryName = PathConstants.OS_MAC_SILICON;
@@ -66,34 +80,5 @@ public class LibConfig implements IOcrConfig {
             throw new UnsupportedOperationException("Unsupported operating system: " + os);
         }
         return libraryName;
-    }
-
-
-    public String getLibraryDir() {
-        return libraryDir;
-    }
-
-    public String getModelsDir() {
-        return modelsDir;
-    }
-
-    public boolean isDeleteOnExit() {
-        return deleteOnExit;
-    }
-
-    public String getDetName() {
-        return detName;
-    }
-
-    public String getClsName() {
-        return clsName;
-    }
-
-    public String getRecName() {
-        return recName;
-    }
-
-    public String getKeysName() {
-        return keysName;
     }
 }

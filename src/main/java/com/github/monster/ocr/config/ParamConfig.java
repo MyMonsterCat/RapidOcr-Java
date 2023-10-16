@@ -1,10 +1,18 @@
 package com.github.monster.ocr.config;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * 可调节参数配置
  */
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ParamConfig {
-
 
     /**
      * 图像外接白框，用于提升识别率，文字框没有正确框住所有文字时，增加此值。默认50。
@@ -35,60 +43,4 @@ public class ParamConfig {
      */
     private boolean mostAngle = false;
 
-
-    public int getPadding() {
-        return padding;
-    }
-
-    public int getMaxSideLen() {
-        return maxSideLen;
-    }
-
-    public float getBoxScoreThresh() {
-        return boxScoreThresh;
-    }
-
-    public float getBoxThresh() {
-        return boxThresh;
-    }
-
-    public float getUnClipRatio() {
-        return unClipRatio;
-    }
-
-    public boolean isDoAngle() {
-        return doAngle;
-    }
-
-    public boolean isMostAngle() {
-        return mostAngle;
-    }
-
-    public void setPadding(int padding) {
-        this.padding = padding;
-    }
-
-    public void setMaxSideLen(int maxSideLen) {
-        this.maxSideLen = maxSideLen;
-    }
-
-    public void setBoxScoreThresh(float boxScoreThresh) {
-        this.boxScoreThresh = boxScoreThresh;
-    }
-
-    public void setBoxThresh(float boxThresh) {
-        this.boxThresh = boxThresh;
-    }
-
-    public void setUnClipRatio(float unClipRatio) {
-        this.unClipRatio = unClipRatio;
-    }
-
-    public void setDoAngle(boolean doAngle) {
-        this.doAngle = doAngle;
-    }
-
-    public void setMostAngle(boolean mostAngle) {
-        this.mostAngle = mostAngle;
-    }
 }

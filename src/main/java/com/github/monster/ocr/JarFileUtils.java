@@ -1,11 +1,9 @@
 package com.github.monster.ocr;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 
 /**
  * 从jar包中加载动态库
@@ -86,12 +84,12 @@ public class JarFileUtils {
      * @throws IllegalArgumentException 路径必须以'/'开始、文件名必须至少有3个字符长
      */
     private static String checkFileName(String path) {
-        if (null == path || !path.startsWith("/")) {
-            throw new IllegalArgumentException("路径必须以'/'开始.");
+        if (null == path || !path.startsWith(File.separator)) {
+            throw new IllegalArgumentException("路径必须以文件分隔符开始.");
         }
 
         // 从路径获取文件名
-        String[] parts = path.split("/");
+        String[] parts = path.split(File.separator);
         String filename = (parts.length > 1) ? parts[parts.length - 1] : null;
 
         // 检查文件名是否正确
@@ -107,14 +105,23 @@ public class JarFileUtils {
      * @param modelPath 文件夹路径
      */
     public static void copyModelsFromJar(String modelPath, boolean deleteOnExit) throws IOException {
-        modelPath = modelPath.endsWith("/") ? modelPath : modelPath + "/";
-        copyFileFromJar(modelPath + PathConstants.MODEL_DET_NAME + PathConstants.MODEL_BIN, null, false, deleteOnExit);
-        copyFileFromJar(modelPath + PathConstants.MODEL_DET_NAME + PathConstants.MODEL_PARAM, null, false, deleteOnExit);
-        copyFileFromJar(modelPath + PathConstants.MODEL_REC_NAME + PathConstants.MODEL_BIN, null, false, deleteOnExit);
-        copyFileFromJar(modelPath + PathConstants.MODEL_REC_NAME + PathConstants.MODEL_PARAM, null, false, deleteOnExit);
-        copyFileFromJar(modelPath + PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_BIN, null, false, deleteOnExit);
-        copyFileFromJar(modelPath + PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_PARAM, null, false, deleteOnExit);
-        copyFileFromJar(modelPath + PathConstants.MODEL_KEYS_NAME, null, false, deleteOnExit);
+        String path = modelPath.endsWith(File.separator) ? modelPath : modelPath + File.separator;
+        if (Objects.equals(PathConstants.ONNX, modelPath)) {
+            copyFileFromJar(path + PathConstants.MODEL_DET_NAME, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_DET_NAME, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_REC_NAME, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_REC_NAME, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME, null, false, deleteOnExit);
+        } else {
+            copyFileFromJar(path + PathConstants.MODEL_DET_NAME + PathConstants.MODEL_SUFFIX_BIN, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_DET_NAME + PathConstants.MODEL_SUFFIX_PARAM, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_REC_NAME + PathConstants.MODEL_SUFFIX_BIN, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_REC_NAME + PathConstants.MODEL_SUFFIX_PARAM, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_SUFFIX_BIN, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_SUFFIX_PARAM, null, false, deleteOnExit);
+        }
+        copyFileFromJar(path + PathConstants.MODEL_KEYS_NAME, null, false, deleteOnExit);
     }
 
     /**

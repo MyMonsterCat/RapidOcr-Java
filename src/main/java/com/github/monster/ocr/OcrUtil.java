@@ -22,29 +22,39 @@ public class OcrUtil {
 
     public static OcrResult runOcr(String imagePath) {
         // 获取引擎
-        initOcrEngine(LibConfig.getDefaultConfig(), HardwareConfig.getDefaultConfig());
+        initOcrEngine(LibConfig.getNcnnConfig(), HardwareConfig.getDefaultConfig());
         // 获取默认配置
         ParamConfig config = new ParamConfig();
         // 开始识别
         return ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
     }
 
-    public static OcrResult runOcr(String imagePath, ParamConfig config) {
+    public static OcrResult runOcr(String imagePath, LibConfig libConfig) {
         // 获取引擎
-        initOcrEngine(LibConfig.getDefaultConfig(), HardwareConfig.getDefaultConfig());
+        initOcrEngine(libConfig, HardwareConfig.getDefaultConfig());
+        // 获取默认配置
+        ParamConfig config = new ParamConfig();
+        // 开始识别
+        return ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
+    }
+
+    public static OcrResult runOcr(String imagePath, LibConfig libConfig, ParamConfig config) {
+        // 获取引擎
+        initOcrEngine(libConfig, HardwareConfig.getDefaultConfig());
         // 开始识别
         return ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
     }
 
     /**
      * OCR识别
-     * @param imagePath 图片路径
-     * @param config 可调参数配置
-     * @param libConfig 库文件配置
+     *
+     * @param imagePath      图片路径
+     * @param config         可调参数配置
+     * @param libConfig      库文件配置
      * @param hardwareConfig 硬件参数配置
      * @return 识别结果
      */
-    public static OcrResult runOcr(String imagePath, ParamConfig config, LibConfig libConfig, HardwareConfig hardwareConfig) {
+    public static OcrResult runOcr(String imagePath, LibConfig libConfig, ParamConfig config, HardwareConfig hardwareConfig) {
         // 获取引擎
         initOcrEngine(libConfig, hardwareConfig);
         // 开始识别
