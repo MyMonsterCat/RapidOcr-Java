@@ -1,7 +1,10 @@
 package com.github.monster.ocr.config;
 
+import com.github.monster.ocr.JarFileUtils;
 import com.github.monster.ocr.PathConstants;
 import lombok.Getter;
+
+import java.util.Objects;
 
 /**
  * 库文件配置类
@@ -46,6 +49,7 @@ public class LibConfig implements IOcrConfig {
     public static LibConfig getNcnnConfig() {
         return new LibConfig(PathConstants.NCNN + getLibraryName(), PathConstants.MODEL_NCNN_PATH, false);
     }
+
     /**
      * 使用ONNX推理引擎
      * 自动加载动态库、复制模型文件，以及设置CPU线程数，并且模型文件在第一次加载后会被缓存
@@ -80,5 +84,19 @@ public class LibConfig implements IOcrConfig {
             throw new UnsupportedOperationException("Unsupported operating system: " + os);
         }
         return libraryName;
+    }
+
+
+    /**
+     * 获取临时文件夹路径
+     *
+     * @return 临时文件夹路径
+     */
+    public String getTempDirPath() {
+        if (Objects.equals(PathConstants.ONNX, this.libraryDir)) {
+            return System.getProperty("java.io.tmpdir") + JarFileUtils.NATIVE_FOLDER_PATH_PREFIX + PathConstants.ONNX;
+        } else {
+            return System.getProperty("java.io.tmpdir") + JarFileUtils.NATIVE_FOLDER_PATH_PREFIX + PathConstants.NCNN;
+        }
     }
 }

@@ -12,10 +12,6 @@ import com.github.monster.ocr.config.ParamConfig;
 public class OcrUtil {
 
     /**
-     * 临时目录
-     */
-    private static String tempDirPath = System.getProperty("java.io.tmpdir") + JarFileUtils.NATIVE_FOLDER_PATH_PREFIX;
-    /**
      * OCR引擎
      */
     private static OcrEngine ocrEngine;
@@ -61,26 +57,20 @@ public class OcrUtil {
         return ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
     }
 
-    private static OcrEngine initOcrEngine(LibConfig libConfig, HardwareConfig hardwareConfig) {
-        if (ocrEngine != null) {
-            return ocrEngine;
+    private static void initOcrEngine(LibConfig libConfig, HardwareConfig hardwareConfig) {
+        if (ocrEngine == null) {
+            ocrEngine = new OcrEngine(libConfig.getLibraryDir(), libConfig.getModelsDir(), libConfig.isDeleteOnExit());
+            ocrEngine.initLogger(
+                    false,
+                    false,
+                    false
+            );
+            ocrEngine.setNumThread(hardwareConfig.getNumThread());
+            ocrEngine.setGpuIndex(hardwareConfig.getGpuIndex());
+            if (!ocrEngine.initModels(libConfig.getTempDirPath(), libConfig.getDetName(), libConfig.getClsName(), libConfig.getRecName(), libConfig.getKeysName())) {
+                throw new IllegalArgumentException("模型初始化错误，请检查models/keys路径！");
+            }
         }
-        ocrEngine = new OcrEngine(libConfig.getLibraryDir(), libConfig.getModelsDir(), libConfig.isDeleteOnExit());
-        ocrEngine.initLogger(
-                false,
-                false,
-                false
-        );
-        Integer numThread = hardwareConfig.getNumThread();
-        ocrEngine.setNumThread(numThread);
-        Integer gpuIndex = hardwareConfig.getGpuIndex();
-        if (gpuIndex != null) {
-            ocrEngine.setGpuIndex(gpuIndex);
-        }
-        if (!ocrEngine.initModels(tempDirPath, libConfig.getDetName(), libConfig.getClsName(), libConfig.getRecName(), libConfig.getKeysName())) {
-            throw new IllegalArgumentException("模型初始化错误，请检查models/keys路径！");
-        }
-        return ocrEngine;
     }
 
 }

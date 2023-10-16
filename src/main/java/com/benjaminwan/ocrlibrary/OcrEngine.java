@@ -1,8 +1,10 @@
 package com.benjaminwan.ocrlibrary;
 
 import com.github.monster.ocr.JarFileUtils;
+import com.github.monster.ocr.PathConstants;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * OCR引擎对象，负责接收参数并执行OCR
@@ -11,7 +13,11 @@ public class OcrEngine {
 
     public OcrEngine(String libraryPath, String modelsDir, boolean deleteOnExit) {
         try {
-            JarFileUtils.copyFileFromJar(libraryPath, null, true, deleteOnExit);
+            if (Objects.equals(PathConstants.ONNX, libraryPath)) {
+                JarFileUtils.copyFileFromJar(libraryPath, PathConstants.ONNX, null, true, deleteOnExit);
+            } else {
+                JarFileUtils.copyFileFromJar(libraryPath, PathConstants.NCNN, null, true, deleteOnExit);
+            }
             JarFileUtils.copyModelsFromJar(modelsDir, deleteOnExit);
         } catch (IOException e) {
             throw new RuntimeException(e);

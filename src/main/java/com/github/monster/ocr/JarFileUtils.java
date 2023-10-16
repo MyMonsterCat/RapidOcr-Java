@@ -31,20 +31,21 @@ public class JarFileUtils {
      * 从jar包中复制文件
      * 先将jar包中的动态库复制到系统临时文件夹，如果需要加载会进行加载，并且在JVM退出时自动删除。
      *
-     * @param path         要复制文件的路径，必须以'/'开始,比如 /lib/mylib.so，必须以'/'开始
+     * @param path         要复制文件的路径，必须以'/'开始，比如 /lib/mylib.so，必须以'/'开始
+     * @param dirName      保存的文件夹名称，必须以'/'开始，可为null
      * @param loadClass    用于提供{@link ClassLoader}加载动态库的类，如果为null,则使用NativeUtils.class
      * @param load         是否加载，有些文件只需要复制到临时文件夹，不需要加载
      * @param deleteOnExit 是否在JVM退出时删除临时文件
      * @throws IOException           动态库读写错误
      * @throws FileNotFoundException 没有在jar包中找到指定的文件
      */
-    public static synchronized void copyFileFromJar(String path, Class<?> loadClass, boolean load, boolean deleteOnExit) throws IOException {
+    public static synchronized void copyFileFromJar(String path, String dirName, Class<?> loadClass, boolean load, boolean deleteOnExit) throws IOException {
 
         String filename = checkFileName(path);
 
         // 创建临时文件夹
         if (temporaryDir == null) {
-            temporaryDir = createTempDirectory();
+            temporaryDir = createTempDirectory(dirName);
             temporaryDir.deleteOnExit();
         }
         // 临时文件夹下的动态库名
@@ -107,35 +108,44 @@ public class JarFileUtils {
     public static void copyModelsFromJar(String modelPath, boolean deleteOnExit) throws IOException {
         String path = modelPath.endsWith("/") ? modelPath : modelPath + "/";
         if (Objects.equals(PathConstants.ONNX, modelPath)) {
-            copyFileFromJar(path + PathConstants.MODEL_DET_NAME, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_DET_NAME, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_REC_NAME, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_REC_NAME, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_DET_NAME, PathConstants.ONNX, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_DET_NAME, PathConstants.ONNX, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_REC_NAME, PathConstants.ONNX, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_REC_NAME, PathConstants.ONNX, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME, PathConstants.ONNX, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME, PathConstants.ONNX, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_KEYS_NAME, PathConstants.ONNX, null, false, deleteOnExit);
         } else {
-            copyFileFromJar(path + PathConstants.MODEL_DET_NAME + PathConstants.MODEL_SUFFIX_BIN, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_DET_NAME + PathConstants.MODEL_SUFFIX_PARAM, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_REC_NAME + PathConstants.MODEL_SUFFIX_BIN, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_REC_NAME + PathConstants.MODEL_SUFFIX_PARAM, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_SUFFIX_BIN, null, false, deleteOnExit);
-            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_SUFFIX_PARAM, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_DET_NAME + PathConstants.MODEL_SUFFIX_BIN, PathConstants.NCNN, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_DET_NAME + PathConstants.MODEL_SUFFIX_PARAM, PathConstants.NCNN, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_REC_NAME + PathConstants.MODEL_SUFFIX_BIN, PathConstants.NCNN, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_REC_NAME + PathConstants.MODEL_SUFFIX_PARAM, PathConstants.NCNN, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_SUFFIX_BIN, PathConstants.NCNN, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_SUFFIX_PARAM, PathConstants.NCNN, null, false, deleteOnExit);
+            copyFileFromJar(path + PathConstants.MODEL_KEYS_NAME, PathConstants.NCNN, null, false, deleteOnExit);
         }
-        copyFileFromJar(path + PathConstants.MODEL_KEYS_NAME, null, false, deleteOnExit);
+
     }
 
     /**
      * 在系统临时文件夹下创建临时文件夹
      */
-    private static File createTempDirectory() throws IOException {
+    private static File createTempDirectory(String dirName) throws IOException {
         String tempDir = System.getProperty("java.io.tmpdir");
         File generatedDir = new File(tempDir, JarFileUtils.NATIVE_FOLDER_PATH_PREFIX);
-        if (generatedDir.exists()) {
-            return generatedDir;
-        } else {
+        if (!generatedDir.exists()) {
             if (!generatedDir.mkdir()) {
                 throw new IOException("无法在临时目录创建文件" + generatedDir.getName());
             }
+        }
+        if (dirName != null) {
+            File dir = new File(generatedDir, dirName);
+            if (!dir.exists()) {
+                if (!dir.mkdir()) {
+                    throw new IOException("无法在临时目录创建文件" + dir.getName());
+                }
+            }
+            return dir;
         }
         return generatedDir;
     }
