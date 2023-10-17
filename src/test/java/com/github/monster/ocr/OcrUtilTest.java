@@ -15,21 +15,21 @@ public class OcrUtilTest {
     @Test
     public void NcnnTest() {
         // 使用NCNN引擎进行识别
-        OcrResult NCNNResult = OcrUtil.runOcr("images/40.png", LibConfig.getNcnnConfig());
-        Assert.assertEquals("40",NCNNResult.getStrRes().trim().toString());
+        OcrResult NCNNResult = OcrUtil.runOcr("images/40.png", LibConfig.getNcnnConfig(), ParamConfig.getDefaultConfig(), HardwareConfig.getNcnnConfig());
+        Assert.assertEquals("40", NCNNResult.getStrRes().trim().toString());
     }
 
     @Test
     public void OnnxTest() {
         // 使用ONNX推理引擎进行识别
-        OcrResult ONNXResult = OcrUtil.runOcr("images/40.png", LibConfig.getOnnxConfig());
-        Assert.assertEquals("40",ONNXResult.getStrRes().trim().toString());
+        OcrResult ONNXResult = OcrUtil.runOcr("images/40.png");
+        Assert.assertEquals("40", ONNXResult.getStrRes().trim().toString());
     }
 
     @Test
     public void paramTest() {
         // 配置参数
-        ParamConfig paramConfig = new ParamConfig();
+        ParamConfig paramConfig = ParamConfig.getDefaultConfig();
         paramConfig.setDoAngle(true);
         paramConfig.setMostAngle(true);
         // 开始识别
@@ -40,7 +40,7 @@ public class OcrUtilTest {
     @Test
     public void hardWareTest() {
         // 配置可变参数
-        ParamConfig paramConfig = new ParamConfig();
+        ParamConfig paramConfig = ParamConfig.getDefaultConfig();
         paramConfig.setDoAngle(true);
         paramConfig.setMostAngle(true);
         // 配置硬件参数：4核CPU，不使用GPU
@@ -54,24 +54,24 @@ public class OcrUtilTest {
     public void repeatOcr() {
         String real = "40";
         System.out.println("NCNN 1>>>>>>>> ");
-        OcrResult NCNN_1 = OcrUtil.runOcr("images/40.png", LibConfig.getNcnnConfig());
-        Assert.assertEquals(real,NCNN_1.getStrRes().trim().toString());
+        OcrResult NCNN_1 = OcrUtil.runOcr("images/40.png");
+        Assert.assertEquals(real, NCNN_1.getStrRes().trim().toString());
 
         System.out.println("NCNN 2>>>>>>>> ");
         OcrResult NCNN_2 = OcrUtil.runOcr("images/40.png");
-        Assert.assertEquals(real,NCNN_2.getStrRes().trim().toString());
+        Assert.assertEquals(real, NCNN_2.getStrRes().trim().toString());
 
         System.out.println("NCNN 3>>>>>>>> ");
         OcrResult NCNN_3 = OcrUtil.runOcr("images/40.png");
-        Assert.assertEquals(real,NCNN_3.getStrRes().trim().toString());
+        Assert.assertEquals(real, NCNN_3.getStrRes().trim().toString());
 
         System.out.println("NCNN 4>>>>>>>> ");
         OcrResult NCNN_4 = OcrUtil.runOcr("images/40.png");
-        Assert.assertEquals(real,NCNN_4.getStrRes().trim().toString());
+        Assert.assertEquals(real, NCNN_4.getStrRes().trim().toString());
 
         System.out.println("NCNN 5>>>>>>>> ");
         OcrResult NCNN_5 = OcrUtil.runOcr("images/40.png");
-        Assert.assertEquals(real,NCNN_5.getStrRes().trim().toString());
+        Assert.assertEquals(real, NCNN_5.getStrRes().trim().toString());
     }
 
 }

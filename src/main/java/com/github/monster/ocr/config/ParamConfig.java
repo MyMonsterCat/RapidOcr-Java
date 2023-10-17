@@ -43,4 +43,8 @@ public class ParamConfig {
      */
     private boolean mostAngle = false;
 
+    public static ParamConfig getDefaultConfig(){
+        return new ParamConfig();
+    }
+
 }

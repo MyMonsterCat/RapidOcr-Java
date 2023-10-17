@@ -18,18 +18,9 @@ public class OcrUtil {
 
     public static OcrResult runOcr(String imagePath) {
         // 获取引擎
-        initOcrEngine(LibConfig.getNcnnConfig(), HardwareConfig.getOnnxConfig());
+        initOcrEngine(LibConfig.getOnnxConfig(), HardwareConfig.getOnnxConfig());
         // 获取默认配置
-        ParamConfig config = new ParamConfig();
-        // 开始识别
-        return ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
-    }
-
-    public static OcrResult runOcr(String imagePath, LibConfig libConfig) {
-        // 获取引擎
-        initOcrEngine(libConfig, HardwareConfig.getOnnxConfig());
-        // 获取默认配置
-        ParamConfig config = new ParamConfig();
+        ParamConfig config = ParamConfig.getDefaultConfig();
         // 开始识别
         return ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
     }
