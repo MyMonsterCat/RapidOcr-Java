@@ -24,6 +24,7 @@ public class PathConstants {
     public static final String MODEL_ONNX_PATH = ONNX + "/models";
     public static final String MODEL_SUFFIX_BIN = ".bin";
     public static final String MODEL_SUFFIX_PARAM = ".param";
+    public static final String MODEL_SUFFIX_ONNX = ".onnx";
     public static final String MODEL_DET_NAME = "ch_PP-OCRv3_det_infer";
     public static final String MODEL_REC_NAME = "ch_PP-OCRv3_rec_infer";
     public static final String MODEL_CLS_NAME = "ch_ppocr_mobile_v2.0_cls_infer";

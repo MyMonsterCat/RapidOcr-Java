@@ -91,7 +91,7 @@ public class LibConfig implements IOcrConfig {
      * @return 临时文件夹路径
      */
     public String getTempDirPath() {
-        if (Objects.equals(PathConstants.ONNX, this.libraryDir)) {
+        if (this.libraryDir.contains(PathConstants.ONNX)) {
             return PathConstants.TEMP_DIR + PathConstants.ONNX;
         } else {
             return PathConstants.TEMP_DIR + PathConstants.NCNN;

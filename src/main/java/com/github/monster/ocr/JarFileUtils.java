@@ -103,7 +103,7 @@ public class JarFileUtils {
      */
     public static void copyModelsFromJar(String modelPath, boolean isDelOnExit) throws IOException {
         String base = modelPath.endsWith("/") ? modelPath : modelPath + "/";
-        if (Objects.equals(PathConstants.ONNX, modelPath)) {
+        if (modelPath.contains(PathConstants.ONNX)) {
             for (final String path : PathConstants.MODEL_ONNX_FILE_ARRAY) {
                 copyFileFromJar(base + path, PathConstants.ONNX, null, Boolean.FALSE, isDelOnExit);
             }

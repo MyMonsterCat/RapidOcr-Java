@@ -13,7 +13,7 @@ public class OcrEngine {
 
     public OcrEngine(String libraryPath, String modelsDir, boolean deleteOnExit) {
         try {
-            if (Objects.equals(PathConstants.ONNX, libraryPath)) {
+            if (libraryPath.contains(PathConstants.ONNX)) {
                 JarFileUtils.copyFileFromJar(libraryPath, PathConstants.ONNX, null, true, deleteOnExit);
                 inference = PathConstants.ONNX;
             } else {
