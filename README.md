@@ -13,7 +13,7 @@
 ## 👏 项目特点
 
 - 纯Java代码调用RapidOcr
-- 使用ncnn和onnx推理引擎方式，并编写了简单工具类
+- 使用ncnn和onnx推理引擎方式，并编写了简单工具类，默认使用Onnx推理方式
 
 
 ## 🎉 快速开始
@@ -96,7 +96,7 @@ public class OcrUtilTest {
 | numThread |                         CPU 核心数量                         | int  | 读写 |
 | gpuIndex  | GPU0一般为默认GPU，参数选项：使用CPU(-1)/使用GPU0(0)/使用GPU1(1)/...，默认0 | int  | 读写 |
 
-> ⚠️ 本项目ncnn暂时不支持使用GPU，即使用默认值0
+> ⚠️ ONNX不使用GPU，即使用-1
 
 **ParamConfig**参数说明如下：
 

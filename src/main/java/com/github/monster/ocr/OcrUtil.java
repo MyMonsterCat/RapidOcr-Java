@@ -18,7 +18,7 @@ public class OcrUtil {
 
     public static OcrResult runOcr(String imagePath) {
         // 获取引擎
-        initOcrEngine(LibConfig.getNcnnConfig(), HardwareConfig.getDefaultConfig());
+        initOcrEngine(LibConfig.getNcnnConfig(), HardwareConfig.getOnnxConfig());
         // 获取默认配置
         ParamConfig config = new ParamConfig();
         // 开始识别
@@ -27,7 +27,7 @@ public class OcrUtil {
 
     public static OcrResult runOcr(String imagePath, LibConfig libConfig) {
         // 获取引擎
-        initOcrEngine(libConfig, HardwareConfig.getDefaultConfig());
+        initOcrEngine(libConfig, HardwareConfig.getOnnxConfig());
         // 获取默认配置
         ParamConfig config = new ParamConfig();
         // 开始识别
@@ -36,7 +36,7 @@ public class OcrUtil {
 
     public static OcrResult runOcr(String imagePath, LibConfig libConfig, ParamConfig config) {
         // 获取引擎
-        initOcrEngine(libConfig, HardwareConfig.getDefaultConfig());
+        initOcrEngine(libConfig, HardwareConfig.getOnnxConfig());
         // 开始识别
         return ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
     }
@@ -66,12 +66,15 @@ public class OcrUtil {
                     false
             );
             ocrEngine.setNumThread(hardwareConfig.getNumThread());
-            ocrEngine.setGpuIndex(hardwareConfig.getGpuIndex());
+            if (hardwareConfig.getGpuIndex()!=-1) {
+                ocrEngine.setGpuIndex(hardwareConfig.getGpuIndex());
+            }
             if (!ocrEngine.initModels(libConfig.getTempDirPath(), libConfig.getDetName(), libConfig.getClsName(), libConfig.getRecName(), libConfig.getKeysName())) {
                 throw new IllegalArgumentException("模型初始化错误，请检查models/keys路径！");
             }
         }
         System.out.println("当前使用的推理引擎为：" + ocrEngine.getInference().replace("/", "").toUpperCase());
+        System.out.println("版本号为：" + ocrEngine.getVersion());
     }
 
 }

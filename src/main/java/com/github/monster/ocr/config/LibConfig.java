@@ -2,6 +2,7 @@ package com.github.monster.ocr.config;
 
 import com.github.monster.ocr.PathConstants;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
@@ -26,9 +27,13 @@ public class LibConfig implements IOcrConfig {
      */
     private boolean deleteOnExit = false;
 
-    String detName = PathConstants.MODEL_DET_NAME;
-    String clsName = PathConstants.MODEL_CLS_NAME;
-    String recName = PathConstants.MODEL_REC_NAME;
+    @Setter
+    String detName = PathConstants.MODEL_DET_NAME + PathConstants.MODEL_SUFFIX_ONNX;
+    @Setter
+    String clsName = PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_SUFFIX_ONNX;
+    @Setter
+    String recName = PathConstants.MODEL_REC_NAME + PathConstants.MODEL_SUFFIX_ONNX;
+    @Setter
     String keysName = PathConstants.MODEL_KEYS_NAME;
 
 
@@ -46,7 +51,11 @@ public class LibConfig implements IOcrConfig {
      * 自动加载动态库、复制模型文件，以及设置CPU线程数，并且模型文件在第一次加载后会被缓存
      */
     public static LibConfig getNcnnConfig() {
-        return new LibConfig(PathConstants.NCNN + getLibraryName(), PathConstants.MODEL_NCNN_PATH, false);
+        LibConfig libConfig = new LibConfig(PathConstants.NCNN + getLibraryName(), PathConstants.MODEL_NCNN_PATH, false);
+        libConfig.setDetName(PathConstants.MODEL_DET_NAME);
+        libConfig.setClsName(PathConstants.MODEL_CLS_NAME);
+        libConfig.setRecName(PathConstants.MODEL_REC_NAME);
+        return libConfig;
     }
 
     /**

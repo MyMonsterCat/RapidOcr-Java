@@ -22,12 +22,16 @@ public class HardwareConfig implements IOcrConfig {
 
     /**
      * GPU0一般为默认GPU，参数选项：使用CPU(-1)/使用GPU0(0)/使用GPU1(1)/...
-     * 重要：NCNN必须设置为0
+     * 重要：ONNX不使用GPU
      */
     private int gpuIndex = 0;
 
-    public static HardwareConfig getDefaultConfig() {
+    public static HardwareConfig getNcnnConfig() {
         return new HardwareConfig(Runtime.getRuntime().availableProcessors() / 2, 0);
+    }
+
+    public static HardwareConfig getOnnxConfig() {
+        return new HardwareConfig(Runtime.getRuntime().availableProcessors() / 2, -1);
     }
 
 
