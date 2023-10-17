@@ -35,9 +35,8 @@ public class PathConstants {
             MODEL_KEYS_NAME
     };
     public static final String[] MODEL_ONNX_FILE_ARRAY = new String[]{
-            MODEL_DET_NAME, MODEL_DET_NAME, MODEL_REC_NAME,
-            MODEL_REC_NAME, MODEL_CLS_NAME, MODEL_CLS_NAME,
-            MODEL_KEYS_NAME
+            MODEL_DET_NAME + MODEL_SUFFIX_ONNX, MODEL_REC_NAME + MODEL_SUFFIX_ONNX,
+            MODEL_CLS_NAME + MODEL_SUFFIX_ONNX, MODEL_KEYS_NAME
     };
 
     /**

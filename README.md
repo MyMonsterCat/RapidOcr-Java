@@ -13,9 +13,8 @@
 ## 👏 项目特点
 
 - 纯Java代码调用RapidOcr
-- 使用ncnn~~和onnx~~推理引擎方式，并编写了简单工具类
+- 使用ncnn和onnx推理引擎方式，并编写了简单工具类
 
-> ❗️**本项目暂时移除onnx**，如有需要请提issue
 
 ## 🎉 快速开始
 
@@ -25,7 +24,7 @@
 <dependency>
     <groupId>com.github.monster</groupId>
     <artifactId>RapidOcr-Java</artifactId>
-    <version>0.0.2</version>
+    <version>latest.version</version>
 </dependency>
 ```
 
@@ -115,19 +114,6 @@ public class OcrUtilTest {
 
 ## 🗣️ 目录说明
 
-### Resources目录
-
-存放RapidOcr使用[ncnn](https://github.com/Tencent/ncnn)编译后的结果
-
-> 想要更新ncnn请[前往](https://github.com/RapidAI/RapidOcrNcnn/releases)
-
-- models: 模型文件
-
-- libRapidOcrNcnn-silicon.dylib: 使用Mac系统 **M系列架构**编译
-- libRapidOcrNcnn-intel.dylib: 使用Mac系统 **Intel架构**编译
-- libRapidOcrNcnn.so: 使用Linux系统编译
-- RapidOcrNcnn.dll: 使用Windows系统编译
-
 ### src目录
 
 - com.benjaminwan.ocrlibrary: 核心代码，用来与dll、so、dylib进行交互。‼️ 千万不要改包名！！！
@@ -139,6 +125,8 @@ public class OcrUtilTest {
 
 ### ncnn
 
+[自行更新](https://github.com/RapidAI/RapidOcrNcnn)
+
 - Mac-Arm64: `v1.2.0`
 
 - Mac-x86_64、Linux、Win：`v1.1.2`
@@ -146,9 +134,11 @@ public class OcrUtilTest {
 
 ### onnx
 
+[自行更新](https://github.com/RapidAI/RapidOcrOnnx)
+
 - Mac-Arm64: `暂不支持`
 
-- Mac-x86_64、Linux、Win：`v1.2.0`
+- Mac-x86_64、Linux、Win：`v1.2.2`
 - win7可能存在问题，未经测试
 
 ## 📌 TODO
