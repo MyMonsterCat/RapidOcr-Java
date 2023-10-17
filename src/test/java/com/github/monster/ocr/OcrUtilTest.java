@@ -43,7 +43,7 @@ public class OcrUtilTest {
         ParamConfig paramConfig = ParamConfig.getDefaultConfig();
         paramConfig.setDoAngle(true);
         paramConfig.setMostAngle(true);
-        // 配置硬件参数：4核CPU，不使用GPU
+        // 配置硬件参数：4核CPU，使用GPU0
         HardwareConfig hardwareConfig = new HardwareConfig(4, 0);
         // 开始识别
         OcrResult ocrResult = OcrUtil.runOcr("images/1.jpg", LibConfig.getNcnnConfig(), paramConfig, hardwareConfig);

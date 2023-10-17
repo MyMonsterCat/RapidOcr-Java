@@ -15,6 +15,8 @@
 - 纯Java代码调用RapidOcr
 - 使用ncnn和onnx推理引擎方式，并编写了简单工具类，默认使用Onnx推理方式
 
+> ⚠️ 注意：当前JVM启动时只能同时启动一种推理引擎
+
 
 ## 🎉 快速开始
 
@@ -34,43 +36,65 @@
 public class OcrUtilTest {
 
     @Test
-    public void runParamConfig() {
+    public void NcnnTest() {
+        // 使用NCNN引擎进行识别
+        OcrResult NCNNResult = OcrUtil.runOcr("images/40.png", LibConfig.getNcnnConfig());
+        Assert.assertEquals("40",NCNNResult.getStrRes().trim().toString());
+    }
+
+    @Test
+    public void OnnxTest() {
+        // 使用ONNX推理引擎进行识别
+        OcrResult ONNXResult = OcrUtil.runOcr("images/40.png", LibConfig.getOnnxConfig());
+        Assert.assertEquals("40",ONNXResult.getStrRes().trim().toString());
+    }
+
+    @Test
+    public void paramTest() {
         // 配置参数
         ParamConfig paramConfig = new ParamConfig();
         paramConfig.setDoAngle(true);
         paramConfig.setMostAngle(true);
         // 开始识别
-        OcrResult ocrResult = OcrUtil.runOcr("images/1.jpg", paramConfig);
+        OcrResult ocrResult = OcrUtil.runOcr("images/1.jpg", LibConfig.getNcnnConfig(), paramConfig);
         System.out.println(ocrResult);
     }
 
     @Test
-    public void runOcr() {
-        // 开始识别
-        System.out.println("第一次OCR >>>>>>>> ");
-        OcrResult ocrResult1 = OcrUtil.runOcr("images/img.png");
-        System.out.println(ocrResult1);
-        // 开始识别
-        System.out.println("第二次OCR >>>>>>>> ");
-        OcrResult ocrResult2 = OcrUtil.runOcr("images/40.png");
-        System.out.println(ocrResult2);
-        // 开始识别
-        System.out.println("第三次OCR >>>>>>>> ");
-        OcrResult ocrResult3 = OcrUtil.runOcr("images/40.png");
-        System.out.println(ocrResult3);
-    }
-
-    @Test
-    public void runHardWareConfig() {
+    public void hardWareTest() {
         // 配置可变参数
         ParamConfig paramConfig = new ParamConfig();
         paramConfig.setDoAngle(true);
         paramConfig.setMostAngle(true);
-        // 配置硬件参数：4核CPU，不使用GPU
+        // 配置硬件参数：4核CPU，使用GPU0
         HardwareConfig hardwareConfig = new HardwareConfig(4, 0);
         // 开始识别
-        OcrResult ocrResult = OcrUtil.runOcr("images/1.jpg", paramConfig, LibConfig.getDefaultConfig(), hardwareConfig);
+        OcrResult ocrResult = OcrUtil.runOcr("images/1.jpg", LibConfig.getNcnnConfig(), paramConfig, hardwareConfig);
         System.out.println(ocrResult);
+    }
+
+    @Test
+    public void repeatOcr() {
+        String real = "40";
+        System.out.println("NCNN 1>>>>>>>> ");
+        OcrResult NCNN_1 = OcrUtil.runOcr("images/40.png", LibConfig.getNcnnConfig());
+        Assert.assertEquals(real,NCNN_1.getStrRes().trim().toString());
+
+        System.out.println("NCNN 2>>>>>>>> ");
+        OcrResult NCNN_2 = OcrUtil.runOcr("images/40.png");
+        Assert.assertEquals(real,NCNN_2.getStrRes().trim().toString());
+
+        System.out.println("NCNN 3>>>>>>>> ");
+        OcrResult NCNN_3 = OcrUtil.runOcr("images/40.png");
+        Assert.assertEquals(real,NCNN_3.getStrRes().trim().toString());
+
+        System.out.println("NCNN 4>>>>>>>> ");
+        OcrResult NCNN_4 = OcrUtil.runOcr("images/40.png");
+        Assert.assertEquals(real,NCNN_4.getStrRes().trim().toString());
+
+        System.out.println("NCNN 5>>>>>>>> ");
+        OcrResult NCNN_5 = OcrUtil.runOcr("images/40.png");
+        Assert.assertEquals(real,NCNN_5.getStrRes().trim().toString());
     }
 }
 ```
@@ -150,7 +174,7 @@ public class OcrUtilTest {
 - [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)
 - [ ] 添加日志，规范日志打印
 - [ ] ONNX支持Mac-Arm64
-- [ ] 同时加载多个引擎
+- [ ] 同时加载多个引擎，当前JVM启动时只能同时启动一种推理引擎
 
 ## 鸣谢
 
