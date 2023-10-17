@@ -138,10 +138,17 @@ public class OcrUtilTest {
 
 ## 🗣️ 目录说明
 
-### src目录
-
 - com.benjaminwan.ocrlibrary: 核心代码，用来与dll、so、dylib进行交互。‼️ 千万不要改包名！！！
-- com.github.monster.ocr.OcrUtil: 调用核心代码工具类
+- com.github.monster.ocr
+  - config
+    - HardwareConfig: 硬件配置类
+    - LibConfig: 库文件配置类
+    - ParamConfig: 可调节参数配置
+
+  - JarFileUtils: 从jar包中加载动态库
+  - PathConstants: 模型/文件路径常量
+  - OcrUtil: 调用核心代码工具类
+
 
 ## ⚠️ 版本说明
 
@@ -149,21 +156,28 @@ public class OcrUtilTest {
 
 ### ncnn
 
-[自行更新](https://github.com/RapidAI/RapidOcrNcnn)
-
 - Mac-Arm64: `v1.2.0`
 
 - Mac-x86_64、Linux、Win：`v1.1.2`
 - win7可能存在问题，未经测试
 
-### onnx
+> [自行更新地址](https://github.com/RapidAI/RapidOcrNcnn)
 
-[自行更新](https://github.com/RapidAI/RapidOcrOnnx)
+### onnx
 
 - Mac-Arm64: `暂不支持`
 
 - Mac-x86_64、Linux、Win：`v1.2.2`
 - win7可能存在问题，未经测试
+
+> [自行更新地址](https://github.com/RapidAI/RapidOcrOnnx)
+
+
+
+## 🪡 分支说明
+
+- main: 主分支，使用ncnn和onnx进行推理
+- dev-ncnn： 仅使用ncnn进行推理
 
 ## 📌 TODO
 
@@ -171,7 +185,7 @@ public class OcrUtilTest {
 - [x] 动态库集成到jar中
 - [x] 是否删除临时文件夹配置为可选项
 - [x] jvm未退出场景连续调用识别结果集乱码[#1](https://github.com/MyMonsterCat/RapidOcr-Java/issues/1)
-- [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)
+- [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)，感谢[nn200433](https://github.com/nn200433)及[tika-server](https://github.com/nn200433/tika-server)👏 
 - [ ] 添加日志，规范日志打印
 - [ ] ONNX支持Mac-Arm64
 - [ ] 同时加载多个引擎，当前JVM启动时只能同时启动一种推理引擎
