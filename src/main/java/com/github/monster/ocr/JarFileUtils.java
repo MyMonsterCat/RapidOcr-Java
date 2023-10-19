@@ -1,9 +1,11 @@
 package com.github.monster.ocr;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.Objects;
 
 /**
  * 从jar包中加载动态库
@@ -121,8 +123,8 @@ public class JarFileUtils {
     private static File createTempDirectory(String dirName) throws IOException {
         File dir = new File(PathConstants.TEMP_DIR, dirName);
         if (!dir.exists()) {
-            if (!dir.mkdir()) {
-                throw new IOException("无法在临时目录创建文件" + dir.getName());
+            if (!dir.mkdirs()) {
+                throw new IOException("无法在临时目录创建文件" + dir);
             }
         }
         return dir;
