@@ -26,7 +26,7 @@ public class PathConstants {
     public static final String MODEL_SUFFIX_PARAM = ".param";
     public static final String MODEL_SUFFIX_ONNX = ".onnx";
     public static final String MODEL_DET_NAME = "ch_PP-OCRv3_det_infer";
-    public static final String MODEL_REC_NAME = "ch_PP-OCRv3_rec_infer";
+    public static final String MODEL_REC_NAME = "ch_PP-OCRv4_rec_infer";
     public static final String MODEL_CLS_NAME = "ch_ppocr_mobile_v2.0_cls_infer";
     public static final String MODEL_KEYS_NAME = "ppocr_keys_v1.txt";
     public static final String[] MODEL_NCNN_FILE_ARRAY = new String[]{
