@@ -3,13 +3,13 @@ package com.github.monster.ocr.config;
 import com.github.monster.ocr.PathConstants;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Objects;
+import lombok.ToString;
 
 /**
  * 库文件配置类
  */
 @Getter
+@ToString
 public class LibConfig implements IOcrConfig {
 
 
@@ -28,11 +28,11 @@ public class LibConfig implements IOcrConfig {
     private boolean deleteOnExit = false;
 
     @Setter
-    String detName = PathConstants.MODEL_DET_NAME + PathConstants.MODEL_SUFFIX_ONNX;
+    String detName = PathConstants.MODEL_DET_NAME_V3 + PathConstants.MODEL_SUFFIX_ONNX;
     @Setter
     String clsName = PathConstants.MODEL_CLS_NAME + PathConstants.MODEL_SUFFIX_ONNX;
     @Setter
-    String recName = PathConstants.MODEL_REC_NAME + PathConstants.MODEL_SUFFIX_ONNX;
+    String recName = PathConstants.MODEL_REC_NAME_V4 + PathConstants.MODEL_SUFFIX_ONNX;
     @Setter
     String keysName = PathConstants.MODEL_KEYS_NAME;
 
@@ -52,9 +52,9 @@ public class LibConfig implements IOcrConfig {
      */
     public static LibConfig getNcnnConfig() {
         LibConfig libConfig = new LibConfig(PathConstants.NCNN + getLibraryName(), PathConstants.MODEL_NCNN_PATH, false);
-        libConfig.setDetName(PathConstants.MODEL_DET_NAME);
+        libConfig.setDetName(PathConstants.MODEL_DET_NAME_V3);
         libConfig.setClsName(PathConstants.MODEL_CLS_NAME);
-        libConfig.setRecName(PathConstants.MODEL_REC_NAME);
+        libConfig.setRecName(PathConstants.MODEL_REC_NAME_V4);
         return libConfig;
     }
 

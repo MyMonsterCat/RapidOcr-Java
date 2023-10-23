@@ -14,13 +14,14 @@
 
 - 纯Java代码调用RapidOcr
 - 使用ncnn和onnx推理引擎方式，并编写了简单工具类，默认使用Onnx推理方式
+- 均使用CPU版本，GPU版本请自行编译
 
 > ⚠️ 注意：当前JVM启动时**只能同时启动一种推理引擎**
 
 
 ## 🎉 快速开始
 
-1⃣️ 引入jar包(需要自己下载项目打包，过程略)
+1⃣️ 引入jar包(需要自己下载项目打包，过程参考[如何自行编译jar包？](./docs/COMPILE_JAR.md))
 
 ```xml
 <dependency>
@@ -101,8 +102,12 @@ public class OcrUtilTest {
 
 ## 🔝 进阶使用
 
-- [参数调优、版本说明、目录说明、分支说明](./ADVANCED.md)
-- [如何进行模型更新？](./UPDATE_MODEL.md)
+- [参数调优、版本说明、目录说明、分支说明](./docs/ADVANCED.md)
+- [如何自行更新模型？](./docs/UPDATE_MODEL.md)
+- [如何自行编译动态库？](./docs/COMPILE_LIB.md)
+- [如何自行编译jar包？](./docs/COMPILE_JAR.md)
+- [OCR相关知识](./docs/OCR.md)
+- [JVM下不同OCR框架简易性能比对](./docs/PERFORMANCE.md)
 
 ## 📌 TODO
 
@@ -111,7 +116,7 @@ public class OcrUtilTest {
 - [x] 是否删除临时文件夹配置为可选项
 - [x] jvm未退出场景连续调用识别结果集乱码[#1](https://github.com/MyMonsterCat/RapidOcr-Java/issues/1)
 - [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)，感谢[nn200433](https://github.com/nn200433)及[tika-server](https://github.com/nn200433/tika-server)👏 
-- [ ] 添加日志，规范日志打印
+- [x] 添加日志，规范日志打印
 - [x] ONNX支持Mac-Arm64
 - [ ] ~~同时加载多个引擎，当前JVM启动时只能同时启动一种推理引擎~~  暂时受限于jni
 

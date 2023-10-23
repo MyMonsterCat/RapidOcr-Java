@@ -2,7 +2,7 @@ package com.benjaminwan.ocrlibrary;
 
 import java.util.ArrayList;
 
-public class OcrResult extends OcrOutput {
+public class OcrResult implements OcrOutput {
     private final double dbNetTime;
     private final ArrayList<TextBlock> textBlocks;
     private double detectTime;

@@ -66,8 +66,8 @@ public class OcrUtilTest {
         Assert.assertEquals(real, NCNN_3.getStrRes().trim().toString());
 
         System.out.println("NCNN 4>>>>>>>> ");
-        OcrResult NCNN_4 = OcrUtil.runOcr("images/40.png");
-        Assert.assertEquals(real, NCNN_4.getStrRes().trim().toString());
+        OcrResult NCNN_4 = OcrUtil.runOcr("images/img.png");
+        Assert.assertEquals("System", NCNN_4.getStrRes().trim().toString());
 
         System.out.println("NCNN 5>>>>>>>> ");
         OcrResult NCNN_5 = OcrUtil.runOcr("images/40.png");

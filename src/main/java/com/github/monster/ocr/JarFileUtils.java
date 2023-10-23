@@ -1,5 +1,8 @@
 package com.github.monster.ocr;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +14,8 @@ import java.nio.file.StandardCopyOption;
  * 从jar包中加载动态库
  */
 public class JarFileUtils {
+
+    private static final Logger logger = LoggerFactory.getLogger(JarFileUtils.class);
 
     /**
      * 文件前缀的最小长度
@@ -73,6 +78,7 @@ public class JarFileUtils {
             // 设置在JVM结束时删除临时文件
             temp.deleteOnExit();
         }
+        logger.debug("将文件{}复制到{}，加载此文件：{}，JVM退出时删除此文件：{}", path, dirName, load, deleteOnExit);
     }
 
     /**
@@ -122,10 +128,8 @@ public class JarFileUtils {
      */
     private static File createTempDirectory(String dirName) throws IOException {
         File dir = new File(PathConstants.TEMP_DIR, dirName);
-        if (!dir.exists()) {
-            if (!dir.mkdirs()) {
-                throw new IOException("无法在临时目录创建文件" + dir);
-            }
+        if (!dir.exists() || !dir.mkdirs()) {
+            throw new IOException("无法在临时目录创建文件" + dir);
         }
         return dir;
     }

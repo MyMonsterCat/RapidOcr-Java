@@ -5,11 +5,18 @@ import com.benjaminwan.ocrlibrary.OcrResult;
 import com.github.monster.ocr.config.HardwareConfig;
 import com.github.monster.ocr.config.LibConfig;
 import com.github.monster.ocr.config.ParamConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * OCR工具类
  */
 public class OcrUtil {
+
+    private OcrUtil() {
+    }
+
+    private static final Logger logger = LoggerFactory.getLogger(OcrUtil.class);
 
     /**
      * OCR引擎
@@ -17,19 +24,11 @@ public class OcrUtil {
     private static OcrEngine ocrEngine;
 
     public static OcrResult runOcr(String imagePath) {
-        // 获取引擎
-        initOcrEngine(LibConfig.getOnnxConfig(), HardwareConfig.getOnnxConfig());
-        // 获取默认配置
-        ParamConfig config = ParamConfig.getDefaultConfig();
-        // 开始识别
-        return ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
+        return runOcr(imagePath, LibConfig.getOnnxConfig(), ParamConfig.getDefaultConfig(), HardwareConfig.getOnnxConfig());
     }
 
     public static OcrResult runOcr(String imagePath, LibConfig libConfig, ParamConfig config) {
-        // 获取引擎
-        initOcrEngine(libConfig, HardwareConfig.getOnnxConfig());
-        // 开始识别
-        return ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
+        return runOcr(imagePath, libConfig, config, HardwareConfig.getOnnxConfig());
     }
 
     /**
@@ -42,10 +41,14 @@ public class OcrUtil {
      * @return 识别结果
      */
     public static OcrResult runOcr(String imagePath, LibConfig libConfig, ParamConfig config, HardwareConfig hardwareConfig) {
+        logger.info("图片路径：{}， 检测参数：{}", imagePath, config);
         // 获取引擎
         initOcrEngine(libConfig, hardwareConfig);
         // 开始识别
-        return ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
+        OcrResult detect = ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
+        logger.info("识别结果为：{}，耗时{}ms", detect.getStrRes(), detect.getDetectTime());
+        logger.debug("文本块：{}，DbNet耗时{}ms", detect.getTextBlocks(), detect.getDbNetTime());
+        return detect;
     }
 
     private static void initOcrEngine(LibConfig libConfig, HardwareConfig hardwareConfig) {
@@ -57,15 +60,20 @@ public class OcrUtil {
                     false
             );
             ocrEngine.setNumThread(hardwareConfig.getNumThread());
-            if (hardwareConfig.getGpuIndex()!=-1) {
+            if (hardwareConfig.getGpuIndex() != -1) {
                 ocrEngine.setGpuIndex(hardwareConfig.getGpuIndex());
             }
             if (!ocrEngine.initModels(libConfig.getTempDirPath(), libConfig.getDetName(), libConfig.getClsName(), libConfig.getRecName(), libConfig.getKeysName())) {
                 throw new IllegalArgumentException("模型初始化错误，请检查models/keys路径！");
             }
+            String engine = ocrEngine.getInference().replace("/", "");
+            logger.info("推理引擎初始化完成，当前使用的推理引擎为：{}，RapidOcr-{} 版本为：{}", engine, engine, ocrEngine.getVersion());
+            logger.debug("初始化时动态库配置为：{}， 硬件配置为：{}", libConfig, hardwareConfig);
+        } else {
+            String engine = ocrEngine.getInference().replace("/", "");
+            logger.debug("{}引擎已初始化，初始化后不可更换为其他引擎，将继续使用{}推理引擎工作", engine, engine);
         }
-        System.out.println("当前使用的推理引擎为：" + ocrEngine.getInference().replace("/", "").toUpperCase());
-        System.out.println("版本号为：" + ocrEngine.getVersion());
+
     }
 
 }

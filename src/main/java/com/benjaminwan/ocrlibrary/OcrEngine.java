@@ -4,7 +4,6 @@ import com.github.monster.ocr.JarFileUtils;
 import com.github.monster.ocr.PathConstants;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * OCR引擎对象，负责接收参数并执行OCR

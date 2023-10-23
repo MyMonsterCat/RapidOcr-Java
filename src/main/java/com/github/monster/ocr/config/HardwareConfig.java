@@ -1,9 +1,6 @@
 package com.github.monster.ocr.config;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * OCR引擎启动硬件配置配置
@@ -12,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class HardwareConfig implements IOcrConfig {
 
 
@@ -22,7 +20,7 @@ public class HardwareConfig implements IOcrConfig {
 
     /**
      * GPU0一般为默认GPU，参数选项：使用CPU(-1)/使用GPU0(0)/使用GPU1(1)/...
-     * 重要：ONNX不使用GPU
+     * 重要：ONNX不使用GPU，目前都是使用CPU
      */
     private int gpuIndex = 0;
 
