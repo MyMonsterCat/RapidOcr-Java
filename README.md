@@ -112,7 +112,7 @@ public class OcrUtilTest {
 - [x] jvm未退出场景连续调用识别结果集乱码[#1](https://github.com/MyMonsterCat/RapidOcr-Java/issues/1)
 - [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)，感谢[nn200433](https://github.com/nn200433)及[tika-server](https://github.com/nn200433/tika-server)👏 
 - [ ] 添加日志，规范日志打印
-- [ ] ONNX支持Mac-Arm64
+- [x] ONNX支持Mac-Arm64
 - [ ] ~~同时加载多个引擎，当前JVM启动时只能同时启动一种推理引擎~~  暂时受限于jni
 
 ## 鸣谢
