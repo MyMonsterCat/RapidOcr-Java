@@ -38,8 +38,8 @@ public class PathConstants {
     public static final String MODEL_CLS_NAME = "ch_ppocr_mobile_v2.0_cls_infer";
     public static final String MODEL_KEYS_NAME = "ppocr_keys_v1.txt";
     public static final String[] MODEL_NCNN_FILE_ARRAY = new String[]{
-            MODEL_DET_NAME_V3 + MODEL_SUFFIX_BIN, MODEL_DET_NAME_V3 + MODEL_SUFFIX_PARAM, MODEL_REC_NAME_V4 + MODEL_SUFFIX_BIN,
-            MODEL_REC_NAME_V4 + MODEL_SUFFIX_PARAM, MODEL_CLS_NAME + MODEL_SUFFIX_BIN, MODEL_CLS_NAME + MODEL_SUFFIX_PARAM,
+            MODEL_DET_NAME_V3 + MODEL_SUFFIX_BIN, MODEL_DET_NAME_V3 + MODEL_SUFFIX_PARAM, MODEL_REC_NAME_V3 + MODEL_SUFFIX_BIN,
+            MODEL_REC_NAME_V3 + MODEL_SUFFIX_PARAM, MODEL_CLS_NAME + MODEL_SUFFIX_BIN, MODEL_CLS_NAME + MODEL_SUFFIX_PARAM,
             MODEL_KEYS_NAME
     };
     public static final String[] MODEL_ONNX_FILE_ARRAY = new String[]{

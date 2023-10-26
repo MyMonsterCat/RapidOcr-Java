@@ -54,7 +54,7 @@ public class LibConfig implements IOcrConfig {
         LibConfig libConfig = new LibConfig(PathConstants.NCNN + getLibraryName(), PathConstants.MODEL_NCNN_PATH, false);
         libConfig.setDetName(PathConstants.MODEL_DET_NAME_V3);
         libConfig.setClsName(PathConstants.MODEL_CLS_NAME);
-        libConfig.setRecName(PathConstants.MODEL_REC_NAME_V4);
+        libConfig.setRecName(PathConstants.MODEL_REC_NAME_V3);
         return libConfig;
     }
 

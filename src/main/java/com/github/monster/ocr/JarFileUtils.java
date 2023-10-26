@@ -128,7 +128,7 @@ public class JarFileUtils {
      */
     private static File createTempDirectory(String dirName) throws IOException {
         File dir = new File(PathConstants.TEMP_DIR, dirName);
-        if (!dir.exists() || !dir.mkdirs()) {
+        if (!dir.exists() && !dir.mkdirs()) {
             throw new IOException("无法在临时目录创建文件" + dir);
         }
         return dir;
