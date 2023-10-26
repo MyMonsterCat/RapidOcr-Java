@@ -1,4 +1,4 @@
-# 如何自行编译库文件？
+# 如何自行编译JNI动态库？
 
 ## 环境准备
 
@@ -61,22 +61,16 @@ onnxruntime-static
 ### 4.MacOS环境配置
 
 - macOS Catalina 10.15.x，安装Xcode>=12，并安装Xcode Command Line Tools, 终端运行`xcode-select –install`
-
 - 自行下载安装HomeBrew，cmake >=3.19[下载地址](https://cmake.org/download/)
-
 - libomp: `brew install libomp`
-
 - Java环境
 
   - 下载jdk-8u221-macosx-x64.dmg，安装。
-
-  - 编辑用户目录下的隐藏文件`.zshrc` ，添加`export JAVA_HOME=$(/usr/libexec/java_home)`
-
-  - 运行`build.sh`并按照提示输入选项，最后选择'JNI动态库'
+- 编辑用户目录下的隐藏文件`.zshrc` ，添加`export JAVA_HOME=$(/usr/libexec/java_home)`
 
 ### 5.开始编译
 
-- 修改文件路径
+- git clone的代码中，修改如下
 
 ```c
 将下面的代码
@@ -86,9 +80,7 @@ onnxruntime-static
 // 受影响的文件有: AngleNet.h  CrnnNet.h  DbNet.h  OcrLite.h. OcrUtils.h
 ```
 
-
-
-- 终端打开项目根目录，`./build.sh`并按照提示输入选项，最后选择'BIN可执行文件'
+- 终端打开项目根目录，`./build.sh`并按照提示输入选项，最后选择'JNI动态库'
 - 测试：`./run-test.sh`(注意修改脚本内的目标图片路径)
 
 编译结果如下图，其中libRapidOcrOnnx.dylib即为所需库文件

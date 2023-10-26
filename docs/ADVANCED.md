@@ -64,8 +64,8 @@
 
 > 如何更新模型？
 >
-> - 前往[自行更新地址](https://github.com/RapidAI/RapidOcrNcnn)，在release下载模型
-> - 按照编译说明自行[编译](./COMPILE_LIB.md)
+> - 方式一：前往[自行更新地址](https://github.com/RapidAI/RapidOcrNcnn)，在release下载模型
+> - 方式二：按照编译说明自行[编译](./COMPILE_LIB.md)
 
 ### onnx：支持[PP-OCRv4](https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.7/doc/doc_ch/PP-OCRv4_introduction.md)和PP-OCRv3
 
@@ -76,8 +76,8 @@
 
 > 如何更新模型？
 >
-> - 前往[自行更新地址](https://github.com/RapidAI/RapidOcrOnnx)，在release下载最新的模型
-> - 按照编译说明自行[编译](./COMPILE_LIB.md)
+> - 方式一：前往[自行更新地址](https://github.com/RapidAI/RapidOcrOnnx)，在release下载最新的模型
+> - 方式二：按照编译说明自行[编译](./COMPILE_LIB.md)
 
 ## :saxophone: 分支说明
 

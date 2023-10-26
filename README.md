@@ -59,8 +59,8 @@ public class OcrUtilTest {
 - [如何自行更新模型？](./docs/UPDATE_MODEL.md)
 - [如何自行编译动态库？](./docs/COMPILE_LIB.md)
 - [如何自行编译jar包？](./docs/COMPILE_JAR.md)
-- [OCR相关知识](./docs/OCR.md)
-- [JVM下不同OCR框架简易性能比对](./docs/PERFORMANCE.md)
+- OCR相关知识-待更新
+- JVM下不同PaddleOCR调用方式性能比对-待更新
 
 ## 📌 TODO
 
@@ -71,7 +71,6 @@ public class OcrUtilTest {
 - [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)，感谢[nn200433](https://github.com/nn200433)及[tika-server](https://github.com/nn200433/tika-server)👏 
 - [x] 添加日志，规范日志打印
 - [x] ONNX支持Mac-Arm64
-- [ ] ~~同时加载多个引擎，当前JVM启动时只能同时启动一种推理引擎~~  暂时受限于jni
 
 ## 鸣谢
 
