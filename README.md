@@ -8,7 +8,7 @@
 
   >RapidOcr是完全开源、免费并支持多平台、多语言OCR离线部署
 
-- 而实际使用过程中，项目中并不想再引入Kotlin，因此本项目将Kotlin部分移除，并在此基础上加以完善，使调用者方便使用
+- 而实际使用过程中，项目中并不想再引入Kotlin，因此本项目将Kotlin部分移除，并在此基础上加以完善(提供了更友好的的调用方法)，更方便java开发者使用。
 
 ## 👏 项目特点
 
@@ -38,7 +38,7 @@ public class OcrUtilTest {
 
     @Test
     public void NcnnTest() {
-        // 使用NCNN引擎进行识别，不要同NCNN使用
+        // 使用NCNN引擎进行识别，不要同ONNX使用
         OcrResult NCNNResult = OcrUtil.runOcr(getResourcePath("/images/40.png"), LibConfig.getNcnnConfig(), ParamConfig.getDefaultConfig(), HardwareConfig.getNcnnConfig());
         Assert.assertEquals("40", NCNNResult.getStrRes().trim().toString());
     }
