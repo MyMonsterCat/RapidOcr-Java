@@ -1,13 +1,18 @@
 package com.github.monster.ocr;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.IoUtil;
 import com.benjaminwan.ocrlibrary.OcrResult;
+import com.benjaminwan.ocrlibrary.TextBlock;
 import com.github.monster.ocr.config.HardwareConfig;
 import com.github.monster.ocr.config.LibConfig;
 import com.github.monster.ocr.config.ParamConfig;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * @author Monster
@@ -23,9 +28,28 @@ public class OcrUtilTest {
 
     @Test
     public void OnnxTest() {
-        // 使用ONNX推理引擎进行识别
-        OcrResult ONNXResult = OcrUtil.runOcr(getResourcePath("/images/40.png"));
+        String imgPath = getResourcePath("/images/40.png");
+        OcrResult ONNXResult = OcrUtil.runOcr(imgPath);
         Assert.assertEquals("40", ONNXResult.getStrRes().trim().toString());
+    }
+
+    @Test
+    public void OnnxDrawTest() {
+        String imgPath = getResourcePath("/images/test.png");
+        String drawPath = imgPath.replace("test", "40-draw");
+        File drawFile = new File(drawPath);
+        // 使用ONNX推理引擎进行识别
+        // 配置参数
+        ParamConfig paramConfig = ParamConfig.getDefaultConfig();
+        paramConfig.setDoAngle(true);
+        paramConfig.setMostAngle(true);
+        // 开始识别
+        OcrResult ONNXResult = OcrUtil.runOcr(imgPath, LibConfig.getNcnnConfig(), paramConfig);
+        // 绘制推理结果
+        ArrayList<TextBlock> textBlocks = ONNXResult.getTextBlocks();
+        FileUtil.copy(imgPath, drawPath, Boolean.TRUE);
+        ByteArrayInputStream in = IoUtil.toStream(ImageUtil.drawImg(drawFile, textBlocks));
+        FileUtil.writeFromStream(in, drawFile);
     }
 
     @Test
@@ -35,7 +59,7 @@ public class OcrUtilTest {
         paramConfig.setDoAngle(true);
         paramConfig.setMostAngle(true);
         // 开始识别
-        OcrResult ocrResult = OcrUtil.runOcr(getResourcePath("/images/1.jpg"), LibConfig.getNcnnConfig(), paramConfig);
+        OcrResult ocrResult = OcrUtil.runOcr(getResourcePath("/images/test.png"), LibConfig.getNcnnConfig(), paramConfig);
         System.out.println(ocrResult);
     }
 
@@ -48,7 +72,7 @@ public class OcrUtilTest {
         // 配置硬件参数：4核CPU，使用GPU0
         HardwareConfig hardwareConfig = new HardwareConfig(4, 0);
         // 开始识别
-        OcrResult ocrResult = OcrUtil.runOcr(getResourcePath("/images/1.jpg"), LibConfig.getNcnnConfig(), paramConfig, hardwareConfig);
+        OcrResult ocrResult = OcrUtil.runOcr(getResourcePath("/images/test.png"), LibConfig.getNcnnConfig(), paramConfig, hardwareConfig);
         System.out.println(ocrResult);
     }
 
@@ -68,7 +92,7 @@ public class OcrUtilTest {
         Assert.assertEquals(real, NCNN_3.getStrRes().trim().toString());
 
         System.out.println("NCNN 4>>>>>>>> ");
-        OcrResult NCNN_4 = OcrUtil.runOcr(getResourcePath("/images/img.png"));
+        OcrResult NCNN_4 = OcrUtil.runOcr(getResourcePath("/images/system.png"));
         Assert.assertEquals("System", NCNN_4.getStrRes().trim().toString());
 
         System.out.println("NCNN 5>>>>>>>> ");
