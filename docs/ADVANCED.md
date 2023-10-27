@@ -35,7 +35,7 @@
 |  doAngleFlag   | 启用(1)/禁用(0) 文字方向检测，只有图片倒置的情况下(旋转90~270度的图片)，才需要启用文字方向检测，默认关闭 | boolean | 读写 |
 | mostAngleFlag  | 启用(1)/禁用(0) 角度投票(整张图片以最大可能文字方向来识别)，当禁用文字方向检测时，此项也不起作用，默认关闭 | boolean | 读写 |
 
-> ✍️ 想更深入了解，请移步[config.yaml参数解释](https://rapidai.github.io/RapidOCRDocs/docs/blog/config_parameter/)
+> ✍️ 想更深入了解，请移步[config.yaml参数解释](https://rapidai.github.io/RapidOCRDocs/docs/blog/02_config_parameter/)
 
 ## 🗣️ 目录说明
 
@@ -65,7 +65,7 @@
 > 如何更新模型？
 >
 > - 方式一：前往[自行更新地址](https://github.com/RapidAI/RapidOcrNcnn)，在release下载模型
-> - 方式二：按照编译说明自行[编译](./COMPILE_LIB.md)
+> - 方式二：自行[编译](./COMPILE_LIB.md)
 
 ### onnx：支持[PP-OCRv4](https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.7/doc/doc_ch/PP-OCRv4_introduction.md)和PP-OCRv3
 
@@ -77,7 +77,7 @@
 > 如何更新模型？
 >
 > - 方式一：前往[自行更新地址](https://github.com/RapidAI/RapidOcrOnnx)，在release下载最新的模型
-> - 方式二：按照编译说明自行[编译](./COMPILE_LIB.md)
+> - 方式二：自行[编译](./COMPILE_LIB.md)
 
 ## :saxophone: 分支说明
 

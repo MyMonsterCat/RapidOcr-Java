@@ -4,7 +4,7 @@
 
 以IDEA界面操作为例
 
-![](./img/package-all.png)
+![](./img/package.png)
 
 
 
@@ -20,9 +20,9 @@
           <resource>
               <directory>src/main/resources</directory>
               <includes>
-                  <!--包含文件夹以及子文件夹下所有资源-->
+                  <!--方式一：包含文件夹以及子文件夹下所有资源-->
                   <!-- <include>**/*.*</include> -->
-                  <!--仅打包onnx mac-arm64-->
+                  <!--方式二：仅打包onnx mac-arm64(按照自己的需求来，推荐👍)-->
                   <include>onnx/mac/arm64/*</include>
                   <include>onnx/models/*</include>
               </includes>
@@ -50,6 +50,12 @@
   </build>
 ```
 
-在这种方式下，当引入该jar后，还需在项目src/main/resources下添加相应的动态库(如下图所示)，否则会抛出NoSuchFileException
+在这种方式下，当引入该jar后，**还需在项目src/main/resources下添加相应的动态**库(如下图所示)
 
 ![](./img/package-no-example.png)
+
+否则会抛出NoSuchFileException
+
+
+
+> 具体使用哪种方式还是按照自己的需求来

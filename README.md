@@ -16,10 +16,24 @@
 - 使用ncnn和onnx推理引擎方式，并编写了简单工具类，默认使用Onnx推理方式
 - 均使用CPU版本，GPU版本请自行编译
 
-> ⚠️ 注意：当前JVM启动时**只能同时启动一种推理引擎**
+> ⚠️ 注意：当前JVM启动时**只能同时启动一种推理引擎**，以第一次调用runOcr方法时的引擎配置为准
 
 
 ## 🎉 快速开始
+
+### 方式一：本地直接运行
+
+1⃣️ 下载项目
+
+```shell
+git clone https://github.com/MyMonsterCat/RapidOcr-Java.git
+```
+
+2️⃣ 运行[测试类](https://github.com/MyMonsterCat/RapidOcr-Java/blob/main/src/test/java/com/github/monster/ocr/OcrUtilTest.java)
+
+<img src="./docs/img/run-test.png" style="zoom:50%;" />
+
+### 方式二：引入到其他项目
 
 1⃣️ 引入jar包(需要自己下载项目打包，过程参考[如何自行编译jar包？](./docs/COMPILE_JAR.md))
 
@@ -27,9 +41,11 @@
 <dependency>
     <groupId>com.github.monster</groupId>
     <artifactId>RapidOcr-Java</artifactId>
-    <version>latest.version</version>
+    <version>${latest.version}</version>
 </dependency>
 ```
+
+> ⚠️ 如果是采用方式二打包，务必将src/resources下的ncnn或者onnx的库文件引入到自己的项目resources中
 
 2⃣️ 调用(更多使用示例请参考[测试类](https://github.com/MyMonsterCat/RapidOcr-Java/blob/main/src/test/java/com/github/monster/ocr/OcrUtilTest.java))
 
@@ -59,8 +75,9 @@ public class OcrUtilTest {
 - [如何自行更新模型？](./docs/UPDATE_MODEL.md)
 - [如何自行编译动态库？](./docs/COMPILE_LIB.md)
 - [如何自行编译jar包？](./docs/COMPILE_JAR.md)
-- OCR相关知识-待更新
-- JVM下不同PaddleOCR调用方式性能比对-待更新
+- OCR相关知识--❗️待更新
+- JVM下不同PaddleOCR调用方式性能比对--❗️待更新
+- SpringBoot示例和普通Java程序示例--❗️待更新
 
 ## 📌 TODO
 
@@ -71,6 +88,14 @@ public class OcrUtilTest {
 - [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)，感谢[nn200433](https://github.com/nn200433)及[tika-server](https://github.com/nn200433/tika-server)👏 
 - [x] 添加日志，规范日志打印
 - [x] ONNX支持Mac-Arm64
+
+## 🤔 FAQ
+
+#### Q1:无法运行相应的动态库？
+
+Mac Arm64、Mac Intel、Win10、Win11、CentOs8均经过测试，项目resources目录下的的动态库文件**均可成功加载**，如果您的系统无法运行相应的动态库，请在该系统下尝试[自行编译动态库？](./docs/COMPILE_LIB.md)
+
+
 
 ## 鸣谢
 

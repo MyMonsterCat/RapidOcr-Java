@@ -44,7 +44,7 @@ public class OcrUtilTest {
         paramConfig.setDoAngle(true);
         paramConfig.setMostAngle(true);
         // 开始识别
-        OcrResult ONNXResult = OcrUtil.runOcr(imgPath, LibConfig.getNcnnConfig(), paramConfig);
+        OcrResult ONNXResult = OcrUtil.runOcr(imgPath, LibConfig.getOnnxConfig(), paramConfig);
         // 绘制推理结果
         ArrayList<TextBlock> textBlocks = ONNXResult.getTextBlocks();
         FileUtil.copy(imgPath, drawPath, Boolean.TRUE);

@@ -46,7 +46,7 @@ public class OcrUtil {
         initOcrEngine(libConfig, hardwareConfig);
         // 开始识别
         OcrResult detect = ocrEngine.detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
-        logger.info("识别结果为：{}，耗时{}ms", detect.getStrRes(), detect.getDetectTime());
+        logger.info("识别结果为：{}，耗时{}ms", detect.getStrRes().replace("\n", ""), detect.getDetectTime());
         logger.debug("文本块：{}，DbNet耗时{}ms", detect.getTextBlocks(), detect.getDbNetTime());
         return detect;
     }

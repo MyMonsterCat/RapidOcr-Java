@@ -101,6 +101,21 @@ onnxruntime-static
 
 ![](./img/ncnn-replace.png)
 
+## 去除动态库日志打印
+
+在使用过程中，会发现会在控制台打印配置信息，而且没办法关闭
+
+![](./img/log.png)
+
+这是因为在RapidOnnx/RapidNcnn代码中添加了打印日志，所以需要修改源码，去除日志打印。
+
+在CLion中，使用全局搜索：
+
+例如搜索：`printf("numThread=`，找到相应代码注释掉，并重新打包即可
+
+同理可搜索：`printf("modelsDir= `等其他代码并注释掉
+
+![](./img/log-remove.png)
 
 
 
