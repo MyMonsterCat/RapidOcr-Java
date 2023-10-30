@@ -63,14 +63,12 @@ onnxruntime-static
 - macOS Catalina 10.15.x，安装Xcode>=12，并安装Xcode Command Line Tools, 终端运行`xcode-select –install`
 - 自行下载安装HomeBrew，cmake >=3.19[下载地址](https://cmake.org/download/)
 - libomp: `brew install libomp`
-- Java环境
+- 安装Java环境（自行搜索）
 
-  - 下载jdk-8u221-macosx-x64.dmg，安装。
-- 编辑用户目录下的隐藏文件`.zshrc` ，添加`export JAVA_HOME=$(/usr/libexec/java_home)`
 
 ### 5.开始编译
 
-- git clone的代码中，修改如下
+- 拉取的代码中，做出如下修改
 
 ```c
 将下面的代码
@@ -87,7 +85,7 @@ onnxruntime-static
 
 ![](./img/onnx-lib.png)
 
-替换项目中的库文件即可
+将其替换项目中的库文件即可
 
 ![](./img/onnx-replace.png)
 

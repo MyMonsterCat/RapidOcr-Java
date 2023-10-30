@@ -93,9 +93,7 @@ public class OcrUtilTest {
 
 #### Q1:无法运行相应的动态库？
 
-Mac Arm64、Mac Intel、Win10、Win11、CentOs8均经过测试，项目resources目录下的的动态库文件**均可成功加载**，如果您的系统无法运行相应的动态库，请在该系统下尝试[自行编译动态库？](./docs/COMPILE_LIB.md)
-
-
+Mac-Arm64、Mac-Intel、Win10、Win11、CentOS-8均经过测试，项目resources目录下的的动态库文件**均可成功加载**，如果您的系统无法运行相应的动态库，请在该系统下尝试[自行编译动态库](./docs/COMPILE_LIB.md)
 
 ## 鸣谢
 
