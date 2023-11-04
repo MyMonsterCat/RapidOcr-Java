@@ -30,9 +30,10 @@
 
 ### 方式一：本地直接运行
 
-1⃣️ 下载项目
+1️⃣ 下载项目
 
 ```shell
+## 项目含有库文件，导致下载可能较慢
 git clone https://github.com/MyMonsterCat/RapidOcr-Java.git
 ```
 
@@ -54,7 +55,6 @@ git clone https://github.com/MyMonsterCat/RapidOcr-Java.git
 
 > ⚠️ 注意
 >
-> - 项目由于含有库文件，大概有300M左右
 > - 如果是采用方式二打包，务必将src/resources下的ncnn或者onnx的库文件引入到自己的项目resources中
 
 2️⃣ 调用(更多使用示例请参考[测试类](https://github.com/MyMonsterCat/RapidOcr-Java/blob/main/src/test/java/com/github/monster/ocr/OcrUtilTest.java))
