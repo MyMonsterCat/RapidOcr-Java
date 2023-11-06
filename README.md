@@ -1,14 +1,21 @@
 # RapidOcr-Java
 
-## 🪧 项目起源
+![](./img/line.png)
+
+## 😺 项目起源
 
 - 现有的JavaOCR工具包识别效果差强人意，PaddleOCR在实现前沿算法的基础上，考虑精度与速度的平衡，进行模型瘦身和深度优化，使其尽可能满足产业落地需求。
-
 - PaddleOCR官方并未提供Java版本，而[RapidOcr](https://github.com/RapidAI/RapidOCR)解决了这个问题，其提供了Kotlin和Java混合版本的[Demo-onnx](https://github.com/RapidAI/RapidOcrOnnxJvm)和[Demo-ncnn](https://github.com/RapidAI/RapidOcrNcnnJvm)
 
-  >RapidOcr是完全开源、免费并支持多平台、多语言OCR离线部署
+- 而实际使用过程中
+  - 项目中并不想再引入Kotlin
+  - 不想了解OCR相关知识，开箱即用
+  - 不想额外再部署OCR服务
 
-- 而实际使用过程中，项目中并不想再引入Kotlin，因此本项目将Kotlin部分移除，并在此基础上加以完善(提供了更友好的的调用方法)，更方便java开发者使用。
+
+因此本项目将Kotlin部分移除，并在此基础上加以完善且提供了更友好的的调用方法，更方便java开发者直接进行使用。
+
+> 如果该项目对您有帮助，您的star是我不断优化的动力！！！
 
 ## 👏 项目特点
 
@@ -23,9 +30,10 @@
 
 ### 方式一：本地直接运行
 
-1⃣️ 下载项目
+1️⃣ 下载项目
 
 ```shell
+## 项目含有库文件，导致下载可能较慢
 git clone https://github.com/MyMonsterCat/RapidOcr-Java.git
 ```
 
@@ -35,7 +43,7 @@ git clone https://github.com/MyMonsterCat/RapidOcr-Java.git
 
 ### 方式二：引入到其他项目
 
-1⃣️ 引入jar包(需要自己下载项目打包，过程参考[如何自行编译jar包？](./docs/COMPILE_JAR.md))
+1️⃣ 引入jar包(需要自己下载项目打包，过程参考[如何自行打包jar包？](./docs/COMPILE_JAR.md))
 
 ```xml
 <dependency>
@@ -45,9 +53,11 @@ git clone https://github.com/MyMonsterCat/RapidOcr-Java.git
 </dependency>
 ```
 
-> ⚠️ 如果是采用方式二打包，务必将src/resources下的ncnn或者onnx的库文件引入到自己的项目resources中
+> ⚠️ 注意
+>
+> - 如果是采用方式二打包，务必将src/resources下的ncnn或者onnx的库文件引入到自己的项目resources中
 
-2⃣️ 调用(更多使用示例请参考[测试类](https://github.com/MyMonsterCat/RapidOcr-Java/blob/main/src/test/java/com/github/monster/ocr/OcrUtilTest.java))
+2️⃣ 调用(更多使用示例请参考[测试类](https://github.com/MyMonsterCat/RapidOcr-Java/blob/main/src/test/java/com/github/monster/ocr/OcrUtilTest.java))
 
 ```java
 public class OcrUtilTest {
@@ -72,11 +82,11 @@ public class OcrUtilTest {
 ## 🔝 进阶使用
 
 - [参数调优、版本说明、目录说明、分支说明](./docs/ADVANCED.md)
-- [如何自行更新模型？](./docs/UPDATE_MODEL.md)
-- [如何自行编译动态库？](./docs/COMPILE_LIB.md)
-- [如何自行编译jar包？](./docs/COMPILE_JAR.md)
+- [如何自行更新模型](./docs/UPDATE_MODEL.md)
+- [如何自行编译动态库](./docs/COMPILE_LIB.md)
+- [如何自行打包jar包](./docs/COMPILE_JAR.md)
 - OCR相关知识--❗️待更新
-- JVM下不同PaddleOCR调用方式性能比对--❗️待更新
+- [JVM下不同PaddleOCR调用方式性能比对，强烈建议阅读👍](./docs/COMPARE.md)
 - SpringBoot示例和普通Java程序示例--❗️待更新
 
 ## 📌 TODO
@@ -88,6 +98,9 @@ public class OcrUtilTest {
 - [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)，感谢[nn200433](https://github.com/nn200433)及[tika-server](https://github.com/nn200433/tika-server)👏 
 - [x] 添加日志，规范日志打印
 - [x] ONNX支持Mac-Arm64
+- [ ] 支持Docker镜像
+- [ ] Maven仓库提供packages
+- [ ] SpringBoot下，以配置文件方式改造
 
 ## 🤔 FAQ
 
