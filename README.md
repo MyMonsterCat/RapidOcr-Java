@@ -47,8 +47,8 @@ git clone https://github.com/MyMonsterCat/RapidOcr-Java.git
 
 ```xml
 <dependency>
-    <groupId>com.github.monster</groupId>
-    <artifactId>RapidOcr-Java</artifactId>
+    <groupId>io.github.mymonstercat</groupId>
+    <artifactId>rapidocr</artifactId>
     <version>${latest.version}</version>
 </dependency>
 ```
