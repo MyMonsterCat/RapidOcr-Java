@@ -38,7 +38,7 @@
 >
 > - 对于`版本号-light，例如0.0.4-light`:轻量级打包，不将库文件打包到jar中
 >   - 务必将[release](https://github.com/MyMonsterCat/RapidOcr-Java/releases)下的ncnn或者onnx的库文件引入到自己的项目resources中，请按需引入(例如只需在mac-arm64的机器上运行onnx，见下图)
->   - onnx和ncnn一般只需要引入一个就好，一般来说引入onnx即可
+>   - onnx和ncnn一般只需要引入一个就好，一般来说引入onnx即可，可以在[release](https://github.com/MyMonsterCat/RapidOcr-Java/releases)下test-ocr查看示例引入
 >
 > <img src="./docs/img/structure.png" style="zoom:50%;" />
 >
