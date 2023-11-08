@@ -84,11 +84,11 @@
 ```java
 public class Main {
     public static void main(String[] args) {
-				// 参数配置自行查看
+	// 参数配置自行查看
         ParamConfig paramConfig = ParamConfig.getDefaultConfig();
         paramConfig.setDoAngle(true);
         paramConfig.setMostAngle(true);
-				// 对项目根目录images包内图片进行OCR，请自行替换
+	// 对项目根目录images包内图片进行OCR，请自行替换
         String imgPath1 = getResourcePath("/images/40.png");
         OcrUtil.runOcr(imgPath1, LibConfig.getOnnxConfig(), paramConfig);
 
