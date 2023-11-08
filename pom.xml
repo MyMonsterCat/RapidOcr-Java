@@ -6,8 +6,9 @@
 
     <groupId>io.github.mymonstercat</groupId>
     <artifactId>rapidocr</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.4-light</version>
 
+    <name>rapid-ocr</name>
     <url>https://github.com/MyMonsterCat/RapidOcr-Java</url>
     <description>Java代码实现调用RapidOCR(基于PaddleOCR)，适配Mac、Win、Linux，支持最新PP-OCRv4</description>
     <licenses>
@@ -79,65 +80,15 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <!-- 打包方式二：不打包动态库(推荐)-->
-<!--                <excludes>-->
-<!--                    <exclude>**/*.*</exclude>-->
-<!--                </excludes>-->
+                <excludes>
+                    <exclude>**/*.*</exclude>
+                </excludes>
                 <!-- 打包方式一：包含文件夹以及子文件夹下所有资源-->
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
+<!--                <includes>-->
+<!--                    <include>**/*.*</include>-->
+<!--                </includes>-->
             </resource>
         </resources>
-
-
-<!--        <plugins>-->
-<!--            &lt;!&ndash; source code &ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-source-plugin</artifactId>-->
-<!--                <version>3.3.0</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>attach-sources</id>-->
-<!--                        <goals>-->
-<!--                            <goal>jar-no-fork</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--            &lt;!&ndash; javadoc &ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-<!--                <version>3.6.0</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>jar</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <additionalOptions>-Xdoclint:none</additionalOptions>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--            &lt;!&ndash; gpg &ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-gpg-plugin</artifactId>-->
-<!--                <version>3.1.0</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>sign-artifacts</id>-->
-<!--                        <phase>verify</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>sign</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
     </build>
 
 </project>

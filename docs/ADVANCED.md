@@ -82,4 +82,4 @@
 ## :saxophone: 分支说明
 
 - main: 主分支，使用ncnn和onnx进行推理
-- dev-ncnn： 仅使用ncnn进行推理
+- dev: 开发分支，最新功能在这里 
