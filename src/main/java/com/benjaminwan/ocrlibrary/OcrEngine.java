@@ -1,34 +1,48 @@
 package com.benjaminwan.ocrlibrary;
 
-import com.github.monster.ocr.JarFileUtils;
-import com.github.monster.ocr.PathConstants;
+import io.github.monster.ocr.Model;
+import io.github.monster.ocr.config.HardwareConfig;
+import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
+import java.util.Objects;
 
 /**
- * OCR引擎对象，负责接收参数并执行OCR
+ * OCR引擎对象，通过JNI与库文件交互
  */
+@Slf4j
 public class OcrEngine {
 
-    public OcrEngine(String libraryPath, String modelsDir, boolean deleteOnExit) {
-        try {
-            if (libraryPath.contains(PathConstants.ONNX)) {
-                JarFileUtils.copyFileFromJar(libraryPath, PathConstants.ONNX, null, true, deleteOnExit);
-                inference = PathConstants.ONNX;
-            } else {
-                JarFileUtils.copyFileFromJar(libraryPath, PathConstants.NCNN, null, true, deleteOnExit);
-                inference = PathConstants.NCNN;
+    protected void initEngine(Model model, HardwareConfig hardwareConfig) {
+        if (!isInit) {
+            initLogger(false, false, false);
+            setNumThread(hardwareConfig.getNumThread());
+            if (hardwareConfig.getGpuIndex() != -1) {
+                setGpuIndex(hardwareConfig.getGpuIndex());
             }
-            JarFileUtils.copyModelsFromJar(modelsDir, deleteOnExit);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            if (!initModel(model.getTempDirPath(), model.getDetName(), model.getClsName(), model.getRecName(), model.getKeysName())) {
+                throw new IllegalArgumentException("模型初始化错误，请检查models/keys路径！");
+            }
+            inferType = model.getModelType();
+            log.info("推理引擎初始化完成，当前使用的推理引擎为：{}-v{}", inferType, getVersion());
+            log.info("初始化时模型配置为：{}， 硬件配置为：{}", model, hardwareConfig);
+        } else {
+            if (!Objects.equals(inferType, inferType)) {
+                log.warn("引擎已初始化，初始化后不可更换为其他引擎，将继续使用{}推理引擎工作", inferType);
+            } else {
+                log.info("当前使用的推理引擎为：{}-v{}", inferType, getVersion());
+            }
         }
     }
 
-    private String inference;
+    private boolean isInit = false;
+    private String inferType;
 
-    public String getInference() {
-        return inference;
+    public boolean initModel(String modelsDir, String detName, String clsName, String recName, String keysName) {
+        boolean init = initModels(modelsDir, detName, clsName, recName, keysName);
+        if (init) {
+            isInit = true;
+        }
+        return init;
     }
 
     public native boolean setNumThread(int numThread);

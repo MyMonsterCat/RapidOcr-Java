@@ -1,5 +1,8 @@
 target/
 .idea/
 logs/
+test/resources/ncnn/
+test/resources/onnx/
+test/resources/*.xml
 *.iml
 *.log

@@ -10,7 +10,7 @@
         <Root level="info" additivity="false">
             <AppenderRef ref="console"/>
         </Root>
-        <Logger name="ocrLibrary" level="info" additivity="false">
+        <Logger name="ocrLibrary" level="debug" additivity="false">
             <AppenderRef ref="console"/>
         </Logger>
     </Loggers>
