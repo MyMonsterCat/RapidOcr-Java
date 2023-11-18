@@ -1,0 +1,4 @@
+io.github.mymonstercat.NcnnMacArm64LibraryLoader
+io.github.mymonstercat.NcnnMacX8664LibraryLoader
+io.github.mymonstercat.NcnnLinuxX8664LibraryLoader
+io.github.mymonstercat.NcnnWindowsX86LibraryLoader

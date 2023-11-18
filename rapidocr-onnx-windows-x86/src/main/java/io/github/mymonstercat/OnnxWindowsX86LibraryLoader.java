@@ -1,11 +1,13 @@
 package io.github.mymonstercat;
 
+import io.github.mymonstercat.loader.OnnxLibraryLoader;
+
 import java.io.IOException;
 
 /**
  * @author Monster
  */
-public class OnnxWindowsX86LibraryLoader implements LibraryLoader {
+public class OnnxWindowsX86LibraryLoader implements OnnxLibraryLoader {
 
     @Override
     public void loadLibrary() throws IOException {

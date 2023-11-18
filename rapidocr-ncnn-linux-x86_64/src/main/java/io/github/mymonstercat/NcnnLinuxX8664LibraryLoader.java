@@ -1,11 +1,13 @@
 package io.github.mymonstercat;
 
+import io.github.mymonstercat.loader.NcnnLibraryLoader;
+
 import java.io.IOException;
 
 /**
  * @author Monster
  */
-public class NcnnLinuxX8664LibraryLoader implements LibraryLoader {
+public class NcnnLinuxX8664LibraryLoader implements NcnnLibraryLoader {
 
     @Override
     public void loadLibrary() throws IOException {
