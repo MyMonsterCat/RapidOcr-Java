@@ -1,7 +1,7 @@
 package com.benjaminwan.ocrlibrary;
 
 import io.github.mymonstercat.Model;
-import io.github.monster.ocr.config.HardwareConfig;
+import io.github.mymonstercat.ocr.config.HardwareConfig;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;

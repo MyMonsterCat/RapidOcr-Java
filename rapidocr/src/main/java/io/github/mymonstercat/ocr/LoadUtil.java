@@ -1,4 +1,4 @@
-package io.github.monster.ocr;
+package io.github.mymonstercat.ocr;
 
 import io.github.mymonstercat.exception.LoadException;
 import io.github.mymonstercat.loader.NcnnLibraryLoader;
