@@ -4,7 +4,6 @@ import com.benjaminwan.ocrlibrary.OcrEngine;
 import com.benjaminwan.ocrlibrary.OcrResult;
 import io.github.monster.ocr.config.HardwareConfig;
 import io.github.monster.ocr.config.ParamConfig;
-import io.github.monster.ocr.util.InferenceUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**

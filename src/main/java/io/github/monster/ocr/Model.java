@@ -1,6 +1,5 @@
 package io.github.monster.ocr;
 
-import io.github.monster.ocr.util.InferenceUtil;
 import lombok.Getter;
 import lombok.ToString;
 
