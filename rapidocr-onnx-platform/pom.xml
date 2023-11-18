@@ -22,7 +22,7 @@
             <id>macosx-arm64</id>
             <activation>
                 <os>
-                    <name>Mac OS X</name>
+                    <family>mac</family>
                     <arch>aarch64</arch>
                 </os>
             </activation>
@@ -38,7 +38,7 @@
             <id>macosx-x86_64</id>
             <activation>
                 <os>
-                    <name>Mac OS X</name>
+                    <family>mac</family>
                     <arch>x86_64</arch>
                 </os>
             </activation>
@@ -54,7 +54,7 @@
             <id>windows-x86_64</id>
             <activation>
                 <os>
-                    <name>Windows</name>
+                    <family>windows</family>
                     <arch>amd64</arch>
                 </os>
             </activation>
@@ -70,7 +70,7 @@
             <id>windows-x86</id>
             <activation>
                 <os>
-                    <name>Windows</name>
+                    <family>windows</family>
                     <arch>x86</arch>
                 </os>
             </activation>
@@ -86,7 +86,7 @@
             <id>linux-x86_64</id>
             <activation>
                 <os>
-                    <name>Linux</name>
+                    <family>unix</family>
                     <arch>amd64</arch>
                 </os>
             </activation>
