@@ -1,8 +1,10 @@
 target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
 .idea/
 logs/
-test/resources/ncnn/
-test/resources/onnx/
-test/resources/*.xml
 *.iml
 *.log
+
+.DS_Store

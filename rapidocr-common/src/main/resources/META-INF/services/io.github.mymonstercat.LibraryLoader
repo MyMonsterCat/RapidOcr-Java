@@ -1,0 +1,4 @@
+io.github.mymonstercat.MacArm64LibraryLoader
+io.github.mymonstercat.WindowsX86LibraryLoader
+io.github.mymonstercat.MacX86LibraryLoader
+io.github.mymonstercat.LinuxX86LibraryLoader

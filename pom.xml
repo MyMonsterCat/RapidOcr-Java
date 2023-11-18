@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.mymonstercat</groupId>
-    <artifactId>rapidocr</artifactId>
+    <artifactId>rapidocr-java</artifactId>
     <version>0.0.5</version>
+    <packaging>pom</packaging>
 
     <name>rapid-ocr</name>
     <url>https://github.com/MyMonsterCat/RapidOcr-Java</url>
@@ -39,54 +40,125 @@
         </repository>
     </distributionManagement>
 
+    <modules>
+        <module>rapidocr</module>
+        <module>rapidocr-onnx-macosx-arm64</module>
+        <module>rapidocr-platform</module>
+        <module>rapidocr-onnx-models</module>
+        <module>rapidocr-common</module>
+        <module>rapidocr-onnx-windows-x86</module>
+        <module>rapidocr-onnx-macos-x86_64</module>
+        <module>rapidocr-onnx-linux-x86</module>
+    </modules>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-            <version>5.8.20</version>
-            <scope>test</scope>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-onnx-models</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-onnx-macosx-arm64</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-onnx-windows-x86</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-onnx-macos-x86_64</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
-        </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-platform</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <!--            <artifactId>log4j-to-slf4j</artifactId>-->
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.20.0</version>
-        </dependency>
-
-    </dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.30</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>2.20.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <!--                <excludes>-->
-                <!--                    <exclude>**/*.*</exclude>-->
-                <!--                </excludes>-->
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-            </resource>
-        </resources>
+        <plugins>
+            <!-- source code -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <additionalOptions>-Xdoclint:none</additionalOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- gpg -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
+
 
 </project>
