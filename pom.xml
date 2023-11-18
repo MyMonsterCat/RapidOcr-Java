@@ -43,12 +43,19 @@
     <modules>
         <module>rapidocr</module>
         <module>rapidocr-onnx-macosx-arm64</module>
-        <module>rapidocr-platform</module>
+        <module>rapidocr-onnx-platform</module>
         <module>rapidocr-onnx-models</module>
         <module>rapidocr-common</module>
+        <module>rapidocr-onnx-windows-x86_64</module>
+        <module>rapidocr-onnx-macosx-x86_64</module>
+        <module>rapidocr-onnx-linux-x86_64</module>
+        <module>rapidocr-ncnn-models</module>
+        <module>rapidocr-ncnn-macosx-arm64</module>
+        <module>rapidocr-ncnn-platform</module>
+        <module>rapidocr-ncnn-macosx-x86_64</module>
+        <module>rapidocr-ncnn-linux-x86_64</module>
+        <module>rapidocr-ncnn-windows-x86_64</module>
         <module>rapidocr-onnx-windows-x86</module>
-        <module>rapidocr-onnx-macos-x86_64</module>
-        <module>rapidocr-onnx-linux-x86</module>
     </modules>
 
     <properties>
@@ -58,6 +65,7 @@
     </properties>
     <dependencyManagement>
         <dependencies>
+            <!--      ONNX       -->
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-models</artifactId>
@@ -70,15 +78,51 @@
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
-                <artifactId>rapidocr-onnx-windows-x86</artifactId>
+                <artifactId>rapidocr-onnx-macosx-x86_64</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
-                <artifactId>rapidocr-onnx-macos-x86_64</artifactId>
+                <artifactId>rapidocr-onnx-linux-x86_64</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-onnx-windows-x86_64</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-onnx-windows-x86</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--      NCNN       -->
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-ncnn-models</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-ncnn-macosx-arm64</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-ncnn-macosx-x86_64</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-ncnn-linux-x86_64</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-ncnn-windows-x86_64</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--      Core       -->
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr</artifactId>
@@ -94,7 +138,7 @@
                 <artifactId>rapidocr-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <!--      Other       -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -110,6 +154,15 @@
     </dependencyManagement>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
         <plugins>
             <!-- source code -->
             <plugin>

@@ -1,4 +1,9 @@
-io.github.mymonstercat.MacArm64LibraryLoader
-io.github.mymonstercat.WindowsX86LibraryLoader
-io.github.mymonstercat.MacX86LibraryLoader
-io.github.mymonstercat.LinuxX86LibraryLoader
+io.github.mymonstercat.OnnxMacArm64LibraryLoader
+io.github.mymonstercat.OnnxMacX8664LibraryLoader
+io.github.mymonstercat.OnnxWindowsX8664LibraryLoader
+io.github.mymonstercat.OnnxWindowsX86LibraryLoader
+io.github.mymonstercat.OnnxLinuxX8664LibraryLoader
+io.github.mymonstercat.NcnnMacArm64LibraryLoader
+io.github.mymonstercat.NcnnMacX8664LibraryLoader
+io.github.mymonstercat.NcnnLinuxX8664LibraryLoader
+io.github.mymonstercat.NcnnWindowsX86LibraryLoader

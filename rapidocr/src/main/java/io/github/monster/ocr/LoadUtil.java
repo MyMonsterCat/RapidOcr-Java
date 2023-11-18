@@ -14,8 +14,10 @@ public class LoadUtil {
     }
 
     public static LibraryLoader findSupportedNativeLoader(ServiceLoader<LibraryLoader> serviceLoader) {
+        String osName = System.getProperty("os.name").toLowerCase();
+        String osArch = System.getProperty("os.arch").toLowerCase();
         for (LibraryLoader loader : serviceLoader) {
-            if (loader.isSupportedPlatform()) {
+            if (loader.isSupportedPlatform(osName, osArch)) {
                 return loader;
             }
         }
@@ -23,8 +25,10 @@ public class LoadUtil {
     }
 
     public static ModelsLoader findSupportedModelsLoader(ServiceLoader<ModelsLoader> serviceLoader) {
+        String osName = System.getProperty("os.name").toLowerCase();
+        String osArch = System.getProperty("os.arch").toLowerCase();
         for (ModelsLoader loader : serviceLoader) {
-            if (loader.isSupportedPlatform()) {
+            if (loader.isSupportedPlatform(osName, osArch)) {
                 return loader;
             }
         }

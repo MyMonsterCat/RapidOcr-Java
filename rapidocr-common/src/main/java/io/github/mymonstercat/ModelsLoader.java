@@ -9,5 +9,5 @@ public interface ModelsLoader {
 
     void loadModels(Model model) throws IOException;
 
-    boolean isSupportedPlatform();
+    boolean isSupportedPlatform(String osName, String osArch);
 }

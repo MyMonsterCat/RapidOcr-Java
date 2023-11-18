@@ -1,0 +1,201 @@
+7767517
+199 231
+Input            x                        0 1 input
+MemoryData       Reshape_16               0 1 Reshape_16 0=1 1=1 2=24
+MemoryData       Reshape_17               0 1 Reshape_17 0=1 1=1 2=1
+Convolution      Conv_0                   1 1 input conv2d_211.tmp_0 0=8 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=216
+HardSwish        Div_0                    1 1 conv2d_211.tmp_0 hardswish_0.tmp_0 0=1.666667e-01 1=5.000000e-01
+Split            splitncnn_0              1 2 hardswish_0.tmp_0 hardswish_0.tmp_0_splitncnn_0 hardswish_0.tmp_0_splitncnn_1
+Convolution      Conv_1                   1 1 hardswish_0.tmp_0_splitncnn_1 conv2d_212.tmp_0 0=8 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=64
+ReLU             Relu_0                   1 1 conv2d_212.tmp_0 relu_0.tmp_0
+ConvolutionDepthWise Conv_2                   1 1 relu_0.tmp_0 depthwise_conv2d_0.tmp_0 0=8 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=72 7=8
+ReLU             Relu_1                   1 1 depthwise_conv2d_0.tmp_0 relu_1.tmp_0
+Convolution      Conv_3                   1 1 relu_1.tmp_0 conv2d_213.tmp_0 0=8 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=64
+BinaryOp         Add_1                    2 1 hardswish_0.tmp_0_splitncnn_0 conv2d_213.tmp_0 elementwise_add_0 0=0
+Convolution      Conv_4                   1 1 elementwise_add_0 conv2d_214.tmp_0 0=32 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=256
+ReLU             Relu_2                   1 1 conv2d_214.tmp_0 relu_2.tmp_0
+ConvolutionDepthWise Conv_5                   1 1 relu_2.tmp_0 depthwise_conv2d_1.tmp_0 0=32 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=288 7=32
+ReLU             Relu_3                   1 1 depthwise_conv2d_1.tmp_0 relu_3.tmp_0
+Convolution      Conv_6                   1 1 relu_3.tmp_0 conv2d_215.tmp_0 0=16 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=512
+Split            splitncnn_1              1 2 conv2d_215.tmp_0 conv2d_215.tmp_0_splitncnn_0 conv2d_215.tmp_0_splitncnn_1
+Convolution      Conv_7                   1 1 conv2d_215.tmp_0_splitncnn_1 conv2d_216.tmp_0 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=640
+ReLU             Relu_4                   1 1 conv2d_216.tmp_0 relu_4.tmp_0
+ConvolutionDepthWise Conv_8                   1 1 relu_4.tmp_0 depthwise_conv2d_2.tmp_0 0=40 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=360 7=40
+ReLU             Relu_5                   1 1 depthwise_conv2d_2.tmp_0 relu_5.tmp_0
+Convolution      Conv_9                   1 1 relu_5.tmp_0 conv2d_217.tmp_0 0=16 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=640
+BinaryOp         Add_2                    2 1 conv2d_215.tmp_0_splitncnn_0 conv2d_217.tmp_0 elementwise_add_1 0=0
+Split            splitncnn_2              1 2 elementwise_add_1 elementwise_add_1_splitncnn_0 elementwise_add_1_splitncnn_1
+Convolution      Conv_10                  1 1 elementwise_add_1_splitncnn_1 conv2d_218.tmp_0 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=640
+ReLU             Relu_6                   1 1 conv2d_218.tmp_0 relu_6.tmp_0
+ConvolutionDepthWise Conv_11                  1 1 relu_6.tmp_0 depthwise_conv2d_3.tmp_0 0=40 1=5 11=5 2=1 12=1 3=2 13=2 4=2 14=2 15=2 16=2 5=1 6=1000 7=40
+ReLU             Relu_7                   1 1 depthwise_conv2d_3.tmp_0 relu_7.tmp_0
+Convolution      Conv_12                  1 1 relu_7.tmp_0 conv2d_219.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=960
+Split            splitncnn_3              1 2 conv2d_219.tmp_0 conv2d_219.tmp_0_splitncnn_0 conv2d_219.tmp_0_splitncnn_1
+Convolution      Conv_13                  1 1 conv2d_219.tmp_0_splitncnn_1 conv2d_220.tmp_0 0=64 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1536
+ReLU             Relu_8                   1 1 conv2d_220.tmp_0 relu_8.tmp_0
+ConvolutionDepthWise Conv_14                  1 1 relu_8.tmp_0 depthwise_conv2d_4.tmp_0 0=64 1=5 11=5 2=1 12=1 3=1 13=1 4=2 14=2 15=2 16=2 5=1 6=1600 7=64
+ReLU             Relu_9                   1 1 depthwise_conv2d_4.tmp_0 relu_9.tmp_0
+Convolution      Conv_15                  1 1 relu_9.tmp_0 conv2d_221.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1536
+BinaryOp         Add_3                    2 1 conv2d_219.tmp_0_splitncnn_0 conv2d_221.tmp_0 elementwise_add_2 0=0
+Split            splitncnn_4              1 2 elementwise_add_2 elementwise_add_2_splitncnn_0 elementwise_add_2_splitncnn_1
+Convolution      Conv_16                  1 1 elementwise_add_2_splitncnn_1 conv2d_222.tmp_0 0=64 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1536
+ReLU             Relu_10                  1 1 conv2d_222.tmp_0 relu_10.tmp_0
+ConvolutionDepthWise Conv_17                  1 1 relu_10.tmp_0 depthwise_conv2d_5.tmp_0 0=64 1=5 11=5 2=1 12=1 3=1 13=1 4=2 14=2 15=2 16=2 5=1 6=1600 7=64
+ReLU             Relu_11                  1 1 depthwise_conv2d_5.tmp_0 relu_11.tmp_0
+Convolution      Conv_18                  1 1 relu_11.tmp_0 conv2d_223.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=1536
+BinaryOp         Add_4                    2 1 elementwise_add_2_splitncnn_0 conv2d_223.tmp_0 elementwise_add_3 0=0
+Split            splitncnn_5              1 2 elementwise_add_3 elementwise_add_3_splitncnn_0 elementwise_add_3_splitncnn_1
+Convolution      Conv_19                  1 1 elementwise_add_3_splitncnn_1 conv2d_224.tmp_0 0=120 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2880
+HardSwish        Div_1                    1 1 conv2d_224.tmp_0 hardswish_1.tmp_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_20                  1 1 hardswish_1.tmp_0 depthwise_conv2d_6.tmp_0 0=120 1=3 11=3 2=1 12=1 3=2 13=2 4=1 14=1 15=1 16=1 5=1 6=1080 7=120
+HardSwish        Div_2                    1 1 depthwise_conv2d_6.tmp_0 hardswish_2.tmp_0 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_21                  1 1 hardswish_2.tmp_0 conv2d_225.tmp_0 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4800
+Split            splitncnn_6              1 2 conv2d_225.tmp_0 conv2d_225.tmp_0_splitncnn_0 conv2d_225.tmp_0_splitncnn_1
+Convolution      Conv_22                  1 1 conv2d_225.tmp_0_splitncnn_1 conv2d_226.tmp_0 0=104 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4160
+HardSwish        Div_3                    1 1 conv2d_226.tmp_0 hardswish_3.tmp_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_23                  1 1 hardswish_3.tmp_0 depthwise_conv2d_7.tmp_0 0=104 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=936 7=104
+HardSwish        Div_4                    1 1 depthwise_conv2d_7.tmp_0 hardswish_4.tmp_0 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_24                  1 1 hardswish_4.tmp_0 conv2d_227.tmp_0 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=4160
+BinaryOp         Add_9                    2 1 conv2d_225.tmp_0_splitncnn_0 conv2d_227.tmp_0 elementwise_add_4 0=0
+Split            splitncnn_7              1 2 elementwise_add_4 elementwise_add_4_splitncnn_0 elementwise_add_4_splitncnn_1
+Convolution      Conv_25                  1 1 elementwise_add_4_splitncnn_1 conv2d_228.tmp_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3840
+HardSwish        Div_5                    1 1 conv2d_228.tmp_0 hardswish_5.tmp_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_26                  1 1 hardswish_5.tmp_0 depthwise_conv2d_8.tmp_0 0=96 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=864 7=96
+HardSwish        Div_6                    1 1 depthwise_conv2d_8.tmp_0 hardswish_6.tmp_0 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_27                  1 1 hardswish_6.tmp_0 conv2d_229.tmp_0 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3840
+BinaryOp         Add_12                   2 1 elementwise_add_4_splitncnn_0 conv2d_229.tmp_0 elementwise_add_5 0=0
+Split            splitncnn_8              1 2 elementwise_add_5 elementwise_add_5_splitncnn_0 elementwise_add_5_splitncnn_1
+Convolution      Conv_28                  1 1 elementwise_add_5_splitncnn_1 conv2d_230.tmp_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3840
+HardSwish        Div_7                    1 1 conv2d_230.tmp_0 hardswish_7.tmp_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_29                  1 1 hardswish_7.tmp_0 depthwise_conv2d_9.tmp_0 0=96 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=864 7=96
+HardSwish        Div_8                    1 1 depthwise_conv2d_9.tmp_0 hardswish_8.tmp_0 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_30                  1 1 hardswish_8.tmp_0 conv2d_231.tmp_0 0=40 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=3840
+BinaryOp         Add_15                   2 1 elementwise_add_5_splitncnn_0 conv2d_231.tmp_0 elementwise_add_6 0=0
+Convolution      Conv_31                  1 1 elementwise_add_6 conv2d_232.tmp_0 0=240 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=9600
+HardSwish        Div_9                    1 1 conv2d_232.tmp_0 hardswish_9.tmp_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_32                  1 1 hardswish_9.tmp_0 depthwise_conv2d_10.tmp_0 0=240 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=2160 7=240
+HardSwish        Div_10                   1 1 depthwise_conv2d_10.tmp_0 hardswish_10.tmp_0 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_33                  1 1 hardswish_10.tmp_0 conv2d_233.tmp_0 0=56 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=13440
+Split            splitncnn_9              1 2 conv2d_233.tmp_0 conv2d_233.tmp_0_splitncnn_0 conv2d_233.tmp_0_splitncnn_1
+Convolution      Conv_34                  1 1 conv2d_233.tmp_0_splitncnn_1 conv2d_234.tmp_0 0=336 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=18816
+HardSwish        Div_11                   1 1 conv2d_234.tmp_0 hardswish_11.tmp_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_35                  1 1 hardswish_11.tmp_0 depthwise_conv2d_11.tmp_0 0=336 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=3024 7=336
+HardSwish        Div_12                   1 1 depthwise_conv2d_11.tmp_0 hardswish_12.tmp_0 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_36                  1 1 hardswish_12.tmp_0 conv2d_235.tmp_0 0=56 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=18816
+BinaryOp         Add_20                   2 1 conv2d_233.tmp_0_splitncnn_0 conv2d_235.tmp_0 elementwise_add_7 0=0
+Split            splitncnn_10             1 2 elementwise_add_7 elementwise_add_7_splitncnn_0 elementwise_add_7_splitncnn_1
+Convolution      Conv_37                  1 1 elementwise_add_7_splitncnn_1 conv2d_236.tmp_0 0=336 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=18816
+HardSwish        Div_13                   1 1 conv2d_236.tmp_0 hardswish_13.tmp_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_38                  1 1 hardswish_13.tmp_0 depthwise_conv2d_12.tmp_0 0=336 1=5 11=5 2=1 12=1 3=2 13=2 4=2 14=2 15=2 16=2 5=1 6=8400 7=336
+HardSwish        Div_14                   1 1 depthwise_conv2d_12.tmp_0 hardswish_14.tmp_0 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_39                  1 1 hardswish_14.tmp_0 conv2d_237.tmp_0 0=80 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=26880
+Split            splitncnn_11             1 2 conv2d_237.tmp_0 conv2d_237.tmp_0_splitncnn_0 conv2d_237.tmp_0_splitncnn_1
+Convolution      Conv_40                  1 1 conv2d_237.tmp_0_splitncnn_1 conv2d_238.tmp_0 0=480 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=38400
+HardSwish        Div_15                   1 1 conv2d_238.tmp_0 hardswish_15.tmp_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_41                  1 1 hardswish_15.tmp_0 depthwise_conv2d_13.tmp_0 0=480 1=5 11=5 2=1 12=1 3=1 13=1 4=2 14=2 15=2 16=2 5=1 6=12000 7=480
+HardSwish        Div_16                   1 1 depthwise_conv2d_13.tmp_0 hardswish_16.tmp_0 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_42                  1 1 hardswish_16.tmp_0 conv2d_239.tmp_0 0=80 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=38400
+BinaryOp         Add_25                   2 1 conv2d_237.tmp_0_splitncnn_0 conv2d_239.tmp_0 elementwise_add_8 0=0
+Split            splitncnn_12             1 2 elementwise_add_8 elementwise_add_8_splitncnn_0 elementwise_add_8_splitncnn_1
+Convolution      Conv_43                  1 1 elementwise_add_8_splitncnn_1 conv2d_240.tmp_0 0=480 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=38400
+HardSwish        Div_17                   1 1 conv2d_240.tmp_0 hardswish_17.tmp_0 0=1.666667e-01 1=5.000000e-01
+ConvolutionDepthWise Conv_44                  1 1 hardswish_17.tmp_0 depthwise_conv2d_14.tmp_0 0=480 1=5 11=5 2=1 12=1 3=1 13=1 4=2 14=2 15=2 16=2 5=1 6=12000 7=480
+HardSwish        Div_18                   1 1 depthwise_conv2d_14.tmp_0 hardswish_18.tmp_0 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_45                  1 1 hardswish_18.tmp_0 conv2d_241.tmp_0 0=80 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=38400
+BinaryOp         Add_28                   2 1 elementwise_add_8_splitncnn_0 conv2d_241.tmp_0 elementwise_add_9 0=0
+Convolution      Conv_46                  1 1 elementwise_add_9 conv2d_242.tmp_0 0=480 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=38400
+HardSwish        Div_19                   1 1 conv2d_242.tmp_0 hardswish_19.tmp_0 0=1.666667e-01 1=5.000000e-01
+Convolution      Conv_47                  1 1 hardswish_19.tmp_0 conv2d_243.tmp_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=0 6=46080
+Split            splitncnn_13             1 3 conv2d_243.tmp_0 conv2d_243.tmp_0_splitncnn_0 conv2d_243.tmp_0_splitncnn_1 conv2d_243.tmp_0_splitncnn_2
+Pooling          GlobalAveragePool_0      1 1 conv2d_243.tmp_0_splitncnn_2 pool2d_0.tmp_0 0=1 4=1
+Convolution      Conv_48                  1 1 pool2d_0.tmp_0 conv2d_244.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2304
+ReLU             Relu_12                  1 1 conv2d_244.tmp_0 relu_12.tmp_0
+Convolution      Conv_49                  1 1 relu_12.tmp_0 conv2d_245.tmp_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2304
+HardSigmoid      HardSigmoid_0            1 1 conv2d_245.tmp_0 hardsigmoid_0.tmp_0 0=2.000000e-01 1=5.000000e-01
+BinaryOp         Mul_20                   2 1 conv2d_243.tmp_0_splitncnn_1 hardsigmoid_0.tmp_0 tmp_0 0=2
+BinaryOp         Add_32                   2 1 conv2d_243.tmp_0_splitncnn_0 tmp_0 tmp_1 0=0
+Split            splitncnn_14             1 2 tmp_1 tmp_1_splitncnn_0 tmp_1_splitncnn_1
+Convolution      Conv_50                  1 1 elementwise_add_7_splitncnn_0 conv2d_246.tmp_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=0 6=5376
+Split            splitncnn_15             1 3 conv2d_246.tmp_0 conv2d_246.tmp_0_splitncnn_0 conv2d_246.tmp_0_splitncnn_1 conv2d_246.tmp_0_splitncnn_2
+Pooling          GlobalAveragePool_1      1 1 conv2d_246.tmp_0_splitncnn_2 pool2d_1.tmp_0 0=1 4=1
+Convolution      Conv_51                  1 1 pool2d_1.tmp_0 conv2d_247.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2304
+ReLU             Relu_13                  1 1 conv2d_247.tmp_0 relu_13.tmp_0
+Convolution      Conv_52                  1 1 relu_13.tmp_0 conv2d_248.tmp_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2304
+HardSigmoid      HardSigmoid_1            1 1 conv2d_248.tmp_0 hardsigmoid_1.tmp_0 0=2.000000e-01 1=5.000000e-01
+BinaryOp         Mul_21                   2 1 conv2d_246.tmp_0_splitncnn_1 hardsigmoid_1.tmp_0 tmp_2 0=2
+BinaryOp         Add_35                   2 1 conv2d_246.tmp_0_splitncnn_0 tmp_2 tmp_3 0=0
+Convolution      Conv_53                  1 1 elementwise_add_3_splitncnn_0 conv2d_249.tmp_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=0 6=2304
+Split            splitncnn_16             1 3 conv2d_249.tmp_0 conv2d_249.tmp_0_splitncnn_0 conv2d_249.tmp_0_splitncnn_1 conv2d_249.tmp_0_splitncnn_2
+Pooling          GlobalAveragePool_2      1 1 conv2d_249.tmp_0_splitncnn_2 pool2d_2.tmp_0 0=1 4=1
+Convolution      Conv_54                  1 1 pool2d_2.tmp_0 conv2d_250.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2304
+ReLU             Relu_14                  1 1 conv2d_250.tmp_0 relu_14.tmp_0
+Convolution      Conv_55                  1 1 relu_14.tmp_0 conv2d_251.tmp_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2304
+HardSigmoid      HardSigmoid_2            1 1 conv2d_251.tmp_0 hardsigmoid_2.tmp_0 0=2.000000e-01 1=5.000000e-01
+BinaryOp         Mul_22                   2 1 conv2d_249.tmp_0_splitncnn_1 hardsigmoid_2.tmp_0 tmp_4 0=2
+BinaryOp         Add_38                   2 1 conv2d_249.tmp_0_splitncnn_0 tmp_4 tmp_5 0=0
+Convolution      Conv_56                  1 1 elementwise_add_1_splitncnn_0 conv2d_252.tmp_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=0 6=1536
+Split            splitncnn_17             1 3 conv2d_252.tmp_0 conv2d_252.tmp_0_splitncnn_0 conv2d_252.tmp_0_splitncnn_1 conv2d_252.tmp_0_splitncnn_2
+Pooling          GlobalAveragePool_3      1 1 conv2d_252.tmp_0_splitncnn_2 pool2d_3.tmp_0 0=1 4=1
+Convolution      Conv_57                  1 1 pool2d_3.tmp_0 conv2d_253.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2304
+ReLU             Relu_15                  1 1 conv2d_253.tmp_0 relu_15.tmp_0
+Convolution      Conv_58                  1 1 relu_15.tmp_0 conv2d_254.tmp_0 0=96 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=2304
+HardSigmoid      HardSigmoid_3            1 1 conv2d_254.tmp_0 hardsigmoid_3.tmp_0 0=2.000000e-01 1=5.000000e-01
+BinaryOp         Mul_23                   2 1 conv2d_252.tmp_0_splitncnn_1 hardsigmoid_3.tmp_0 tmp_6 0=2
+BinaryOp         Add_41                   2 1 conv2d_252.tmp_0_splitncnn_0 tmp_6 tmp_7 0=0
+Interp           Resize_0                 1 1 tmp_1_splitncnn_1 nearest_interp_v2_0.tmp_0 0=1 1=2.000000e+00 2=2.000000e+00 3=0 4=0 6=0
+BinaryOp         Add_42                   2 1 tmp_3 nearest_interp_v2_0.tmp_0 tmp_8 0=0
+Split            splitncnn_18             1 2 tmp_8 tmp_8_splitncnn_0 tmp_8_splitncnn_1
+Interp           Resize_1                 1 1 tmp_8_splitncnn_1 nearest_interp_v2_1.tmp_0 0=1 1=2.000000e+00 2=2.000000e+00 3=0 4=0 6=0
+BinaryOp         Add_43                   2 1 tmp_5 nearest_interp_v2_1.tmp_0 tmp_9 0=0
+Split            splitncnn_19             1 2 tmp_9 tmp_9_splitncnn_0 tmp_9_splitncnn_1
+Interp           Resize_2                 1 1 tmp_9_splitncnn_1 nearest_interp_v2_2.tmp_0 0=1 1=2.000000e+00 2=2.000000e+00 3=0 4=0 6=0
+BinaryOp         Add_44                   2 1 tmp_7 nearest_interp_v2_2.tmp_0 tmp_10 0=0
+Convolution      Conv_59                  1 1 tmp_1_splitncnn_0 conv2d_255.tmp_0 0=24 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=0 6=20736
+Split            splitncnn_20             1 3 conv2d_255.tmp_0 conv2d_255.tmp_0_splitncnn_0 conv2d_255.tmp_0_splitncnn_1 conv2d_255.tmp_0_splitncnn_2
+Pooling          GlobalAveragePool_4      1 1 conv2d_255.tmp_0_splitncnn_2 pool2d_4.tmp_0 0=1 4=1
+Convolution      Conv_60                  1 1 pool2d_4.tmp_0 conv2d_256.tmp_0 0=6 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=144
+ReLU             Relu_16                  1 1 conv2d_256.tmp_0 relu_16.tmp_0
+Convolution      Conv_61                  1 1 relu_16.tmp_0 conv2d_257.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=144
+HardSigmoid      HardSigmoid_4            1 1 conv2d_257.tmp_0 hardsigmoid_4.tmp_0 0=2.000000e-01 1=5.000000e-01
+BinaryOp         Mul_24                   2 1 conv2d_255.tmp_0_splitncnn_1 hardsigmoid_4.tmp_0 tmp_11 0=2
+BinaryOp         Add_47                   2 1 conv2d_255.tmp_0_splitncnn_0 tmp_11 tmp_12 0=0
+Convolution      Conv_62                  1 1 tmp_8_splitncnn_0 conv2d_258.tmp_0 0=24 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=0 6=20736
+Split            splitncnn_21             1 3 conv2d_258.tmp_0 conv2d_258.tmp_0_splitncnn_0 conv2d_258.tmp_0_splitncnn_1 conv2d_258.tmp_0_splitncnn_2
+Pooling          GlobalAveragePool_5      1 1 conv2d_258.tmp_0_splitncnn_2 pool2d_5.tmp_0 0=1 4=1
+Convolution      Conv_63                  1 1 pool2d_5.tmp_0 conv2d_259.tmp_0 0=6 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=144
+ReLU             Relu_17                  1 1 conv2d_259.tmp_0 relu_17.tmp_0
+Convolution      Conv_64                  1 1 relu_17.tmp_0 conv2d_260.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=144
+HardSigmoid      HardSigmoid_5            1 1 conv2d_260.tmp_0 hardsigmoid_5.tmp_0 0=2.000000e-01 1=5.000000e-01
+BinaryOp         Mul_25                   2 1 conv2d_258.tmp_0_splitncnn_1 hardsigmoid_5.tmp_0 tmp_13 0=2
+BinaryOp         Add_50                   2 1 conv2d_258.tmp_0_splitncnn_0 tmp_13 tmp_14 0=0
+Convolution      Conv_65                  1 1 tmp_9_splitncnn_0 conv2d_261.tmp_0 0=24 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=0 6=20736
+Split            splitncnn_22             1 3 conv2d_261.tmp_0 conv2d_261.tmp_0_splitncnn_0 conv2d_261.tmp_0_splitncnn_1 conv2d_261.tmp_0_splitncnn_2
+Pooling          GlobalAveragePool_6      1 1 conv2d_261.tmp_0_splitncnn_2 pool2d_6.tmp_0 0=1 4=1
+Convolution      Conv_66                  1 1 pool2d_6.tmp_0 conv2d_262.tmp_0 0=6 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=144
+ReLU             Relu_18                  1 1 conv2d_262.tmp_0 relu_18.tmp_0
+Convolution      Conv_67                  1 1 relu_18.tmp_0 conv2d_263.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=144
+HardSigmoid      HardSigmoid_6            1 1 conv2d_263.tmp_0 hardsigmoid_6.tmp_0 0=2.000000e-01 1=5.000000e-01
+BinaryOp         Mul_26                   2 1 conv2d_261.tmp_0_splitncnn_1 hardsigmoid_6.tmp_0 tmp_15 0=2
+BinaryOp         Add_53                   2 1 conv2d_261.tmp_0_splitncnn_0 tmp_15 tmp_16 0=0
+Convolution      Conv_68                  1 1 tmp_10 conv2d_264.tmp_0 0=24 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=0 6=20736
+Split            splitncnn_23             1 3 conv2d_264.tmp_0 conv2d_264.tmp_0_splitncnn_0 conv2d_264.tmp_0_splitncnn_1 conv2d_264.tmp_0_splitncnn_2
+Pooling          GlobalAveragePool_7      1 1 conv2d_264.tmp_0_splitncnn_2 pool2d_7.tmp_0 0=1 4=1
+Convolution      Conv_69                  1 1 pool2d_7.tmp_0 conv2d_265.tmp_0 0=6 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=144
+ReLU             Relu_19                  1 1 conv2d_265.tmp_0 relu_19.tmp_0
+Convolution      Conv_70                  1 1 relu_19.tmp_0 conv2d_266.tmp_0 0=24 1=1 11=1 2=1 12=1 3=1 13=1 4=0 14=0 15=0 16=0 5=1 6=144
+HardSigmoid      HardSigmoid_7            1 1 conv2d_266.tmp_0 hardsigmoid_7.tmp_0 0=2.000000e-01 1=5.000000e-01
+BinaryOp         Mul_27                   2 1 conv2d_264.tmp_0_splitncnn_1 hardsigmoid_7.tmp_0 tmp_17 0=2
+BinaryOp         Add_56                   2 1 conv2d_264.tmp_0_splitncnn_0 tmp_17 tmp_18 0=0
+Interp           Resize_3                 1 1 tmp_12 nearest_interp_v2_3.tmp_0 0=1 1=8.000000e+00 2=8.000000e+00 3=0 4=0 6=0
+Interp           Resize_4                 1 1 tmp_14 nearest_interp_v2_4.tmp_0 0=1 1=4.000000e+00 2=4.000000e+00 3=0 4=0 6=0
+Interp           Resize_5                 1 1 tmp_16 nearest_interp_v2_5.tmp_0 0=1 1=2.000000e+00 2=2.000000e+00 3=0 4=0 6=0
+Concat           Concat_0                 4 1 nearest_interp_v2_3.tmp_0 nearest_interp_v2_4.tmp_0 nearest_interp_v2_5.tmp_0 tmp_18 concat_0.tmp_0 0=0
+Convolution      Conv_71                  1 1 concat_0.tmp_0 conv2d_267.tmp_0 0=24 1=3 11=3 2=1 12=1 3=1 13=1 4=1 14=1 15=1 16=1 5=1 6=20736
+ReLU             Relu_20                  1 1 conv2d_267.tmp_0 batch_norm_47.tmp_4
+Deconvolution    ConvTranspose_0          1 1 batch_norm_47.tmp_4 conv2d_transpose_12.tmp_0 0=24 1=2 11=2 2=1 12=1 3=2 13=2 4=0 14=0 15=0 16=0 5=0 6=2304
+BinaryOp         Add_57                   2 1 conv2d_transpose_12.tmp_0 Reshape_16 elementwise_add_10.tmp_0 0=0
+BatchNorm        BatchNormalization_48    1 1 elementwise_add_10.tmp_0 batch_norm_48.tmp_3 0=24
+ReLU             Relu_21                  1 1 batch_norm_48.tmp_3 batch_norm_48.tmp_4
+Deconvolution    ConvTranspose_1          1 1 batch_norm_48.tmp_4 conv2d_transpose_13.tmp_0 0=1 1=2 11=2 2=1 12=1 3=2 13=2 4=0 14=0 15=0 16=0 5=0 6=96
+BinaryOp         Add_58                   2 1 conv2d_transpose_13.tmp_0 Reshape_17 elementwise_add_11.tmp_0 0=0
+Sigmoid          Sigmoid_0                1 1 elementwise_add_11.tmp_0 output

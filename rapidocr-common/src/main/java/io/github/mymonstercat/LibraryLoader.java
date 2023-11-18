@@ -9,5 +9,5 @@ public interface LibraryLoader {
 
     void loadLibrary() throws IOException;
 
-    boolean isSupportedPlatform();
+    boolean isSupportedPlatform(String osName, String osArch);
 }
