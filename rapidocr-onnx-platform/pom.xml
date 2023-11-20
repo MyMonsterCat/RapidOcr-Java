@@ -25,6 +25,9 @@
                     <family>mac</family>
                     <arch>aarch64</arch>
                 </os>
+                <property>
+                    <name>!linux-build</name>
+                </property>
             </activation>
             <dependencies>
                 <dependency>
@@ -41,6 +44,9 @@
                     <family>mac</family>
                     <arch>x86_64</arch>
                 </os>
+                <property>
+                    <name>!linux-build</name>
+                </property>
             </activation>
             <dependencies>
                 <dependency>
@@ -57,6 +63,9 @@
                     <family>windows</family>
                     <arch>amd64</arch>
                 </os>
+                <property>
+                    <name>!linux-build</name>
+                </property>
             </activation>
             <dependencies>
                 <dependency>
@@ -73,6 +82,9 @@
                     <family>windows</family>
                     <arch>x86</arch>
                 </os>
+                <property>
+                    <name>!linux-build</name>
+                </property>
             </activation>
             <dependencies>
                 <dependency>
