@@ -67,7 +67,7 @@ public class InferenceEngine extends OcrEngine {
         if (nativeLoader == null && (isLibraryLoaded.compareAndSet(false, true))) {
             nativeLoader = LoadUtil.findLibLoader(modelType);
             if (nativeLoader == null) {
-                throw new LoadException("找不到合适的本机加载程序实现，运行库可能暂时未适配您的机型!");
+                throw new LoadException("找不到合适的本机加载程序实现，可能的原因：1.运行库可能暂时未适配您的机型! 2.使用的模型与引入的jar包不匹配，当前使用的模型为：" + modelType);
             }
             log.debug("当前库加载器: {}", nativeLoader.getClass().getSimpleName());
             nativeLoader.loadLibrary();
