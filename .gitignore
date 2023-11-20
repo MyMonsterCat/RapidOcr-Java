@@ -1,5 +1,10 @@
 target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
 .idea/
 logs/
 *.iml
 *.log
+
+.DS_Store

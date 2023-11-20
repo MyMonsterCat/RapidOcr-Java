@@ -2,18 +2,6 @@
 
 ## :hourglass_flowing_sand: OcrConfig参数调优
 
-**LibConfig**参数说明如下：
-
-|    参数名    |                  说明                   |  类型   | 权限 |
-| :----------: | :-------------------------------------: | :-----: | :--: |
-|  libraryDir  |             动态链接库路径              | String  | 读写 |
-|  modelsDir   |                模型路径                 | String  | 读写 |
-| deleteOnExit | 是否在JVM退出时删除动态链接库和模型文件 | boolean | 读写 |
-|   detName    |               Det文件名称               | String  | 只读 |
-|   clsName    |               Cls文件名称               | String  | 只读 |
-|   recName    |               Rec文件名称               | String  | 只读 |
-|   keysName   |                  词单                   | String  | 只读 |
-
 **HardWareConfig**参数说明如下：
 
 |  参数名   |                             说明                             | 类型 | 权限 |
@@ -21,7 +9,7 @@
 | numThread |                         CPU 核心数量                         | int  | 读写 |
 | gpuIndex  | GPU0一般为默认GPU，参数选项：使用CPU(-1)/使用GPU0(0)/使用GPU1(1)/...，默认0 | int  | 读写 |
 
-> ⚠️ ONNX不使用GPU，即使用-1
+> ⚠️ ONNX不使用GPU，填写-1
 
 **ParamConfig**参数说明如下：
 
@@ -37,49 +25,33 @@
 
 > ✍️ 想更深入了解，请移步[config.yaml参数解释](https://rapidai.github.io/RapidOCRDocs/docs/blog/02_config_parameter/)
 
-## 🗣️ 目录说明
-
-- com.benjaminwan.ocrlibrary: 核心代码，用来与dll、so、dylib进行交互。‼️ 千万不要改包名！！！
-- com.github.monster.ocr
-  - config
-    - HardwareConfig: 硬件配置类
-    - LibConfig: 库文件配置类
-    - ParamConfig: 可调节参数配置
-
-  - JarFileUtils: 从jar包中加载动态库
-  - PathConstants: 模型/文件路径常量
-  - OcrUtil: 调用核心代码工具类
-
 
 ## ⚠️ 版本说明
 
-当前使用版本如下（此处的版本指的是[RapidOcrNcnn](https://github.com/RapidAI/RapidOcrNcnn)或者[RapidOcrOnnx](https://github.com/RapidAI/RapidOcrOnnx)的版本）
+|    系统架构    | 本项目版本 |        Onnx        |        Ncnn        |
+| :------------: | :--------: | :----------------: | :----------------: |
+|   mac-arm64    |   0.0.5    | 支持，版本`v1.2.2` | 支持，版本`v1.2.0` |
+|   mac-x86_64   |   0.0.5    | 支持，版本`v1.2.2` | 支持，版本`v1.1.2` |
+|  linux-x86_64  |   0.0.5    | 支持，版本`v1.2.2` | 支持，版本`v1.1.2` |
+|   linux-x86    |     /      |       不支持       |       不支持       |
+|  linux-arm64   |     /      |       不支持       |       不支持       |
+| windows-x86_64 |   0.0.5    | 支持，版本`v1.2.2` | 支持，版本`v1.1.2` |
+|  windows-x86   |   0.0.5    | 支持，版本`v1.2.2` |       不支持       |
 
-### ncnn：仅支持PP-OCRv3
+> - onnx和ncnn的版本指的是[RapidOcrNcnn](https://github.com/RapidAI/RapidOcrNcnn)或者[RapidOcrOnnx](https://github.com/RapidAI/RapidOcrOnnx)的版本
+> - win7可能存在问题，未经测试
+> - 不支持我的系统？
+>   - 请参考README中的FAQ
+>   - 如果您成功编译了相应平台的库文件，希望您能提供issue供更多人使用
 
-- Mac-Arm64: `v1.2.0`
-
-- Mac-x86_64、Linux、Win：`v1.1.2`
-- win7可能存在问题，未经测试
-
-> 如何更新模型？
->
-> - 方式一：前往[自行更新地址](https://github.com/RapidAI/RapidOcrNcnn)，在release下载模型
-> - 方式二：自行[编译](./COMPILE_LIB.md)
-
-### onnx：支持[PP-OCRv4](https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.7/doc/doc_ch/PP-OCRv4_introduction.md)和PP-OCRv3
-
-- Mac-Arm64: `v1.2.2`
-
-- Mac-x86_64、Linux、Win：`v1.2.2`
-- win7可能存在问题，未经测试
-
-> 如何更新模型？
->
-> - 方式一：前往[自行更新地址](https://github.com/RapidAI/RapidOcrOnnx)，在release下载最新的模型
-> - 方式二：自行[编译](./COMPILE_LIB.md)
+|        /        |   [RapidOcrNcnn](https://github.com/RapidAI/RapidOcrNcnn)    |   [RapidOcrOnnx](https://github.com/RapidAI/RapidOcrOnnx)    |
+| :-------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| PP-OCR支持版本  |                        仅支持PP-OCRv3                        | 支持[PP-OCRv4](https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.7/doc/doc_ch/PP-OCRv4_introduction.md)和PP-OCRv3 |
+| 更新模型-方式一 | 前往[自行更新地址](https://github.com/RapidAI/RapidOcrNcnn)，在release下载模型 | 前往[自行更新地址](https://github.com/RapidAI/RapidOcrOnnx)，在release下载最新的模型 |
+| 更新模型-方式二 |                 自行[编译](./COMPILE_LIB.md)                 |                 自行[编译](./COMPILE_LIB.md)                 |
 
 ## :saxophone: 分支说明
 
-- main: 主分支，使用ncnn和onnx进行推理
-- dev: 开发分支，最新功能在这里 
+- main: 主分支，多模块打包
+- light-0.0.4: 旧版本
+- dev: 开发分支
