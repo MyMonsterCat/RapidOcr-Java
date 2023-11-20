@@ -1,61 +1,45 @@
-# 如何自行编译 jar 包
-
-## 打包流程
-
-以IDEA界面操作为例
-
-![](./img/package.png)
+# 如何打包 jar 
 
 
 
-## 方式一：打包动态库
+**本地开发环境：**`Windos11--x86_64`
 
-此方式使用了打包插件，会将resources下的所有动态库均打包进jar，这会导致jar包将近100M。
+**问题：**项目B引入`rapidocr-onnx-platform`，将项目B打包后，jar放到CentOS8上无法运行，报错：文件 lib/libRapidOcr.xxx 在JAR中未找到
 
-当然，实际使用过程中，可以通过调整includes标签来只打包相应系统的动态库（比如只打包onnx mac-arm64，jar包只有30M左右）
+**原因：**本项目根据系统自动引入对应平台的依赖，也就是项目B最终依赖的是`rapidocr-onnx-linux-x86_64`，因此打包也是基于该依赖，自然在linux系统下无法运行。
+
+**解决方案：**
+
+1.pom添加profile
 
 ```xml
-  <build>
-      <resources>
-          <resource>
-              <directory>src/main/resources</directory>
-              <includes>
-                  <!--方式一：包含文件夹以及子文件夹下所有资源-->
-                  <!-- <include>**/*.*</include> -->
-                  <!--方式二：仅打包onnx mac-arm64(按照自己的需求来，推荐👍)-->
-                  <include>onnx/mac/arm64/*</include>
-                  <include>onnx/models/*</include>
-              </includes>
-          </resource>
-      </resources>
-  </build>
+    <profiles>
+        <profile>
+            <id>linux-x86_64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>io.github.mymonstercat</groupId>
+                  	<!--     替换成你需要打包的对应平台      -->
+                    <artifactId>rapidocr-onnx-linux-x86_64</artifactId>
+                  	<!--     版本使用最新      -->
+                    <version>0.0.5</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 ```
 
-在这种方式下，当引入该jar后，直接使用即可
+2.打包命令
 
-## 方式二：不打包动态库
-
-同样的，通过打包插件可以控制不打包动态库，打包后jar只有19KB
-
-```xml
-  <build>
-      <resources>
-          <resource>
-              <directory>src/main/resources</directory>
-              <excludes>
-                  <exclude>**/*.*</exclude>
-              </excludes>
-          </resource>
-      </resources>
-  </build>
+```shell
+# linux-x86_64对应pom文件中id标签
+mvn clean package -P linux-x86_64 -Dlinux-build
 ```
 
-在这种方式下，当引入该jar后，**还需在项目src/main/resources下添加相应的动态**库(如下图所示)
-
-![](./img/package-no-example.png)
-
-否则会抛出NoSuchFileException
-
-
-
-> 具体使用哪种方式还是按照自己的需求来
+> [Demo](https://github.com/MyMonsterCat/rapidocr-demo)中已集成该功能，请自行查看

@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * @author Monster
+ * 库文件加载工具类
  */
 public class LoadUtil {
     private LoadUtil() {

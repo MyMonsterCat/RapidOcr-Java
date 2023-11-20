@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * ONNX推理框架
+ * 推理框架引擎
  */
 @Slf4j
 public class InferenceEngine extends OcrEngine {
