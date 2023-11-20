@@ -24,7 +24,7 @@
         </dependency>
         <dependency>
             <groupId>io.github.mymonstercat</groupId>
-            <artifactId>rapidocr-onnx-models</artifactId>
+            <artifactId>rapidocr-ncnn-models</artifactId>
         </dependency>
     </dependencies>
 
