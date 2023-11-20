@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * @author Monster
  */
-public class NcnnWindowsX86LibraryLoader implements LibraryLoader {
+public class NcnnWindowsX8664LibraryLoader implements LibraryLoader {
 
     @Override
     public void loadLibrary() throws IOException {
