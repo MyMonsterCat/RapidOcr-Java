@@ -11,6 +11,6 @@ public class NcnnWindowsX8664LibraryLoader implements LibraryLoader {
 
     @Override
     public void loadLibrary() throws IOException {
-        JarFileUtil.copyFileFromJar("lib/RapidOcr.dll", "/onnx", true, false);
+        JarFileUtil.copyFileFromJar("lib/RapidOcr.dll", "/ncnn", true, false);
     }
 }

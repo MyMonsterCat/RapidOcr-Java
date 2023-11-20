@@ -11,6 +11,6 @@ public class NcnnLinuxX8664LibraryLoader implements LibraryLoader {
 
     @Override
     public void loadLibrary() throws IOException {
-        JarFileUtil.copyFileFromJar("lib/libRapidOcr.dylib", "/onnx", true, false);
+        JarFileUtil.copyFileFromJar("lib/libRapidOcr.dylib", "/ncnn", true, false);
     }
 }
