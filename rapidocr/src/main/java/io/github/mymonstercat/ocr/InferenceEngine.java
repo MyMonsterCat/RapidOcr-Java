@@ -2,16 +2,15 @@ package io.github.mymonstercat.ocr;
 
 import com.benjaminwan.ocrlibrary.OcrEngine;
 import com.benjaminwan.ocrlibrary.OcrResult;
+import io.github.mymonstercat.Model;
+import io.github.mymonstercat.exception.LoadException;
+import io.github.mymonstercat.loader.LibraryLoader;
+import io.github.mymonstercat.loader.ModelsLoader;
 import io.github.mymonstercat.ocr.config.HardwareConfig;
 import io.github.mymonstercat.ocr.config.ParamConfig;
-import io.github.mymonstercat.*;
-import io.github.mymonstercat.exception.LoadException;
-import io.github.mymonstercat.loader.*;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Objects;
-import java.util.ServiceLoader;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -66,13 +65,7 @@ public class InferenceEngine extends OcrEngine {
     private static synchronized void loadFileIfNeeded(Model model) {
         String modelType = model.getModelType();
         if (nativeLoader == null && (isLibraryLoaded.compareAndSet(false, true))) {
-            if (Objects.equals(modelType, Model.ONNX_PPOCR_V3.getModelType())) {
-                ServiceLoader<OnnxLibraryLoader> serviceLoader = ServiceLoader.load(OnnxLibraryLoader.class);
-                nativeLoader = LoadUtil.findOnnxNativeLoader(serviceLoader);
-            } else {
-                ServiceLoader<NcnnLibraryLoader> serviceLoader = ServiceLoader.load(NcnnLibraryLoader.class);
-                nativeLoader = LoadUtil.findNcnnNativeLoader(serviceLoader);
-            }
+            nativeLoader = LoadUtil.findLibLoader(modelType);
             if (nativeLoader == null) {
                 throw new LoadException("找不到合适的本机加载程序实现，运行库可能暂时未适配您的机型!");
             }
@@ -81,13 +74,7 @@ public class InferenceEngine extends OcrEngine {
             isLibraryLoaded.set(true);
         }
         if (modelsLoader == null) {
-            if (Objects.equals(modelType, Model.ONNX_PPOCR_V3.getModelType())) {
-                ServiceLoader<OnnxModelLoader> serviceLoader = ServiceLoader.load(OnnxModelLoader.class);
-                modelsLoader = LoadUtil.findOnnxModelsLoader(serviceLoader);
-            } else {
-                ServiceLoader<NcnnModelLoader> serviceLoader = ServiceLoader.load(NcnnModelLoader.class);
-                modelsLoader = LoadUtil.findNcnnModelsLoader(serviceLoader);
-            }
+            modelsLoader = LoadUtil.findModelsLoader(modelType);
             if (modelsLoader == null) {
                 throw new LoadException("未能成功加载模型!");
             }

@@ -8,6 +8,4 @@ import java.io.IOException;
 public interface LibraryLoader {
 
     void loadLibrary() throws IOException;
-
-    boolean isSupportedPlatform(String osName, String osArch);
 }
