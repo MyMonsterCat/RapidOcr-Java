@@ -4,13 +4,13 @@
 
 **本地开发环境：**`Windos11--x86_64`
 
-**问题：**项目B引入`rapidocr-onnx-platform`，将项目B打包后，jar放到CentOS8上无法运行，报错：文件 lib/libRapidOcr.xxx 在JAR中未找到
+问题：项目B引入`rapidocr-onnx-platform`，将项目B打包后，jar放到CentOS8上无法运行，报错：文件 lib/libRapidOcr.xxx 在JAR中未找到
 
-**原因：**本项目根据系统自动引入对应平台的依赖，也就是项目B最终依赖的是`rapidocr-onnx-linux-x86_64`，因此打包也是基于该依赖，自然在linux系统下无法运行。
+原因：本项目根据系统自动引入对应平台的依赖，也就是项目B最终依赖的是`rapidocr-onnx-windows-x86_64`，因此在windows上打包也是基于该依赖，自然在linux系统下无法运行windows的依赖库。
 
 **解决方案：**
 
-1.pom添加profile
+1.项目B的pom添加profile
 
 ```xml
     <profiles>
