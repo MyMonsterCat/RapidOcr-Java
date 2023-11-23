@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 
 /**
  * @author Monster
@@ -15,7 +16,7 @@ import java.nio.file.StandardCopyOption;
 @Slf4j
 public class JarFileUtil {
 
-    public static final String TEMP_DIR = System.getProperty("java.io.tmpdir") + "ocrJava";
+    public static final String TEMP_DIR = new File(Objects.toString(System.getProperty("java.io.tmpdir")), "ocrJava").getPath();
 
     private JarFileUtil() {
     }
