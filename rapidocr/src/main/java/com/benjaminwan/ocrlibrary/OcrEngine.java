@@ -14,17 +14,22 @@ public class OcrEngine {
 
     protected void initEngine(Model model, HardwareConfig hardwareConfig) {
         if (!isInit) {
-            initLogger(false, false, false);
-            setNumThread(hardwareConfig.getNumThread());
-            if (hardwareConfig.getGpuIndex() != -1) {
-                setGpuIndex(hardwareConfig.getGpuIndex());
+            synchronized (this) {
+                if (!isInit) {
+                    initLogger(false, false, false);
+                    setNumThread(hardwareConfig.getNumThread());
+                    if (hardwareConfig.getGpuIndex() != -1) {
+                        setGpuIndex(hardwareConfig.getGpuIndex());
+                    }
+                    if (!initModels(model.getTempDirPath(), model.getDetName(), model.getClsName(), model.getRecName(), model.getKeysName())) {
+                        throw new IllegalArgumentException("模型初始化错误，请检查models/keys路径！");
+                    }
+                    inferType = model.getModelType();
+                    log.info("推理引擎初始化完成，当前使用的推理引擎为：{}-v{}", inferType, getVersion());
+                    log.info("初始化时模型配置为：{}， 硬件配置为：{}", model, hardwareConfig);
+                    isInit = true;
+                }
             }
-            if (!initModel(model.getTempDirPath(), model.getDetName(), model.getClsName(), model.getRecName(), model.getKeysName())) {
-                throw new IllegalArgumentException("模型初始化错误，请检查models/keys路径！");
-            }
-            inferType = model.getModelType();
-            log.info("推理引擎初始化完成，当前使用的推理引擎为：{}-v{}", inferType, getVersion());
-            log.info("初始化时模型配置为：{}， 硬件配置为：{}", model, hardwareConfig);
         } else {
             if (!Objects.equals(model.getModelType(), inferType)) {
                 log.warn("引擎已初始化，初始化后不可更换为其他引擎，将继续使用{}推理引擎工作", inferType);
@@ -34,16 +39,8 @@ public class OcrEngine {
         }
     }
 
-    private boolean isInit = false;
+    private volatile boolean isInit = false;
     private String inferType;
-
-    public boolean initModel(String modelsDir, String detName, String clsName, String recName, String keysName) {
-        boolean init = initModels(modelsDir, detName, clsName, recName, keysName);
-        if (init) {
-            isInit = true;
-        }
-        return init;
-    }
 
     public native boolean setNumThread(int numThread);
 
