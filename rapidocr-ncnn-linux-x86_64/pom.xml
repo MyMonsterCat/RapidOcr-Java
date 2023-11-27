@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.mymonstercat</groupId>
         <artifactId>rapidocr-java</artifactId>
-        <version>0.0.5</version>
+        <version>0.0.6</version>
     </parent>
 
     <artifactId>rapidocr-ncnn-linux-x86_64</artifactId>

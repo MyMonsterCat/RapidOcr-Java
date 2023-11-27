@@ -29,17 +29,18 @@
 目前支持的系统请查看[版本说明](./docs/ADVANCED.md)
 
 ```xml
-<!--  可前往maven中央仓库https://repo1.maven.org/maven2/io/github/mymonstercat/rapidocr/，查看版本      -->
 <!--  一般只需要引入一个，CPU端建议使用onnx，移动端建议使用ncnn     -->
 <dependency>
     <groupId>io.github.mymonstercat</groupId>
     <artifactId>rapidocr-ncnn-platform</artifactId>
-    <version>0.0.5</version>
+  	<!--  可前往maven中央仓库https://repo1.maven.org/maven2/io/github/mymonstercat/rapidocr/，查看版本      -->
+    <version>0.0.6</version>
 </dependency>
 <dependency>
     <groupId>io.github.mymonstercat</groupId>
     <artifactId>rapidocr-onnx-platform</artifactId>
-    <version>0.0.5</version>
+  	<!--  可前往maven中央仓库https://repo1.maven.org/maven2/io/github/mymonstercat/rapidocr/，查看版本      -->
+    <version>0.0.6</version>
 </dependency>
 ```
 
@@ -96,6 +97,7 @@ public class Main {
 - [x] Maven仓库提供packages
 - [ ] SpringBoot下，以配置文件方式改造
 - [x] 多模块打包[#6](可以否将dll，所以还有onnx文件分别存放进jar)
+- [x] 多线程情况下库和模型可能重复加载、编译目标jdk版本改为1.8，感谢[FlyInWind1](https://github.com/FlyInWind1)
 
 ## 🤔 FAQ
 

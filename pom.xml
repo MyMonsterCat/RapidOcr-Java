@@ -6,7 +6,7 @@
 
     <groupId>io.github.mymonstercat</groupId>
     <artifactId>rapidocr-java</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
     <packaging>pom</packaging>
 
     <name>rapid-ocr</name>
