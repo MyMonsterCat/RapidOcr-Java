@@ -67,6 +67,12 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <model.version.112>1.1.2</model.version.112>
+        <model.version.120>1.2.0</model.version.120>
+        <model.version.122>1.2.2</model.version.122>
+
+        <ocr.version>0.0.6</ocr.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -74,69 +80,69 @@
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-models</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.122}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-macosx-arm64</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.122}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-macosx-x86_64</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.122}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-linux-x86_64</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.122}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-windows-x86_64</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.122}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-windows-x86</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.122}</version>
             </dependency>
             <!--      NCNN       -->
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-ncnn-models</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.112}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-ncnn-macosx-arm64</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.120}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-ncnn-macosx-x86_64</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.112}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-ncnn-linux-x86_64</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.112}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-ncnn-windows-x86_64</artifactId>
-                <version>${project.version}</version>
+                <version>${model.version.112}</version>
             </dependency>
             <!--      Core       -->
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr</artifactId>
-                <version>${project.version}</version>
+                <version>${ocr.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-common</artifactId>
-                <version>${project.version}</version>
+                <version>${ocr.version}</version>
             </dependency>
             <!--      Other       -->
             <dependency>

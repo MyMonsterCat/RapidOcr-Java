@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>rapidocr-onnx-macosx-arm64</artifactId>
+    <version>1.2.2</version>
     <packaging>jar</packaging>
 
     <properties>
