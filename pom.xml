@@ -6,7 +6,7 @@
 
     <groupId>io.github.mymonstercat</groupId>
     <artifactId>rapidocr-java</artifactId>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
     <packaging>pom</packaging>
 
     <name>rapid-ocr</name>
@@ -72,7 +72,8 @@
         <model.version.120>1.2.0</model.version.120>
         <model.version.122>1.2.2</model.version.122>
 
-        <ocr.version>0.0.6</ocr.version>
+        <ocr.version>0.0.7</ocr.version>
+        <ocr.common.version>0.0.7</ocr.common.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -142,7 +143,7 @@
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-common</artifactId>
-                <version>${ocr.version}</version>
+                <version>${ocr.common.version}</version>
             </dependency>
             <!--      Other       -->
             <dependency>

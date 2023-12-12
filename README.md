@@ -15,8 +15,9 @@
 ## 👏 项目特点
 
 - 纯Java代码调用RapidOcr
-- 集成ncnn和onnx推理引擎方式，默认使用Onnx推理方式
+- 集成ncnn和onnx推理引擎方式，默认使用Onnx推理方式（需引入onnx对应的jar包）
 - 均使用CPU版本，GPU版本请自行编译
+- 支持Mac-Arm64、Mac-Intel、Win10、Win11、CentOS等多平台
 
 > ⚠️ 注意：当前JVM启动时**只能同时启动一种推理引擎**，以第一次调用runOcr方法时的引擎配置为准
 
@@ -28,19 +29,21 @@
 
 目前支持的系统请查看[版本说明](./docs/ADVANCED.md)
 
+> 此种方式会根据你使用的系统自动使用对应的jar包
+
 ```xml
 <!--  一般只需要引入一个，CPU端建议使用onnx，移动端建议使用ncnn     -->
-<dependency>
-    <groupId>io.github.mymonstercat</groupId>
-    <artifactId>rapidocr-ncnn-platform</artifactId>
-  	<!--  可前往maven中央仓库https://repo1.maven.org/maven2/io/github/mymonstercat/rapidocr/，查看版本      -->
-    <version>0.0.6</version>
-</dependency>
+<!--  可前往maven中央仓库https://repo1.maven.org/maven2/io/github/mymonstercat/rapidocr/，查看版本      -->
 <dependency>
     <groupId>io.github.mymonstercat</groupId>
     <artifactId>rapidocr-onnx-platform</artifactId>
-  	<!--  可前往maven中央仓库https://repo1.maven.org/maven2/io/github/mymonstercat/rapidocr/，查看版本      -->
-    <version>0.0.6</version>
+    <version>0.0.7</version>
+</dependency>
+
+<dependency>
+    <groupId>io.github.mymonstercat</groupId>
+    <artifactId>rapidocr-ncnn-platform</artifactId>
+    <version>0.0.7</version>
 </dependency>
 ```
 
@@ -68,8 +71,18 @@ public class Main {
 
 ### 3️⃣ 添加打印日志
 
-- 项目中添加了日志打印，方便打印OCR日志
-- 常见的日志配置请前往[查看日志配置](https://github.com/MyMonsterCat/rapidocr-demo/blob/main/java-ee/src/main/resources/log4j2.xml)(仅供参考)，可将其放入到项目resources目录下，名为`log4j2.xml`
+- 项目中添加了日志打印，方便打印OCR日志，请自行添加日志实现（springboot自带，可以不用添加）
+
+```xml
+<!-- 例如添加slf4j-simple     -->
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-simple</artifactId>
+    <version>2.0.3</version>
+</dependency>
+```
+
+添加后效果如下：
 
 ![](./docs/img/run-result.png)
 
@@ -79,8 +92,8 @@ public class Main {
 ## 🔝 进阶使用
 
 - [参数调优、版本说明、分支说明](./docs/ADVANCED.md)
-- [如何打包jar包](./docs/COMPILE_JAR.md)
-- OCR相关知识--❗️待更新
+- [如何打包jar包在Linux系统上运行](./docs/COMPILE_JAR.md)
+- [如何在CentOS7或其他低版本Linux系统上运行](./docs/CentOS7.md)
 - [JVM下不同PaddleOCR调用方式性能比对，强烈建议阅读👍](./docs/COMPARE.md)
 - [SpringBoot示例和普通Java程序示例](https://github.com/MyMonsterCat/rapidocr-demo)
 
@@ -98,22 +111,17 @@ public class Main {
 - [ ] SpringBoot下，以配置文件方式改造
 - [x] 多模块打包[#6](可以否将dll，所以还有onnx文件分别存放进jar)
 - [x] 多线程情况下库和模型可能重复加载、编译目标jdk版本改为1.8，感谢[FlyInWind1](https://github.com/FlyInWind1)
+- [x] CentOS7升级指引
 
 ## 🤔 FAQ
 
-#### Q1:无法运行相应的动态库？
+#### Q1:CentOS7无法运行？
 
-Mac-Arm64、Mac-Intel、Win10、Win11、CentOS-8均经过测试，项目resources目录下的的动态库文件**均可成功加载**，如果您的系统无法运行相应的动态库，请在该系统下尝试[自行编译动态库](./docs/COMPILE_LIB.md)
+先提供思路：由于centos7使用的gcc、glibc等工具太老了，而提供的so文件所需的最低依赖版本 **远远大于** centos7的最高版本，因此需要将centos7对应的gcc、glibc等工具进行升级。具体教程请参考[CentOS7升级GCC](./docs/CentOS7.md)
 
-#### Q2:CentOS7无法运行？
+#### Q2:如何使用自己编译的动态库和模型？
 
-先提供思路：由于centos7使用的gcc、glibc等工具太老了，而提供的so文件所需的最低依赖版本 **远远大于** centos7的最高版本，因此需要将centos7对应的gcc、glibc等工具进行升级。
-
-具体教程还未整理。
-
-#### Q3:如何使用自己编译的动态库和模型？
-
-自0.0.5版本开始，项目引入了多模块打包，如果不喜欢这种方式，请使用
+自0.0.5版本开始，项目引入了多模块打包，如果不喜欢这种方式，请使用0.0.4-light
 
 ```xml
 <dependency>
@@ -127,11 +135,6 @@ Mac-Arm64、Mac-Intel、Win10、Win11、CentOS-8均经过测试，项目resource
 
 - [如何更新模型](./docs/UPDATE_MODEL.md)
 - [如何自行编译动态库](./docs/COMPILE_LIB.md)
-
-#### Q4: 不支持我的系统？
-
-- 参考Q3，使用`0.0.4-light`，参考Q1、Q2 自行编译
-- 如果您成功编译了相应平台的库文件，希望您能提供issue供更多人使用
 
 
 

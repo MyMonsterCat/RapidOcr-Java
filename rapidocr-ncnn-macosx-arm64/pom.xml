@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.mymonstercat</groupId>
         <artifactId>rapidocr-java</artifactId>
-        <version>0.0.6</version>
+        <version>0.0.7</version>
     </parent>
 
     <artifactId>rapidocr-ncnn-macosx-arm64</artifactId>
@@ -19,10 +19,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>io.github.mymonstercat</groupId>
-            <artifactId>rapidocr</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.github.mymonstercat</groupId>
             <artifactId>rapidocr-ncnn-models</artifactId>

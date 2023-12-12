@@ -69,17 +69,17 @@ public class InferenceEngine extends OcrEngine {
                 if (InferenceEngine.nativeLoader == null) {
                     LibraryLoader nativeLoader = LoadUtil.findLibLoader(modelType);
                     if (nativeLoader == null) {
-                        throw new LoadException("找不到合适的本机加载程序实现，可能的原因：1.运行库可能暂时未适配您的机型! " +
+                        throw new LoadException("找不到合适的本机加载程序实现，可能的原因：1.运行库可能暂时未适配您的系统! " +
                                 "2.使用的模型与引入的jar包不匹配，当前使用的模型为：" + modelType + "，请检查您引入的jar依赖是否正确! " +
-                                "3.打包时未正确引入运行库，例如打包的是window依赖却在linux下运行!");
+                                "3.打包时未正确引入运行库，例如打包的是window依赖却在linux下运行，请参考文档检查是否使用了正确的打包命令!");
                     }
-                    log.debug("当前库加载器: {}", nativeLoader.getClass().getSimpleName());
                     nativeLoader.loadLibrary();
                     isLibraryLoaded.set(true);
                     InferenceEngine.nativeLoader = nativeLoader;
                 }
             }
         }
+        log.debug("当前库加载器: {}", nativeLoader.getClass().getSimpleName());
         if (InferenceEngine.modelsLoader == null) {
             synchronized (InferenceEngine.class) {
                 if (InferenceEngine.modelsLoader == null) {
@@ -87,11 +87,11 @@ public class InferenceEngine extends OcrEngine {
                     if (modelsLoader == null) {
                         throw new LoadException("未能成功加载模型!");
                     }
-                    log.debug("当前模型加载器: {}", modelsLoader.getClass().getSimpleName());
                     modelsLoader.loadModels(model);
                     InferenceEngine.modelsLoader = modelsLoader;
                 }
             }
         }
+        log.debug("当前模型加载器: {}", modelsLoader.getClass().getSimpleName());
     }
 }
