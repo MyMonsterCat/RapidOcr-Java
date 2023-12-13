@@ -32,7 +32,7 @@
 
 ```xml
 <!--  rapidocr这个必须要引入     -->
-<!--  可前往maven中央仓库https://repo1.maven.org/maven2/io/github/mymonstercat/rapidocr/，查看版本      -->
+<!--  可前往maven中央仓库https://central.sonatype.com/artifact/io.github.mymonstercat/rapidocr/versions，查看版本      -->
 <dependency>
     <groupId>io.github.mymonstercat</groupId>
     <artifactId>rapidocr</artifactId>
@@ -40,7 +40,7 @@
 </dependency>
 
 <!--  一般只需要引入一个，CPU端建议使用onnx，移动端建议使用ncnn     -->
-<!--  可前往maven中央仓库https://repo1.maven.org/maven2/io/github/mymonstercat/，查看版本      -->
+<!--  可前往maven中央仓库https://central.sonatype.com/artifact/io.github.mymonstercat/rapidocr-onnx-platform/versions，查看版本      -->
 <dependency>
     <groupId>io.github.mymonstercat</groupId>
     <artifactId>rapidocr-onnx-platform</artifactId>
