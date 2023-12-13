@@ -22,6 +22,7 @@ public class OcrEngine {
                         setGpuIndex(hardwareConfig.getGpuIndex());
                     }
                     if (!initModels(model.getTempDirPath(), model.getDetName(), model.getClsName(), model.getRecName(), model.getKeysName())) {
+                        log.error("模型初始化错误，请检查models路径！model: {}", model);
                         throw new IllegalArgumentException("模型初始化错误，请检查models/keys路径！");
                     }
                     inferType = model.getModelType();

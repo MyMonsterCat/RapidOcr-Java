@@ -58,7 +58,7 @@ public class JarFileUtil {
                 }
             } catch (IOException e) {
                 Files.delete(temp.toPath());
-                throw e;
+                throw new IOException("无法复制文件 " + filePath + " 到 " + temp.getAbsolutePath(), e);
             } catch (NullPointerException e) {
                 throw new FileNotFoundException("文件 " + filePath + " 在JAR中未找到.");
             }

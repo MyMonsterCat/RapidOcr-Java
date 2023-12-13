@@ -2,6 +2,7 @@ package io.github.mymonstercat.ocr;
 
 import io.github.mymonstercat.loader.LibraryLoader;
 import io.github.mymonstercat.loader.ModelsLoader;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -10,6 +11,7 @@ import java.util.Properties;
 /**
  * 库文件加载工具类
  */
+@Slf4j
 public class LoadUtil {
     private LoadUtil() {
         throw new IllegalStateException("Utility class");
@@ -26,6 +28,7 @@ public class LoadUtil {
 
             String osName = System.getProperty("os.name").toLowerCase();
             String osArch = System.getProperty("os.arch").toLowerCase();
+            log.debug("osName: {}, osArch: {}", osName, osArch);
             String loaderClassName = null;
             if (osName.contains("win")) {
                 if (osArch.contains("amd64")) {
@@ -50,7 +53,7 @@ public class LoadUtil {
                 return (LibraryLoader) Class.forName(loaderClassName).getDeclaredConstructor().newInstance();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("获取库文件加载器 {} 失败", e.getMessage());
         }
         return null;
     }
@@ -65,7 +68,7 @@ public class LoadUtil {
 
             return (ModelsLoader) Class.forName(props.getProperty(engine + ".model")).getDeclaredConstructor().newInstance();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("获取模型文件加载器 {} 失败", e.getMessage());
         }
         return null;
     }

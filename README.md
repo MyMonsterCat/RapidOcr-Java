@@ -6,7 +6,7 @@
 
 - 现有的JavaOCR工具包识别效果差强人意，[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)在实现前沿算法的基础上，考虑精度与速度的平衡，进行模型瘦身和深度优化，使其尽可能满足产业落地需求。
 - PaddleOCR官方并未提供Java版本，而[RapidOcr](https://github.com/RapidAI/RapidOCR)解决了这个问题，其提供了Kotlin和Java混合版本的[Demo-onnx](https://github.com/RapidAI/RapidOcrOnnxJvm)和[Demo-ncnn](https://github.com/RapidAI/RapidOcrNcnnJvm)
-- 而实际使用过程中 项目中并不想再引入Kotlin、不想了解OCR相关知识，开箱即用、不想额外再部署OCR服务
+- 而实际使用过程中 项目中并**不想再引入Kotlin、不想了解OCR相关知识，开箱即用、不想额外再部署OCR服务**
 
 因此本项目将Kotlin部分移除，并在此基础上加以完善且提供了更友好的的调用方法，更方便java开发者直接进行使用。
 
@@ -15,25 +15,29 @@
 ## 👏 项目特点
 
 - 纯Java代码调用RapidOcr
-- 集成ncnn和onnx推理引擎方式，默认使用Onnx推理方式（需引入onnx对应的jar包）
+- 集成ncnn和onnx推理引擎方式
 - 均使用CPU版本，GPU版本请自行编译
-- 支持Mac-Arm64、Mac-Intel、Win10、Win11、CentOS等多平台
-
-> ⚠️ 注意：当前JVM启动时**只能同时启动一种推理引擎**，以第一次调用runOcr方法时的引擎配置为准
+- 支持Mac、Windows、Linux等多平台，详细支持的系统请查看[版本说明](./docs/ADVANCED.md)
 
 ## 🎉 快速开始
 
-项目提供了[JavaEE](https://github.com/MyMonsterCat/rapidocr-demo/tree/main/java-ee) 和 [SpringBoot](https://github.com/MyMonsterCat/rapidocr-demo/tree/main/spring-boot) 的使用Demo，仅作参考
+项目提供了[JavaEE](https://github.com/MyMonsterCat/rapidocr-demo/tree/main/java-ee) 和 [SpringBoot](https://github.com/MyMonsterCat/rapidocr-demo/tree/main/spring-boot) 的使用Demo，仅作参考（可以拉取下来运行试一下）
 
 ### 1️⃣ 添加依赖
 
-目前支持的系统请查看[版本说明](./docs/ADVANCED.md)
-
-> 此种方式会根据你使用的系统自动使用对应的jar包
+此种方式会根据你使用的系统自动使用对应的jar包，目前支持的系统请查看[版本说明](./docs/ADVANCED.md)
 
 ```xml
-<!--  一般只需要引入一个，CPU端建议使用onnx，移动端建议使用ncnn     -->
+<!--  rapidocr这个必须要引入     -->
 <!--  可前往maven中央仓库https://repo1.maven.org/maven2/io/github/mymonstercat/rapidocr/，查看版本      -->
+<dependency>
+    <groupId>io.github.mymonstercat</groupId>
+    <artifactId>rapidocr</artifactId>
+    <version>0.0.7</version>
+</dependency>
+
+<!--  一般只需要引入一个，CPU端建议使用onnx，移动端建议使用ncnn     -->
+<!--  可前往maven中央仓库https://repo1.maven.org/maven2/io/github/mymonstercat/，查看版本      -->
 <dependency>
     <groupId>io.github.mymonstercat</groupId>
     <artifactId>rapidocr-onnx-platform</artifactId>
@@ -52,33 +56,36 @@
 ```java
 public class Main {
     public static void main(String[] args) {
-        ParamConfig paramConfig = ParamConfig.getDefaultConfig();
-        paramConfig.setDoAngle(true);
-        paramConfig.setMostAngle(true);
         InferenceEngine engine = InferenceEngine.getInstance(Model.ONNX_PPOCR_V3);
-        // 开始识别
-        OcrResult ocrResult = engine.runOcr(getResourcePath("/images/test.png"), paramConfig);
+        OcrResult ocrResult = engine.runOcr("/images/test.png");
         System.out.println(ocrResult.getStrRes().trim());
-    }
-
-    private static String getResourcePath(String path) {
-        return new File(Main.class.getResource(path).getFile()).toString();
     }
 }
 ```
 
 > 更多使用示例请参考[使用示例](https://github.com/MyMonsterCat/rapidocr-demo/blob/main/java-ee/src/main/java/io/github/mymonstercat/Main.java)
 
-### 3️⃣ 添加打印日志
+### 3️⃣ 添加打印日志(可选)
 
-- 项目中添加了日志打印，方便打印OCR日志，请自行添加日志实现（springboot自带，可以不用添加）
+项目中添加了日志打印，方便打印OCR日志，请自行添加日志实现（springboot自带，可以不用添加）
 
 ```xml
-<!-- 例如添加slf4j-simple     -->
+<!-- 非SpringBoot项目：例如添加slf4j-simple     -->
 <dependency>
     <groupId>org.slf4j</groupId>
     <artifactId>slf4j-simple</artifactId>
     <version>2.0.3</version>
+</dependency>
+<!-- SpringBoot项目：去除依赖，防止冲突     -->
+<dependency>
+    <groupId>io.github.mymonstercat</groupId>
+    <artifactId>rapidocr</artifactId>
+    <exclusions>
+        <exclusion>
+            <artifactId>slf4j-api</artifactId>
+            <groupId>org.slf4j</groupId>
+        </exclusion>
+    </exclusions>
 </dependency>
 ```
 
@@ -86,16 +93,15 @@ public class Main {
 
 ![](./docs/img/run-result.png)
 
-> - 如果想去除最底下numThread=4等控制台打印需要在编译库文件的时候进行控制，可以在[如何自行编译动态库](./docs/COMPILE_LIB.md)查看教程。
-> - 后续有时间会将所有库的控制台打印去掉，目前仅去掉了Mac-arm64的，望理解。
+> ⚠️ 注意：当前JVM启动时**只能同时启动一种推理引擎**，以第一次调用runOcr方法时的引擎配置为准
 
 ## 🔝 进阶使用
 
 - [参数调优、版本说明、分支说明](./docs/ADVANCED.md)
 - [如何打包jar包在Linux系统上运行](./docs/COMPILE_JAR.md)
 - [如何在CentOS7或其他低版本Linux系统上运行](./docs/CentOS7.md)
-- [JVM下不同PaddleOCR调用方式性能比对，强烈建议阅读👍](./docs/COMPARE.md)
 - [SpringBoot示例和普通Java程序示例](https://github.com/MyMonsterCat/rapidocr-demo)
+- [JVM下不同PaddleOCR调用方式性能比对👍](./docs/COMPARE.md)
 
 ## 📌 TODO
 
@@ -117,7 +123,7 @@ public class Main {
 
 #### Q1:CentOS7无法运行？
 
-先提供思路：由于centos7使用的gcc、glibc等工具太老了，而提供的so文件所需的最低依赖版本 **远远大于** centos7的最高版本，因此需要将centos7对应的gcc、glibc等工具进行升级。具体教程请参考[CentOS7升级GCC](./docs/CentOS7.md)
+请参考[CentOS7升级GCC](./docs/CentOS7.md)
 
 #### Q2:如何使用自己编译的动态库和模型？
 
@@ -138,7 +144,7 @@ public class Main {
 
 
 
-如有其他问题请提issue，我会尽快解决。
+> 如有其他问题请提issue，我会尽快解决。
 
 ## 鸣谢
 
