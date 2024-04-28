@@ -1,7 +1,10 @@
 package io.github.mymonstercat.ocr;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.benjaminwan.ocrlibrary.OcrEngine;
 import com.benjaminwan.ocrlibrary.OcrResult;
+
 import io.github.mymonstercat.Model;
 import io.github.mymonstercat.exception.LoadException;
 import io.github.mymonstercat.loader.LibraryLoader;
@@ -10,8 +13,6 @@ import io.github.mymonstercat.ocr.config.HardwareConfig;
 import io.github.mymonstercat.ocr.config.ParamConfig;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Inference framework engine.
@@ -33,6 +34,8 @@ public class InferenceEngine extends OcrEngine {
     private InferenceEngine(Model model, HardwareConfig hardwareConfig) {
         this.model = model;
         this.hardwareConfig = hardwareConfig;
+        loadFileIfNeeded(model);
+        initEngine(model, hardwareConfig);
     }
 
     public static InferenceEngine getInstance(Model model) {
@@ -45,14 +48,20 @@ public class InferenceEngine extends OcrEngine {
         }
         return inferenceEngine;
     }
+    
+    public Model getModel() {
+        return model;
+    }
+    
+    public HardwareConfig getHardwareConfig() {
+        return hardwareConfig;
+    }
 
     public OcrResult runOcr(String imagePath) {
         return runOcr(imagePath, ParamConfig.getDefaultConfig());
     }
 
     public OcrResult runOcr(String imagePath, ParamConfig config) {
-        loadFileIfNeeded(model);
-        initEngine(model, hardwareConfig);
         log.info("Image path: {}, Parameter configuration: {}", imagePath, config);
         OcrResult result = detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
         String property = System.getProperty("rapid.ocr.print.result");
