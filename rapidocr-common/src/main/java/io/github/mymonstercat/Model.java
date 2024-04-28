@@ -12,6 +12,8 @@ public enum Model {
     ONNX_PPOCR_V3("/models", "onnx", "ch_PP-OCRv3_det_infer.onnx", "ch_ppocr_mobile_v2.0_cls_infer.onnx", "ch_PP-OCRv3_rec_infer.onnx", "ppocr_keys_v1.txt"),
     ONNX_PPOCR_V4("/models", "onnx", "ch_PP-OCRv4_det_infer.onnx", "ch_ppocr_mobile_v2.0_cls_infer.onnx", "ch_PP-OCRv4_rec_infer.onnx", "ppocr_keys_v1.txt"),
     NCNN_PPOCR_V3("/models", "ncnn", "ch_PP-OCRv3_det_infer", "ch_ppocr_mobile_v2.0_cls_infer", "ch_PP-OCRv3_rec_infer", "ppocr_keys_v1.txt"),
+    ONNX_PPOCR_V4_SERVER("/models", "onnx", 
+        "ch_PP-OCRv4_det_server_infer.onnx", "ch_ppocr_mobile_v2.0_cls_infer.onnx", "ch_PP-OCRv4_rec_server_infer.onnx", "ppocr_keys_v1.txt"),
     ;
 
 

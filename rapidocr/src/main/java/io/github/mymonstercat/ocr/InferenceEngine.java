@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * 推理框架引擎
+ * Inference framework engine.
  */
 @Slf4j
 public class InferenceEngine extends OcrEngine {
@@ -50,14 +50,16 @@ public class InferenceEngine extends OcrEngine {
         return runOcr(imagePath, ParamConfig.getDefaultConfig());
     }
 
-
     public OcrResult runOcr(String imagePath, ParamConfig config) {
         loadFileIfNeeded(model);
         initEngine(model, hardwareConfig);
-        log.info("图片路径：{}， 参数配置：{}", imagePath, config);
+        log.info("Image path: {}, Parameter configuration: {}", imagePath, config);
         OcrResult result = detect(imagePath, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
-        log.info("识别结果为：{}，耗时{}ms", result.getStrRes().replace("\n", ""), result.getDetectTime());
-        log.debug("文本块：{}，DbNet耗时{}ms", result.getTextBlocks(), result.getDbNetTime());
+        String property = System.getProperty("rapid.ocr.print.result");
+        if("true".equals(property)) {
+          log.info("Recognition result: {}, Time taken: {}ms", result.getStrRes().replace("\n", ""), result.getDetectTime());
+        }
+        log.debug("Text blocks: {}, DbNet Time taken: {}ms", result.getTextBlocks(), result.getDbNetTime());
         return result;
     }
 
@@ -69,11 +71,11 @@ public class InferenceEngine extends OcrEngine {
                 if (InferenceEngine.nativeLoader == null) {
                     LibraryLoader nativeLoader = LoadUtil.findLibLoader(modelType);
                     if (nativeLoader == null) {
-                        throw new LoadException("找不到合适的本机加载程序实现，可能的原因：" +
-                                "1.maven未引入" + modelType + "对应的坐标！" +
-                                "2.运行库可能暂时未适配您的系统:" + System.getProperty("os.name").toLowerCase() + System.getProperty("os.arch").toLowerCase() + "! "+
-                                "3.使用的模型与引入的jar包不匹配，当前使用的模型为：" + modelType + "，请检查您引入的jar依赖是否正确! " +
-                                "4.打包时未正确引入运行库，例如打包的是window依赖却在linux下运行，请参考文档检查是否使用了正确的打包命令!");
+                        throw new LoadException("Unable to find a suitable native loader implementation. Possible reasons include: " +
+                                "1. The Maven coordinates for " + modelType + " are not included! " +
+                                "2. The runtime library might not yet be adapted for your system: " + System.getProperty("os.name").toLowerCase() + System.getProperty("os.arch").toLowerCase() + "! " +
+                                "3. The model used does not match the JAR dependency included, currently used model: " + modelType + ", please check your JAR dependencies are correct! " +
+                                "4. Incorrect inclusion of the runtime library during packaging, such as packaging Windows dependencies but running on Linux, please refer to the documentation to check if the correct packaging command was used!");
                     }
                     nativeLoader.loadLibrary();
                     isLibraryLoaded.set(true);
@@ -81,19 +83,19 @@ public class InferenceEngine extends OcrEngine {
                 }
             }
         }
-        log.debug("当前库加载器: {}", nativeLoader.getClass().getSimpleName());
+        log.debug("Current library loader: {}", nativeLoader.getClass().getSimpleName());
         if (InferenceEngine.modelsLoader == null) {
             synchronized (InferenceEngine.class) {
                 if (InferenceEngine.modelsLoader == null) {
                     ModelsLoader modelsLoader = LoadUtil.findModelsLoader(modelType);
                     if (modelsLoader == null) {
-                        throw new LoadException("未能成功加载模型!");
+                        throw new LoadException("Failed to load models successfully!");
                     }
                     modelsLoader.loadModels(model);
                     InferenceEngine.modelsLoader = modelsLoader;
                 }
             }
         }
-        log.debug("当前模型加载器: {}", modelsLoader.getClass().getSimpleName());
+        log.debug("Current model loader: {}", modelsLoader.getClass().getSimpleName());
     }
 }
