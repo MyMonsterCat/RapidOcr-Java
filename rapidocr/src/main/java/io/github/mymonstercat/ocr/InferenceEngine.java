@@ -64,7 +64,7 @@ public class InferenceEngine extends OcrEngine {
     }
 
     @SneakyThrows
-    private static void loadFileIfNeeded(Model model) {
+    public static void loadFileIfNeeded(Model model) {
         String modelType = model.getModelType();
         if (InferenceEngine.nativeLoader == null && (isLibraryLoaded.compareAndSet(false, true))) {
             synchronized (InferenceEngine.class) {

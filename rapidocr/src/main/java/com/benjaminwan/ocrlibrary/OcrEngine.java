@@ -12,7 +12,7 @@ import java.util.Objects;
 @Slf4j
 public class OcrEngine {
 
-    protected void initEngine(Model model, HardwareConfig hardwareConfig) {
+    public void initEngine(Model model, HardwareConfig hardwareConfig) {
         if (!isInit) {
             synchronized (this) {
                 if (!isInit) {
