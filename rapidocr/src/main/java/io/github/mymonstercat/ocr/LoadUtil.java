@@ -45,9 +45,15 @@ public class LoadUtil {
             } else if (osName.contains("linux")) {
                 if (osArch.contains("x86") || osArch.contains("amd64")) {
                     loaderClassName = props.getProperty(engine + ".linux-x86_64");
-                } else if (osArch.contains("arm")) {
-                    loaderClassName = props.getProperty("linuxArmLoader");
                 }
+//begin sandywalker 2024-04-30 add arm64 linux support
+//                else if (osArch.contains("arm")) {
+//                    loaderClassName = props.getProperty("linuxArmLoader");
+//                }
+                else if (osArch.contains("arm") || osArch.contains("arch64")){
+                    loaderClassName = props.getProperty(engine + ".linux-arm64");  //Note: only support onnx,  not support ncnn now
+                }
+//end sandywalker 2024-04-30
             }
             if (loaderClassName != null) {
                 return (LibraryLoader) Class.forName(loaderClassName).getDeclaredConstructor().newInstance();
