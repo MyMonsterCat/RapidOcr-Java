@@ -60,6 +60,7 @@
         <module>rapidocr-ncnn-macosx-x86_64</module>
         <module>rapidocr-ncnn-linux-x86_64</module>
         <module>rapidocr-ncnn-windows-x86_64</module>
+        <module>rapidocr-onnx-linux-arm64</module>
 
     </modules>
 
@@ -106,6 +107,11 @@
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-windows-x86</artifactId>
+                <version>${model.version.122}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.mymonstercat</groupId>
+                <artifactId>rapidocr-onnx-linux-arm64</artifactId>
                 <version>${model.version.122}</version>
             </dependency>
             <!--      NCNN       -->

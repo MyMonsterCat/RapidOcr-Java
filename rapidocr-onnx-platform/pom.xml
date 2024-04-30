@@ -109,6 +109,21 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>linux-arm64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>arm64</arch>
+                </os>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>io.github.mymonstercat</groupId>
+                    <artifactId>rapidocr-onnx-linux-arm64</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
 
 
     </profiles>
