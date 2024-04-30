@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ParamConfig {
+public class ParamConfig implements IOcrConfig{
 
     /**
      * 图像外接白框，用于提升识别率，文字框没有正确框住所有文字时，增加此值。默认50。

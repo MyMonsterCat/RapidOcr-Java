@@ -123,6 +123,7 @@ public class Main {
 - [x] 多线程情况下库和模型可能重复加载、编译目标jdk版本改为1.8，感谢[FlyInWind1](https://github.com/FlyInWind1)
 - [x] CentOS7升级指引
 - [x] 基于arm64的银河麒麟环境，提供linux-arm64下onnx运行库(编译过程详见进阶使用)，感谢[sandywalker](https://github.com/sandywalker)
+- [ ] 添加英语日志以及，感谢[litongjava](https://github.com/litongjava)
 
 ## 🤔 FAQ
 
