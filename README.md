@@ -105,7 +105,7 @@ public class Main {
 - [如何在CentOS7或其他低版本Linux系统上运行](./docs/CentOS7.md)
 - [SpringBoot示例和普通Java程序示例](https://github.com/MyMonsterCat/rapidocr-demo)
 - [JVM下不同PaddleOCR调用方式性能比对👍](./docs/COMPARE.md)
-- [银河麒麟v10编译onnx-arm64👍](./docs/COMPARE.md)
+- [银河麒麟v10编译onnx-arm64👍](./docs/Build_Rapid_OCR_Onnx_Lib_on_Kylin_arm64.md)
 
 ## 📌 TODO
 
