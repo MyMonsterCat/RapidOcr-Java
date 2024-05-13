@@ -155,7 +155,7 @@ public class Main {
 - 模型中添加对应的[配置](https://github.com/MyMonsterCat/RapidOcr-Java/blob/main/rapidocr-common/src/main/java/io/github/mymonstercat/Model.java)
 - 项目执行打包命令
 
-#### Q4:如何使用其他版本(如服务器版本)的模型？
+#### Q4:如何更新模型？
 
 - [如何更新模型](./docs/UPDATE_MODEL.md)
 
