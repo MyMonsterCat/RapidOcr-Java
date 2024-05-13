@@ -3,6 +3,7 @@ package io.github.mymonstercat.ocr;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.benjaminwan.ocrlibrary.OcrEngine;
+import com.benjaminwan.ocrlibrary.OcrInput;
 import com.benjaminwan.ocrlibrary.OcrResult;
 
 import io.github.mymonstercat.Model;
@@ -69,6 +70,16 @@ public class InferenceEngine extends OcrEngine {
           log.info("Recognition result: {}, Time taken: {}ms", result.getStrRes().replace("\n", ""), result.getDetectTime());
         }
         log.debug("Text blocks: {}, DbNet Time taken: {}ms", result.getTextBlocks(), result.getDbNetTime());
+        return result;
+    }
+
+    public OcrResult runOcr(OcrInput input, ParamConfig config){
+        loadFileIfNeeded(model);
+        initEngine(model, hardwareConfig);
+        log.info("图片大小：{}， 参数配置：{}", input.getData().length, config);
+        OcrResult result = detectInput(input, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
+        log.info("识别结果为：{}，耗时{}ms", result.getStrRes().replace("\n", ""), result.getDetectTime());
+        log.debug("文本块：{}，DbNet耗时{}ms", result.getTextBlocks(), result.getDbNetTime());
         return result;
     }
 

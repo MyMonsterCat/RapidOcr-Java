@@ -56,8 +56,15 @@ public class OcrEngine {
     public native String getVersion();
 
     public native OcrResult detect(
-            String input, int padding, int maxSideLen,
-            float boxScoreThresh, float boxThresh,
-            float unClipRatio, boolean doAngle, boolean mostAngle
+        String input, int padding, int maxSideLen,
+        float boxScoreThresh, float boxThresh,
+        float unClipRatio, boolean doAngle, boolean mostAngle
     );
+
+    public native OcrResult detectInput(
+        OcrInput input, int padding, int maxSideLen,
+        float boxScoreThresh, float boxThresh,
+        float unClipRatio, boolean doAngle, boolean mostAngle
+    );
+
 }
