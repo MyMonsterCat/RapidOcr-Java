@@ -124,7 +124,7 @@ public class Main {
 - [x] 多线程情况下库和模型可能重复加载、编译目标jdk版本改为1.8，感谢[FlyInWind1](https://github.com/FlyInWind1)
 - [x] 基于arm64的银河麒麟环境，提供linux-arm64下onnx运行库(编译过程详见进阶使用)，感谢[sandywalker](https://github.com/sandywalker)
 - [x] 添加英语日志，感谢[litongjava](https://github.com/litongjava)
-- [x] 支持传入bitmap和image的二进制数据，感谢[scvzerng](https://github.com/scvzerng),使用说明
+- [x] 支持传入bitmap和image的二进制数据，感谢[scvzerng](https://github.com/scvzerng)
 
 ## 🤔 FAQ
 
