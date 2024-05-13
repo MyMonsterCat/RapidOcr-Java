@@ -37,7 +37,7 @@ public class ParamConfig implements IOcrConfig{
      */
     private boolean doAngle = false;
     /**
-     * 启用(1)/禁用(0) 角度投票(整张图片以最大可能文字方向来识别)，当禁用文字方向检测时，此项也不起作用，默认关闭
+     * 启用(true)/禁用(false) 角度投票(整张图片以最大可能文字方向来识别)，当禁用文字方向检测时，此项也不起作用，默认关闭
      */
     private boolean mostAngle = false;
 
