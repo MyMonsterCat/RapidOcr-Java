@@ -112,41 +112,52 @@ public class Main {
 - [x] 根据系统版本自适应加载动态库
 - [x] 动态库集成到jar中
 - [x] 是否删除临时文件夹配置为可选项
-- [x] jvm未退出场景连续调用识别结果集乱码[#1](https://github.com/MyMonsterCat/RapidOcr-Java/issues/1)
-- [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)，感谢[nn200433](https://github.com/nn200433)及[tika-server](https://github.com/nn200433/tika-server)👏 
+- [x] CentOS7升级指引
 - [x] 添加日志，规范日志打印
 - [x] ONNX支持Mac-Arm64
 - [ ] 支持Docker镜像
 - [x] Maven仓库提供packages
 - [ ] SpringBoot下，以配置文件方式改造
+- [x] jvm未退出场景连续调用识别结果集乱码[#1](https://github.com/MyMonsterCat/RapidOcr-Java/issues/1)
+- [x] 集成ONNX[#2](https://github.com/MyMonsterCat/RapidOcr-Java/issues/2)，感谢[nn200433](https://github.com/nn200433)及[tika-server](https://github.com/nn200433/tika-server)👏 
 - [x] 多模块打包[#6](可以否将dll，所以还有onnx文件分别存放进jar)
 - [x] 多线程情况下库和模型可能重复加载、编译目标jdk版本改为1.8，感谢[FlyInWind1](https://github.com/FlyInWind1)
-- [x] CentOS7升级指引
 - [x] 基于arm64的银河麒麟环境，提供linux-arm64下onnx运行库(编译过程详见进阶使用)，感谢[sandywalker](https://github.com/sandywalker)
-- [ ] 添加英语日志以及，感谢[litongjava](https://github.com/litongjava)
+- [x] 添加英语日志，感谢[litongjava](https://github.com/litongjava)
+- [x] 支持传入bitmap和image的二进制数据，感谢[scvzerng](https://github.com/scvzerng),使用说明
 
 ## 🤔 FAQ
 
 #### Q1:CentOS7无法运行？
 
-请参考[CentOS7升级GCC](./docs/CentOS7.md)
+- 请参考[CentOS7升级GCC](./docs/CentOS7.md)
+- 其他系统思路同上，主要就是环境问题
 
-#### Q2:如何使用自己编译的动态库和模型？
+#### Q2:如何传入二进制数据，而非图片路径？
 
-自0.0.5版本开始，项目引入了多模块打包，如果不喜欢这种方式，请使用0.0.4-light
+由于缺少其他系统的设备，因此暂不提供最新的jar包（也就用v0.0.7传不了二进制），**可参考以下步骤自行编译可传入二进制数据的jar包**
 
-```xml
-<dependency>
-    <groupId>io.github.mymonstercat</groupId>
-    <artifactId>rapidocr</artifactId>
-    <version>0.0.4-light</version>
-</dependency>
-```
+- star本项目(感谢🙏)
+- 编译动态库
+  - [使用该项目进行编译](https://github.com/MyMonsterCat/RapidOcrOnnx)
+  - [如何自行编译动态库](./docs/COMPILE_LIB.md)
+- 拉取本项目最新代码到本地
+  - 找到对应模块，例如我是mac-arm64，在[该路径](https://github.com/MyMonsterCat/RapidOcr-Java/tree/main/rapidocr-onnx-macosx-arm64/src/main/resources/lib)下替换上一步编译后的动态库
+  - 项目执行打包命令
+- [传入二进制数据示例代码](https://github.com/MyMonsterCat/RapidOcr-Java/blob/main/rapidocr/src/test/java/TestOnnxWindow.java)
 
-代码位于`0.0.4-light分支`，但该分支后续不进行维护。在该分支代码下，你可能会需要以下帮助
+> 如果你是mac-arm64的设备，直接 拉取项目->运行测试用例 即可，也就是仅mac-arm64的动态库是支持二进制传入的
+
+#### Q3:如何使用其他版本(如服务器版本)的模型？
+
+- 拉取本项目最新代码到本地
+- 在[该路径下](https://github.com/MyMonsterCat/RapidOcr-Java/tree/main/rapidocr-onnx-models/src/main/resources/models)放入模型文件
+- 模型中添加对应的[配置](https://github.com/MyMonsterCat/RapidOcr-Java/blob/main/rapidocr-common/src/main/java/io/github/mymonstercat/Model.java)
+- 项目执行打包命令
+
+#### Q4:如何使用其他版本(如服务器版本)的模型？
 
 - [如何更新模型](./docs/UPDATE_MODEL.md)
-- [如何自行编译动态库](./docs/COMPILE_LIB.md)
 
 
 
