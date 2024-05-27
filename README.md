@@ -54,6 +54,8 @@
 </dependency>
 ```
 
+> ⚠️ 如果你想体验**最新功能**，请拉取main分支代码，自己打包后进行使用！！！
+
 ### 2️⃣ 使用示例
 
 ```java
@@ -146,7 +148,7 @@ public class Main {
   - 项目执行打包命令
 - [传入二进制数据示例代码](https://github.com/MyMonsterCat/RapidOcr-Java/blob/main/rapidocr/src/test/java/TestOnnxWindow.java)
 
-> 如果你是mac-arm64的设备，直接 拉取项目->运行测试用例 即可，也就是仅mac-arm64的动态库是支持二进制传入的
+> ⚠️ 如果你是mac-arm64的设备，直接 拉取项目、运行测试用例即可（也就是目前仅mac-arm64的动态库是支持二进制传入的！）
 
 #### Q3:如何使用其他版本(如服务器版本)的模型？
 
@@ -155,7 +157,7 @@ public class Main {
 - 模型中添加对应的[配置](https://github.com/MyMonsterCat/RapidOcr-Java/blob/main/rapidocr-common/src/main/java/io/github/mymonstercat/Model.java)
 - 项目执行打包命令
 
-#### Q4:如何使用其他版本(如服务器版本)的模型？
+#### Q4:如何更新模型？
 
 - [如何更新模型](./docs/UPDATE_MODEL.md)
 
