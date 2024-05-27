@@ -1,10 +1,8 @@
 package io.github.mymonstercat.ocr;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.benjaminwan.ocrlibrary.OcrEngine;
+import com.benjaminwan.ocrlibrary.OcrInput;
 import com.benjaminwan.ocrlibrary.OcrResult;
-
 import io.github.mymonstercat.Model;
 import io.github.mymonstercat.exception.LoadException;
 import io.github.mymonstercat.loader.LibraryLoader;
@@ -13,6 +11,8 @@ import io.github.mymonstercat.ocr.config.HardwareConfig;
 import io.github.mymonstercat.ocr.config.ParamConfig;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Inference framework engine.
@@ -48,11 +48,11 @@ public class InferenceEngine extends OcrEngine {
         }
         return inferenceEngine;
     }
-    
+
     public Model getModel() {
         return model;
     }
-    
+
     public HardwareConfig getHardwareConfig() {
         return hardwareConfig;
     }
@@ -67,6 +67,17 @@ public class InferenceEngine extends OcrEngine {
         String property = System.getProperty("rapid.ocr.print.result");
         if("true".equals(property)) {
           log.info("Recognition result: {}, Time taken: {}ms", result.getStrRes().replace("\n", ""), result.getDetectTime());
+        }
+        log.debug("Text blocks: {}, DbNet Time taken: {}ms", result.getTextBlocks(), result.getDbNetTime());
+        return result;
+    }
+
+    public OcrResult runOcr(OcrInput input, ParamConfig config){
+        log.info("Image path: {}, Parameter configuration: {}", input.getData().length, config);
+        OcrResult result = detectInput(input, config.getPadding(), config.getMaxSideLen(), config.getBoxScoreThresh(), config.getBoxThresh(), config.getUnClipRatio(), config.isDoAngle(), config.isMostAngle());
+        String property = System.getProperty("rapid.ocr.print.result");
+        if("true".equals(property)) {
+            log.info("Recognition result: {}, Time taken: {}ms", result.getStrRes().replace("\n", ""), result.getDetectTime());
         }
         log.debug("Text blocks: {}, DbNet Time taken: {}ms", result.getTextBlocks(), result.getDbNetTime());
         return result;

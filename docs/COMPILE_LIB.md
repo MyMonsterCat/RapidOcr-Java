@@ -85,7 +85,7 @@ onnxruntime-static
 
 ![](./img/onnx-lib.png)
 
-将其替换项目中的库文件即可
+将其替换项目中的库文件即可（图片是旧版本，新版本的放到对应模块资源目录下）
 
 ![](./img/onnx-replace.png)
 
