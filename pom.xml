@@ -61,6 +61,7 @@
         <module>rapidocr-ncnn-linux-x86_64</module>
         <module>rapidocr-ncnn-windows-x86_64</module>
         <module>rapidocr-onnx-linux-arm64</module>
+        <module>rapidocr-onnx-kylin-x86_64</module>
 
     </modules>
 
