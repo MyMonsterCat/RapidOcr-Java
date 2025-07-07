@@ -82,12 +82,12 @@
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-models</artifactId>
-                <version>${model.version.122}</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-macosx-arm64</artifactId>
-                <version>${model.version.122}</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
@@ -97,7 +97,7 @@
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-onnx-linux-x86_64</artifactId>
-                <version>${model.version.122}</version>
+                <version>1.2.2</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
@@ -118,7 +118,7 @@
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-ncnn-models</artifactId>
-                <version>${model.version.112}</version>
+                <version>1.1.2</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
@@ -133,7 +133,7 @@
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-ncnn-linux-x86_64</artifactId>
-                <version>${model.version.112}</version>
+                <version>1.1.2</version>
             </dependency>
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
@@ -149,7 +149,7 @@
             <dependency>
                 <groupId>io.github.mymonstercat</groupId>
                 <artifactId>rapidocr-common</artifactId>
-                <version>${ocr.common.version}</version>
+                <version>0.0.7</version>
             </dependency>
             <!--      Other       -->
             <dependency>
